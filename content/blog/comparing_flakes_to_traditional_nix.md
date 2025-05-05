@@ -21,7 +21,8 @@ mkdir hello && cd hello/
 
 now create a `flake.nix`:
 
-```nix flake.nix
+```nix
+# flake.nix
 {
   outputs = { self, nixpkgs }: {
     myHello = (import nixpkgs {}).hello;
@@ -47,7 +48,8 @@ Let's explore some ways to make this flake build purely.
 
 To do this we need to add the system attribute (i.e. `x86_64-linux`) with your current system, `flake-utils` simplifies making flakes system agnostic:
 
-```nix flake.nix
+```nix
+# flake.nix
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
@@ -71,7 +73,8 @@ This will allow it to successfully build with `nix build .#myHello` because flak
 
 Create another directory named `hello2` and a `default.nix` with the following contents:
 
-```nix default.nix
+```nix
+# default.nix
 { myHello = (import <nixpkgs> { }).hello; }
 ```
 
@@ -97,7 +100,8 @@ nix-repl> <nixpkgs>
 
 We want to use the same revision for traditional nix for `nixpkgs` as we did for our nix flake. To do so you can get the revision # from the `flake.lock` file in our `hello` directory. You could cd to the hello directory and run `cat flake.lock` and look for:
 
-```nix flake.lock
+```nix
+  # flake.lock
     "nixpkgs": {
       "locked": {
         "lastModified": 1746372124,
@@ -112,7 +116,8 @@ We want to use the same revision for traditional nix for `nixpkgs` as we did for
 
 - You have to add the revision number and add `.tar.gz` to the end of it. Also remove the `<>` around `nixpkgs` like so removing the impurity of using a registry lookup path so back in the `hello2` directory in the `default.nix`:
 
-```nix default.nix
+```nix
+# default.nix
 let
   nixpkgs = fetchTarball {
     url = "https://github.com/NixOS/nixpkgs/archive/f5cbfa4dbbe026c155cf5a9204f3e9121d3a5fe0.tar.gz";
@@ -124,7 +129,8 @@ in {
 
 - And finally, we don't know the correct sha256 yet so we use a placeholder like so:
 
-```nix default.nix
+```nix
+# default.nix
 let
   nixpkgs = fetchTarball {
     url =
@@ -157,7 +163,8 @@ And they all have defaults that are impure.
 
 Users have problems because they don't realize that defaults are pulled in and they have some overlays and config.nix that are custom to their setup. This can't happen in flakes because they enforces this. We can override this by passing empty lists and attribute sets and a system argument to the top-level function with a default like so:
 
-```nix default.nix
+```nix
+# default.nix
 {system ? builtins.currentSystem}:
 let
   nixpkgs = fetchTarball {
@@ -248,7 +255,8 @@ let statement.
 
 A common way around this is to write another argument which is `nixpkgs`:
 
-```nix default.nix
+```nix
+# default.nix
 {
   system ? builtins.currentSystem,
   nixpkgs ?
@@ -315,7 +323,8 @@ niv init
 
 In our `default.nix`:
 
-```nix default.nix
+```nix
+# default.nix
 { system ? builtins.currentSystem,
 sources ? import nix/sources.nix,
 nixpkgs ? sources.nixpkgs,

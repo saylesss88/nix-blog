@@ -76,7 +76,8 @@ date = 2025-05-05
 
 Here is the `/hosts/magic/default.nix`:
 
-```nix default.nix
+```nix
+# default.nix
 {inputs, ...}:
 inputs.nixpkgs.lib.nixosSystem {
   inherit (inputs.lib) system;
@@ -87,7 +88,8 @@ inputs.nixpkgs.lib.nixosSystem {
 
 - Because we want all modules, not just NixOS modules this requires changing your `configuration.nix` to include your home-manager configuration. The core reason for this is that the `packages.nixos` output builds a NixOS system, and home-manager needs to be a part of that system's definition to be included in the build.
 
-```nix configuration.nix
+```nix
+# configuration.nix
 {
   pkgs,
   inputs,
@@ -128,7 +130,8 @@ inputs.nixpkgs.lib.nixosSystem {
 
 My `~/my-nixos/nixos/default.nix` looks like this:
 
-```nix default.nix
+```nix
+# default.nix
 {...}: {
   imports = [
     ./drivers
@@ -176,7 +179,8 @@ packages.${system} = {
 
 And in `lib/vms/nixos-vm.nix`:
 
-```nix nixos-vm.nix
+```nix
+# nixos-vm.nix
 {
   inputs,
   nixosConfiguration,
@@ -265,7 +269,8 @@ nixosConfiguration.extendModules {
 
 And an `apps` output that will build and deploy in one step with `nix build .#deploy-nixos` I'll show `packages` and `apps` outputs for context:
 
-```nix flake.nix
+```nix
+   # flake.nix
     # Default package for tools
     packages.${system} = {
       default = pkgs.buildEnv {
