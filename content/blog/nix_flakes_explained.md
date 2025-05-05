@@ -29,7 +29,7 @@ Output: `"bar"`
 
 Basic Flake Structure:
 
-```nix flake.nix
+```nix
 {
   description = package description
   inputs = dependencies

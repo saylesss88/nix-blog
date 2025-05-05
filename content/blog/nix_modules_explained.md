@@ -48,7 +48,7 @@ NixOS produces a full system configuration by combining smaller, more isolated a
 
 The following is `nixpkgs/nixos/modules/programs/vim.nix`:
 
-```nix vim.nix
+```nix
 {
   config,
   lib,
@@ -169,7 +169,8 @@ environment = {
 
 The following is a bat home-manager module that I wrote:
 
-```nix bat.nix
+```nix
+# bat.nix
 {
   pkgs,
   config,
@@ -211,7 +212,8 @@ in {
 
 Now I could add this to my `home.nix` to enable it:
 
-```nix home.nix
+```nix
+# home.nix
 custom = {
   batModule.enable = true;
 }
