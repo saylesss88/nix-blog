@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Zola
         run: |
-          ZOLA_VERSION="0.17.3" # Match your local Zola version
+          ZOLA_VERSION="0.20.0" # Match your local Zola version
           wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
           tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
           mv zola /usr/local/bin/
