@@ -1,0 +1,54 @@
+name: Deploy Zola Blog to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nix-blog/**" # Adjust if Zola is at root
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Blog Repository
+        uses: actions/checkout@v4
+        with:
+          path: nix-blog
+
+      - name: Install Zola
+        run: |
+          ZOLA_VERSION="0.17.3" # Match your local Zola version
+          wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          mv zola /usr/local/bin/
+          zola --version
+
+      - name: Build Zola Site
+        working-directory: nix-blog
+        run: zola build
+
+      - name: Checkout GitHub Pages Repository
+        uses: actions/checkout@v4
+        with:
+          repository: saylesss88/saylesss88.github.io
+          ref: gh-pages
+          path: github-pages
+          ssh-key: ${{ secrets.GH_PAGES_TOKEN }}
+
+      - name: Clean and Copy Built Site to GitHub Pages
+        run: |
+          rm -rf github-pages/* # Clear existing files
+          rsync -avz nix-blog/public/ github-pages/
+
+      - name: Commit and Push to GitHub Pages
+        working-directory: github-pages
+        run: |
+          git config --local user.name "GitHub Actions Bot"
+          git config --local user.email "actions@github.com"
+          git add .
+          if git commit -m "Deploy Zola blog to gh-pages"; then
+            git push origin gh-pages
+          else
+            echo "No changes to commit"
+          fi
