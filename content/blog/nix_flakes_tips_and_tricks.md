@@ -25,7 +25,7 @@ inputs = {
 # flake.nix
 inputs = {
     wallpapers = {
-      url = "git+ssh://git@github.com/TSawyer87/wallpapers.git";
+      url = "github:saylesss88/wallpapers";
       flake = false;
     };
 }

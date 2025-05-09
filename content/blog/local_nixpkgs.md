@@ -104,7 +104,7 @@ rg "x11 =" pkgs  # case sensitive search
 
 **Output**:
 
-```
+```bash
 pkgs/tools/X11/primus/default.nix
 21:  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
 22:  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
@@ -116,13 +116,13 @@ pkgs/applications/graphics/imv/default.nix
 - The important bit here is `xorg.libX11`. We can further refine our search and
   make sure we aren't missing anything with:
 
-```
+```bash
 rg -i "libx11 =" pkgs    # case insensitive
 ```
 
 Output:
 
-```
+```bash
 1541:    enableX11 = false;
 1726:  bucklespring-x11 = callPackage ../applications/audio/bucklespring { legacy = true; };
 5344:    libX11 = xorg.libX11;
@@ -136,7 +136,7 @@ To search derivations on the command line, use `nix-locate` from `nix-index`
 
 > **NOTE:** You need to first install `nix-index` and run the command `nix-index` to create the initial index of your system and takes a while.
 
-```
+```bash
 nix-locate libx11
 2.0.2/share/xdg-ninja/programs/libx11.json
 x11basic.out                                          0 s /nix/store/809yni8vijakvfdiha65ym1j85dgc9im-X11basic-1.27/lib/libx11basic.so

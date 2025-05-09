@@ -5,8 +5,6 @@ date = 2025-05-05
 
 #### Building your configuration as a Package
 
-<<<<<<< HEAD
-
 - TL;DR This post demonstrates other ways to modularize your config as well as going into more advanced outputs.
 
 - This is long winded, and maybe unnecessary for your workflow. Also I take notes in markdown so this is written in markdown. It demonstrates other ways to modularize your config as well as going into more advanced outputs.
