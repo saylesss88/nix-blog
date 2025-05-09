@@ -35,8 +35,9 @@ jobs:
           PUBLISH_DIR="nix-blog/public"
           TARGET_BRANCH="main"
 
+          cd nix-blog
+
           # Initialize a fresh git repo
-          cd nix-blog # Move out of the nix-blog directory
           git init
 
           # Configure git
@@ -44,15 +45,14 @@ jobs:
           git config user.email "actions@github.com"
 
           # Checkout the target branch (or create if it doesn't exist)
-          # git fetch origin $TARGET_BRANCH --depth=1 || true
           git fetch --all
           git branch --list $TARGET_BRANCH
           git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
-          # Clean the target directory
-          # git rm -rf .
-          find . -mindepth 1 -not -name '.git' -exec rm -rf {} +
-
+          # Clean the target directory (except .git)
+          shopt -s dotglob
+          rm -rf -- * .[^.]*  # removes all files, including hidden ones, except . and ..
+          shopt -u dotglob
 
           # Copy the Zola output
           cp -r $PUBLISH_DIR/* .
