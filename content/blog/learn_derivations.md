@@ -1,6 +1,6 @@
 +++
 title = "Derivations Explained & Resources"
-date = 2025-05-07
+date = 2025-05-09
 +++
 
 ## Derivations
