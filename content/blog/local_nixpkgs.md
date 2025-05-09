@@ -116,7 +116,7 @@ pkgs/applications/graphics/imv/default.nix
 - The important bit here is `xorg.libX11`. We can further refine our search and
   make sure we aren't missing anything with:
 
-```text
+```
 rg -i "libx11 =" pkgs    # case insensitive
 ```
 
