@@ -155,7 +155,7 @@ something promising.</p>
 <li>The important bit here is <code>xorg.libX11</code>. We can further refine our search and
 make sure we aren't missing anything with:</li>
 </ul>
-<pre data-lang="text" style="background-color:#212733;color:#ccc9c2;" class="language-text "><code class="language-text" data-lang="text"><span>rg -i &quot;libx11 =&quot; pkgs    # case insensitive
+<pre style="background-color:#212733;color:#ccc9c2;"><code><span>rg -i &quot;libx11 =&quot; pkgs    # case insensitive
 </span></code></pre>
 <p>Output:</p>
 <pre style="background-color:#212733;color:#ccc9c2;"><code><span>1541:    enableX11 = false;

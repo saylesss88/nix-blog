@@ -33,24 +33,8 @@
 <h1 class="title">NixOS Modules Explained</h1>
 <p class="subtitle"><strong>2025-05-05</strong></p>
 <h2 id="nixos-modules">NixOS Modules</h2>
-<h1 id="headtl-dr-in-this-post-i-break-down-the-nixos-module-system-and-explain-how-to-define-options-as-well-as-how-to-test-modules-with-the-repl">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-TL;DR: In this post I break down the NixOS module system and explain how to define options. As well as how to test modules with the repl.</h1>
+<p>TL;DR: In this post I break down the NixOS module system and explain how to define options. As well as how to test modules with the repl.</p>
 <p>TL;DR: In this post I break down the NixOS module system and explain how to define options. I take notes in markdown so it's written in markdown (sorry old reddit). I write about things to deepen understanding, you think you know until you try to explain it to someone. Anyways, I hope this is useful.</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>6ba626f360559af496954352f8d29d4d54f7ad3e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 <ul>
 <li>Most modules are functions that take an attribute set and return an attribute set.</li>
 </ul>
@@ -378,7 +362,8 @@ testing.</li>
 <p>To check if this worked and <code>git</code> is installed in systemPackages you can
 load it into <code>nix repl</code> but first you'll want <code>lib</code> to be available so uncomment
 this in your <code>default.nix</code>:</p>
-<pre data-lang="nix default.nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix default.nix "><code class="language-nix default.nix" data-lang="nix default.nix"><span>inherit lib;
+<pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="font-style:italic;color:#5c6773;"># default.nix
+</span><span style="color:#ff3333;">inherit </span><span style="color:#ffcc66;">lib</span><span style="color:#ff3333;">;
 </span></code></pre>
 <p>Rerun <code>nix-instantiate -A nixosSystem.system</code></p>
 <p>Then load the repl and check that <code>git</code> is in <code>systemPackages</code>:</p>
@@ -436,21 +421,6 @@ this in your <code>default.nix</code>:</p>
 <p><a href="https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/module-system">NixOS Flakes Book Module System</a></p>
 </li>
 </ul>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>6ba626f360559af496954352f8d29d4d54f7ad3e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
  </div>
     </section>
   </body>
