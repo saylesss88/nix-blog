@@ -3,8 +3,8 @@ name: Build and deploy Zola to separate GitHub Pages repo
 on:
   push:
     branches: [main]
-    paths:
-      - "nix-blog/**"
+    # paths:
+    #   - "nix-blog/**"
   # workflow_dispatch:
 
 jobs:
