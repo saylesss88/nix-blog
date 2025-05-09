@@ -172,3 +172,34 @@ home.packages = [
   pkgs.pokego
 ]
 ```
+
+#### Another Overlay Example
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/NixOS/nixpkgs/*.tar.gz";
+
+    nix.url = "https://flakehub.com/f/NixOS/nix/2.17.0.tar.gz";
+  };
+
+  outputs = { self, nixpkgs, nix }:
+
+    let
+      system = "aarch64-darwin";
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          nix.overlays.default
+        ];
+      };
+    in
+    {
+     # `pkgs` is nixpkgs for the system, with nix's overlay applied
+    };
+}
+```
+
+- Normally, `pkgs = import nixpkgs { }`` imports Nixpkgs with default settings. However, the example above customizes this import by passing arguments: `pkgs = import nixpkgs { inherit system; overlays = [ nix.overlays.default];}`. This makes the pkgs variable represent nixpkgs specifically for the aarch64-darwin system, with the overlay from the nix flake applied.
+
+- Consequently, any packages built using this customized `pkgs` will now depend on or use the specific nix version (2.17.0) provided by the nix flake, instead of the version that comes with the fetched nixpkgs. This technique can be useful for ensuring a consistent environment or testing specific package versions.
