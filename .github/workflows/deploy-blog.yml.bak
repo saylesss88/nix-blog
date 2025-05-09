@@ -1,0 +1,70 @@
+name: Deploy Zola Blog to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nix-blog/**"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Blog Repository
+        uses: actions/checkout@v4
+        with:
+          path: nix-blog
+
+      - name: Install Zola
+        run: |
+          ZOLA_VERSION="0.20.0"
+          wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          sudo mv zola /usr/local/bin/
+          zola --version
+
+      - name: Build Zola Site
+        working-directory: nix-blog
+        run: zola build
+
+      - name: Check Zola Build Output
+        run: ls -al nix-blog/public
+
+      - name: Deploy to GitHub Pages
+        shell: bash
+        run: |
+          REPO="saylesss88/saylesss88.github.io"
+          TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
+          PUBLISH_DIR="public"
+          TARGET_BRANCH="main"
+
+          cd nix-blog
+
+          if [ ! -d "$PUBLISH_DIR" ]; then
+            echo "Error: $PUBLISH_DIR does not exist. Build may have failed."
+            exit 1
+          fi
+
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git fetch --all
+          git branch --list $TARGET_BRANCH
+          git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+
+          # Remove everything except .git folder
+          shopt -s dotglob
+          rm -rf -- * .[^.]*
+          shopt -u dotglob
+
+          cp -r $PUBLISH_DIR/* .
+
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Deploy Zola site to $TARGET_BRANCH"
+            git remote add origin "https://x-access-token:$TOKEN@github.com/$REPO"
+            git push origin $TARGET_BRANCH -f
+          fi

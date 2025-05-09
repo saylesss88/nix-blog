@@ -1,4 +1,4 @@
-name: Deploy Zola Blog to GitHub Pages
+name: Build and deploy Zola to separate GitHub Pages repo
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Blog Repository
+      - name: Checkout blog repo
         uses: actions/checkout@v4
         with:
           path: nix-blog
@@ -24,47 +24,34 @@ jobs:
           sudo mv zola /usr/local/bin/
           zola --version
 
-      - name: Build Zola Site
+      - name: Build Zola site
         working-directory: nix-blog
         run: zola build
 
-      - name: Check Zola Build Output
-        run: ls -al nix-blog/public
-
-      - name: Deploy to GitHub Pages
-        shell: bash
+      - name: Deploy to separate GitHub Pages repo
+        env:
+          GH_PAGES_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
         run: |
           REPO="saylesss88/saylesss88.github.io"
-          TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
-          PUBLISH_DIR="public"
           TARGET_BRANCH="main"
+          PUBLISH_DIR="nix-blog/public"
 
-          cd nix-blog
+          # Clone the GitHub Pages repo
+          git clone --depth 1 --branch $TARGET_BRANCH https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
 
-          if [ ! -d "$PUBLISH_DIR" ]; then
-            echo "Error: $PUBLISH_DIR does not exist. Build may have failed."
-            exit 1
-          fi
+          cd gh-pages
 
-          git init
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git fetch --all
-          git branch --list $TARGET_BRANCH
-          git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+          # Clean existing files
+          git rm -rf .
 
-          # Remove everything except .git folder
-          shopt -s dotglob
-          rm -rf -- * .[^.]*
-          shopt -u dotglob
+          # Copy new site files
+          cp -r ../$PUBLISH_DIR/* .
 
-          cp -r $PUBLISH_DIR/* .
-
+          # Commit and push if there are changes
           git add -A
-          if git diff --staged --quiet; then
+          if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Deploy Zola site to $TARGET_BRANCH"
-            git remote add origin "https://x-access-token:$TOKEN@github.com/$REPO"
-            git push origin $TARGET_BRANCH -f
+            git commit -m "Deploy Zola site"
+            git push origin $TARGET_BRANCH
           fi
