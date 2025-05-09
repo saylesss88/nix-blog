@@ -43,8 +43,9 @@ jobs:
           PUBLISH_DIR="nix-blog/public"
 
           # Clone the GitHub Pages repo
-          git clone --depth 1 --branch $TARGET_BRANCH
-           https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
+          git clone --depth 1 --branch $TARGET_BRANCH https://x-access-token:${GH_PAGES_TOKEN}@github.com/${REPO}.git gh-pages
+          # git clone --depth 1 --branch $TARGET_BRANCH
+          #  https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
 
           cd gh-pages
 
