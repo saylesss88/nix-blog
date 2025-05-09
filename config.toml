@@ -13,6 +13,12 @@ build_search_index = true
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
 # highlight_theme = "ayu-dark"
+highlight_theme = "ayu-mirage"
+
+highlight_themes_css = [
+  { theme = "ayu-mirage", filename = "syntax-theme-dark.css" }, # Using ayu-mirage for dark
+  { theme = "ayu-light", filename = "syntax-theme-light.css" }, # Assuming a light variant exists
+]
 
 [extra]
 subtitle = "Nix-Blog"

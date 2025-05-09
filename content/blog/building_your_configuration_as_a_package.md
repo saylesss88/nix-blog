@@ -5,7 +5,11 @@ date = 2025-05-05
 
 #### Building your configuration as a Package
 
+<<<<<<< HEAD
+- TL;DR This post demonstrates other ways to modularize your config as well as going into more advanced outputs.
+=======
 - This is long winded, and maybe unnecessary for your workflow. Also I take notes in markdown so this is written in markdown. It demonstrates other ways to modularize your config as well as going into more advanced outputs.
+>>>>>>> 6ba626f360559af496954352f8d29d4d54f7ad3e
 
 - This allows you to build your configuration as a package allowing you to separate the process of creating a configuration artifact and applying it to the live system giving you a reusable artifact that can be used to deploy to different systems. This can make it easier to isolate it from other parts of your system making debugging easier.
 
@@ -372,4 +376,8 @@ ssh jr@server
 sudo /nix/store/...-nixos-system-magic/bin/switch-to-configuration switch
 ```
 
+<<<<<<< HEAD
+- I got the examples for building your configuration as a package and vm from the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file) configuration and adapted them to [my config](https://github.com/saylesss88/flake).
+=======
 - I got the examples for building your configuration as a package and vm from the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file) configuration and adapted them to [my config](https://github.com/TSawyer87/my-nixos).
+>>>>>>> 6ba626f360559af496954352f8d29d4d54f7ad3e
