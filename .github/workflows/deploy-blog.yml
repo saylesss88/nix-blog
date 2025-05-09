@@ -28,6 +28,11 @@ jobs:
         working-directory: nix-blog
         run: zola build
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "saylesss88"
+          git config --global user.email "saylesss88@proton.me"
+
       - name: Deploy to separate GitHub Pages repo
         env:
           GH_PAGES_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
