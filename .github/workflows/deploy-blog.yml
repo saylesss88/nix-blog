@@ -1,11 +1,12 @@
+---
 name: Build and deploy Zola to separate GitHub Pages repo
 
 on:
   push:
     branches: [main]
-    # paths:
-    #   - "nix-blog/**"
-  # workflow_dispatch:
+    paths:
+      - "nix-blog/**"
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -42,7 +43,8 @@ jobs:
           PUBLISH_DIR="nix-blog/public"
 
           # Clone the GitHub Pages repo
-          git clone --depth 1 --branch $TARGET_BRANCH https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
+          git clone --depth 1 --branch $TARGET_BRANCH
+           https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
 
           cd gh-pages
 
