@@ -1,4 +1,4 @@
-y+++
++++
 title = "Derivations Explained & Resources"
 date = 2025-05-07
 +++
