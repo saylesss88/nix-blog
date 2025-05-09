@@ -28,14 +28,24 @@ jobs:
         working-directory: nix-blog
         run: zola build
 
+      - name: Check Zola Build Output
+        run: |
+          ls -al nix-blog/public
+
       - name: Deploy to GitHub Pages
         run: |
           REPO="saylesss88/saylesss88.github.io"
           TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
-          PUBLISH_DIR="nix-blog/public"
+          PUBLISH_DIR="public"
           TARGET_BRANCH="main"
 
           cd nix-blog
+
+          # Ensure build output exists
+          if [ ! -d "$PUBLISH_DIR" ]; then
+            echo "Error: $PUBLISH_DIR does not exist. Build may have failed."
+            exit 1
+          fi
 
           # Initialize a fresh git repo
           git init
@@ -50,19 +60,4 @@ jobs:
           git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
           # Clean the target directory (except .git)
-          shopt -s dotglob
-          rm -rf -- * .[^.]*  # removes all files, including hidden ones, except . and ..
-          shopt -u dotglob
-
-          # Copy the Zola output
-          cp -r $PUBLISH_DIR/* .
-
-          # Add, commit, and push
-          git add -A
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "Deploy Zola site to $TARGET_BRANCH"
-            git remote add origin "https://x-access-token:$TOKEN@github.com/$REPO"
-            git push origin $TARGET_BRANCH -f
-          fi
+          shopt -s dot
