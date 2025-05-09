@@ -36,7 +36,7 @@ jobs:
           TARGET_BRANCH="gh-pages"
 
           # Initialize a fresh git repo
-          cd .. # Move out of the nix-blog directory
+          cd nix-blog # Move out of the nix-blog directory
           git init
 
           # Configure git
@@ -44,11 +44,15 @@ jobs:
           git config user.email "actions@github.com"
 
           # Checkout the target branch (or create if it doesn't exist)
-          git fetch origin $TARGET_BRANCH --depth=1 || true
+          # git fetch origin $TARGET_BRANCH --depth=1 || true
+          git fetch --all
+          git branch --list $TARGET_BRANCH
           git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
           # Clean the target directory
-          rm -rf ./*
+          # rm -rf ./*
+          find . -not -name '.git' -exec rm -rf {} +
+
 
           # Copy the Zola output
           cp -r $PUBLISH_DIR/* .
