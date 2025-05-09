@@ -30,35 +30,35 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
-          # Use the correct repository name here
           REPO="saylesss88/saylesss88.github.io"
-          #  Important: Use a PAT, and ensure the secret is named correctly
           TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
-          #  The directory where Zola output is located
           PUBLISH_DIR="nix-blog/public"
-
-          #  Initialize a fresh git repo in the target directory
           TARGET_BRANCH="gh-pages"
+
+          # Initialize a fresh git repo
+          cd .. # Move out of the nix-blog directory
           git init
+
+          # Configure git
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          #  Checkout the target branch if it exists, or create an orphan branch if it does not
+          # Checkout the target branch (or create if it doesn't exist)
           git fetch origin $TARGET_BRANCH --depth=1 || true
           git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
-          #  Clean the target directory
+          # Clean the target directory
           rm -rf ./*
 
-          #  Copy the Zola output to the target directory
+          # Copy the Zola output
           cp -r $PUBLISH_DIR/* .
 
-          #  Add, commit, and push the changes
+          # Add, commit, and push
           git add -A
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Deploy Zola site to $TARGET_BRANCH"
-            #  Use the PAT for authentication in the push URL
-            git push "https://x-access-token:$TOKEN@github.com/$REPO" $TARGET_BRANCH -f
+            git remote add origin "https://x-access-token:$TOKEN@github.com/$REPO"
+            git push origin $TARGET_BRANCH -f
           fi
