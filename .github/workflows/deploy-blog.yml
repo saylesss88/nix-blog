@@ -50,8 +50,8 @@ jobs:
           git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 
           # Clean the target directory
-          git rm -rf .
-          # find . -not -name '.git' -exec rm -rf {} +
+          # git rm -rf .
+          find . -not -name '.git' -exec rm -rf {} +
 
 
           # Copy the Zola output
