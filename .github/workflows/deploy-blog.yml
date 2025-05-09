@@ -33,7 +33,7 @@ jobs:
           REPO="saylesss88/saylesss88.github.io"
           TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
           PUBLISH_DIR="nix-blog/public"
-          TARGET_BRANCH="gh-pages"
+          TARGET_BRANCH="main"
 
           # Initialize a fresh git repo
           cd nix-blog # Move out of the nix-blog directory
