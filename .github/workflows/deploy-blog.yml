@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "nix-blog/**" # Adjust if Zola is at root
+      - "nix-blog/**"
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
 
       - name: Install Zola
         run: |
-          ZOLA_VERSION="0.20.0" # Match your local Zola version
+          ZOLA_VERSION="0.20.0"
           wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
           tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
           mv zola /usr/local/bin/
@@ -28,27 +28,37 @@ jobs:
         working-directory: nix-blog
         run: zola build
 
-      - name: Checkout GitHub Pages Repository
-        uses: actions/checkout@v4
-        with:
-          repository: saylesss88/saylesss88.github.io
-          ref: gh-pages
-          path: github-pages
-          ssh-key: ${{ secrets.GH_PAGES_TOKEN }}
-
-      - name: Clean and Copy Built Site to GitHub Pages
+      - name: Deploy to GitHub Pages
         run: |
-          rm -rf github-pages/* # Clear existing files
-          rsync -avz nix-blog/public/ github-pages/
+          # Use the correct repository name here
+          REPO="saylesss88/saylesss88.github.io"
+          #  Important: Use a PAT, and ensure the secret is named correctly
+          TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
+          #  The directory where Zola output is located
+          PUBLISH_DIR="nix-blog/public"
 
-      - name: Commit and Push to GitHub Pages
-        working-directory: github-pages
-        run: |
-          git config --local user.name "GitHub Actions Bot"
-          git config --local user.email "actions@github.com"
-          git add .
-          if git commit -m "Deploy Zola blog to gh-pages"; then
-            git push origin gh-pages
-          else
+          #  Initialize a fresh git repo in the target directory
+          TARGET_BRANCH="gh-pages"
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          #  Checkout the target branch if it exists, or create an orphan branch if it does not
+          git fetch origin $TARGET_BRANCH --depth=1 || true
+          git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+
+          #  Clean the target directory
+          rm -rf ./*
+
+          #  Copy the Zola output to the target directory
+          cp -r $PUBLISH_DIR/* .
+
+          #  Add, commit, and push the changes
+          git add -A
+          if git diff --staged --quiet; then
             echo "No changes to commit"
+          else
+            git commit -m "Deploy Zola site to $TARGET_BRANCH"
+            #  Use the PAT for authentication in the push URL
+            git push "https://x-access-token:$TOKEN@github.com/$REPO" $TARGET_BRANCH -f
           fi
