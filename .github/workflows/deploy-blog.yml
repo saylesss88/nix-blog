@@ -7,6 +7,10 @@ on:
       - "nix-blog/**"
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: nu {0}
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,9 +22,9 @@ jobs:
 
       - name: Install Zola
         run: |
-          ZOLA_VERSION="0.20.0"
-          wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
-          tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          let ZOLA_VERSION = '0.20.0'
+          wget $"https://github.com/getzola/zola/releases/download/v($ZOLA_VERSION)/zola-v($ZOLA_VERSION)-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xzf $"zola-v($ZOLA_VERSION)-x86_64-unknown-linux-gnu.tar.gz"
           mv zola /usr/local/bin/
           zola --version
 
@@ -29,35 +33,38 @@ jobs:
         run: zola build
 
       - name: Check Zola Build Output
-        run: |
-          ls -al nix-blog/public
+        run: ls -al nix-blog/public
 
       - name: Deploy to GitHub Pages
         run: |
-          REPO="saylesss88/saylesss88.github.io"
-          TOKEN="${{ secrets.GH_PAGES_TOKEN }}"
-          PUBLISH_DIR="public"
-          TARGET_BRANCH="main"
+          let REPO = "saylesss88/saylesss88.github.io"
+          let TOKEN = $env.GH_PAGES_TOKEN
+          let PUBLISH_DIR = "public"
+          let TARGET_BRANCH = "main"
 
           cd nix-blog
 
-          # Ensure build output exists
-          if [ ! -d "$PUBLISH_DIR" ]; then
-            echo "Error: $PUBLISH_DIR does not exist. Build may have failed."
+          if not ($PUBLISH_DIR | path exists) {
+            print $"Error: ($PUBLISH_DIR) does not exist. Build may have failed."
             exit 1
-          fi
+          }
 
-          # Initialize a fresh git repo
           git init
-
-          # Configure git
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-
-          # Checkout the target branch (or create if it doesn't exist)
           git fetch --all
           git branch --list $TARGET_BRANCH
-          git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+          (git checkout $TARGET_BRANCH) || (git checkout --orphan $TARGET_BRANCH)
 
-          # Clean the target directory (except .git)
-          shopt -s dot
+          ls | where name != '.git' | each { |item| rm -rf $item.name }
+
+          cp $PUBLISH_DIR/* .
+
+          git add -A
+          if (git diff --staged --quiet) {
+            print "No changes to commit"
+          } else {
+            git commit -m $"Deploy Zola site to ($TARGET_BRANCH)"
+            git remote add origin $"https://x-access-token:($TOKEN)@github.com/($REPO)"
+            git push origin $TARGET_BRANCH -f
+          }
