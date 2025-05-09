@@ -51,7 +51,7 @@ jobs:
 
           # Clean the target directory
           # git rm -rf .
-          find . -not -name '.git' -exec rm -rf {} +
+          find . -mindepth 1 -not -name '.git' -exec rm -rf {} +
 
 
           # Copy the Zola output
