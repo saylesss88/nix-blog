@@ -9,9 +9,12 @@ date = 2025-05-06
 
 <!--toc:start-->
 
-- [The Problem with `specialArgs`](#the-problem-with-specialargs)
-- [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
-<!--toc:end-->
+- [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
+  - [The Problem with `specialArgs`](#the-problem-with-specialargs)
+  - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option)
+  - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix)
+  - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
+  <!--toc:end-->
 
 This post explores a method for injecting dependencies into NixOS modules from
 a flake in a more declarative way, offering an alternative to `specialArgs`.
@@ -36,7 +39,7 @@ dependencies across modules by defining a custom option within your `flake.nix`
 . This method makes dependencies accessible to all importing modules without
 relying on explicit `specialArgs` in your flake's `outputs`.
 
-### Defining the `dep-inject` Module in `flake.nix`
+## Defining the `dep-inject` Module in `flake.nix`
 
 Within the `outputs` function's `let` block in your `flake.nix`, define the
 following module:
@@ -76,7 +79,7 @@ in {
 - By importing depInject, configurations automatically gain access to these
   dependencies.
 
-#### Benefits of this Approach
+## Benefits of this Approach
 
 - **Declarative Dependency Flow**: Encourages a more declarative style by
   accessing dependencies through a well-defined option (`config.dep-inject`)
@@ -91,7 +94,7 @@ in {
 - **Reduced Boilerplate**: Avoids the need to explicitly include dependency
   arguments (`{ inputs, userVars, ... }`) in every module.
 
-##### Example Usage
+### Example Usage
 
 Here's a practical example of how this `dep-inject` module is defined and used
 within a `flake.nix`:
@@ -207,7 +210,7 @@ dependencies within any module via `config.dep-inject`.
 - You no longer need to explicitly declare `{ inputs, userVars, ... }` in the
   module's arguments.
 
-#### Applying `dep-inject` to Home Manager Modules
+### Applying `dep-inject` to Home Manager Modules
 
 By default, the `dep-inject` module is available to NixOS modules but not
 automatically to Home Manager modules. There are two main ways to make it
@@ -276,7 +279,7 @@ nixosConfigurations = {
   associated with `specialArgs`, as highlighted in resources like
   "flakes-arent-real"
 
-##### Conclusion
+### Conclusion
 
 While `specialArgs` offers a seemingly straightforward way to inject
 dependencies, this declarative approach using a custom `dep-inject` option

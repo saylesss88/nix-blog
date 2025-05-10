@@ -11,7 +11,8 @@ date = 2025-05-05
 
 - [Understanding Nix Functions](#understanding-nix-functions)
   - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
-  - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon) - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
+  - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon)
+  - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
   <!--toc:end-->
 
 Functions are a fundamental concept in Nix and are prevalent throughout Nix code. Grasping how they work is crucial for understanding and writing Nix expressions.
@@ -49,7 +50,7 @@ greet "Anonymous"  # Evaluates to "Hello, Anonymous!"
 The value `"Anonymous"` is substituted for the `personName` placeholder within
 the function body.
 
-### Function Declarations: Single and "Multiple" Arguments
+## Function Declarations: Single and "Multiple" Arguments
 
 **Single-Argument Functions**
 
@@ -193,7 +194,7 @@ services.nginx.settings."http-port" = "8080";
   the available packages (`pkgs`), and other relevant information. The module
   then uses these values to define parts of your system.
 
-##### Resources
+### Resources
 
 - [nix.dev Nix Lang Basics](https://nix.dev/tutorials/nix-language.html)
 

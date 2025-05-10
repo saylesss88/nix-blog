@@ -3,18 +3,18 @@ title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
 
+**TOC**
+
 <!--toc:start-->
 
 - [NixOS Modules](#nixos-modules)
   - [Declaring Options](#declaring-options)
     - [Module Composition](#module-composition)
     - [NixOS Modules and Dependency Locking with npins](#nixos-modules-and-dependency-locking-with-npins)
-  - [Resources on Modules](#resources-on-modules)
+    - [Resources on Modules](#resources-on-modules)
 - [Videos](#videos)
 - [[tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)
 <!--toc:end-->
-
-**TOC**
 
 # NixOS Modules
 
@@ -72,7 +72,7 @@ first things you should understand when learning about NixOS.
   This will allow your editor to warn you about missing arguments and
   dependencies as well as syntax errors.
 
-### Declaring Options
+## Declaring Options
 
 The following is `nixpkgs/nixos/modules/programs/vim.nix`:
 
@@ -271,7 +271,7 @@ custom = {
   without requiring an explicit `custom.batModule.enable = true;` call in my
   `home.nix`.
 
-#### Module Composition
+### Module Composition
 
 - NixOS achieves its full system configuration by combining the configurations
   defined in various modules. This composition is primarily handled through the
@@ -289,7 +289,7 @@ custom = {
   entire system closure, is represented by the derivation built by
   `config.system.build.toplevel`.
 
-#### NixOS Modules and Dependency Locking with npins
+### NixOS Modules and Dependency Locking with npins
 
 This is the file structure:
 
@@ -423,7 +423,7 @@ nix-repl> nixosSystem.config.mine.desktop.enable
 true
 ```
 
-## Resources on Modules
+### Resources on Modules
 
 - [WritingNixOsModules](https://nixos.org/manual/nixos/stable/#sec-writing-modules)
 

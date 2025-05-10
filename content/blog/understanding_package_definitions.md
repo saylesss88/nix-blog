@@ -9,8 +9,13 @@ date = 2025-05-08
 
 <!--toc:start-->
 
-- [The Journey from Definition to Package](#the-journey-from-definition-to-package) - [Skeleton of a Derivation](#skeleton-of-a-derivation) - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition) - [Swaytools Package Definition](#swaytools-package-definition) - [Breakdown of the Above `default.nix`](#breakdown-of-the-above-defaultnix) - [Resources](#resources)
-<!--toc:end-->
+- [Understanding Package Definitions in Nix](#understanding-package-definitions-in-nix)
+  - [The Journey from Definition to Package](#the-journey-from-definition-to-package)
+  - [Skeleton of a Derivation](#skeleton-of-a-derivation)
+  - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition)
+    - [Swaytools Package Definition](#swaytools-package-definition)
+  - [Breakdown of the Above `default.nix`](#breakdown-of-the-above-defaultnix) - [Resources](#resources)
+  <!--toc:end-->
 
 In Nix, the concept of a **package** can refer to two things:
 
@@ -58,7 +63,7 @@ software you intend to "package."
 derivation as the detailed construction plan, and the realized package as the
 finished building.
 
-### Skeleton of a Derivation
+## Skeleton of a Derivation
 
 The most basic derivation structure in Nix looks like this:
 
@@ -82,7 +87,7 @@ stdenv.mkDerivation { }
 
 - [Fundamentals of Stdenv](https://nixos.org/guides/nix-pills/19-fundamentals-of-stdenv.html)
 
-#### Example: A Simple "Hello" Package Definition
+## Example: A Simple "Hello" Package Definition
 
 Here's a package definition for the classic "hello" program:
 
@@ -231,7 +236,7 @@ buildPythonApplication rec {
 }
 ```
 
-#### Breakdown of the Above `default.nix`
+## Breakdown of the Above `default.nix`
 
 1 **Function Structure**:
 
@@ -287,6 +292,6 @@ swaytools = python3Packages.callPackage ../tools/wayland/swaytools { };
   package, and it ensures the necessary Python-related dependencies are
   correctly passed to the `swaytools` definition.
 
-##### Resources
+### Resources
 
 - [Packaging Existing Software](https://nix.dev/tutorials/packaging-existing-software.html)

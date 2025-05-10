@@ -12,7 +12,9 @@ date = 2025-05-05
 - [Introduction: Flakes and Traditional Nix](#introduction-flakes-and-traditional-nix)
 
   - [What is Purity in Nix?](#what-is-purity-in-nix)
-  - [Building a Simple "hello" Package: Flakes vs. Traditional Nix](#building-a-simple-hello-package-flakes-vs-traditional-nix) - [Using Nix Flakes](#using-nix-flakes) - [Using Traditional Nix](#using-traditional-nix) - [Updating Nixpkgs](#updating-nixpkgs) - [Updating Traditional Nix (using `niv`)](#updating-traditional-nix-using-niv) - [Adding Home-Manager with Flakes](#adding-home-manager-with-flakes) - [Adding Home-Manager with Traditional Nix](#adding-home-manager-with-traditional-nix)
+  - [Building a Simple "hello" Package: Flakes vs. Traditional Nix](#building-a-simple-hello-package-flakes-vs-traditional-nix)
+  - [Using Nix Flakes](#using-nix-flakes)
+  - [Using Traditional Nix](#using-traditional-nix) - [Updating Nixpkgs](#updating-nixpkgs) - [Updating Traditional Nix (using `niv`)](#updating-traditional-nix-using-niv) - [Adding Home-Manager with Flakes](#adding-home-manager-with-flakes) - [Adding Home-Manager with Traditional Nix](#adding-home-manager-with-traditional-nix)
   <!--toc:end-->
 
 - This post is based on notes from Nix-Hour #4, comparing Traditional Nix and Flakes, focusing on achieving pure build results. See the [YouTube video](https://www.youtube.com/watch?v=atmoYyBAhF4) for the original content. This guide adapts the information for clarity and ease of understanding.
@@ -33,7 +35,7 @@ date = 2025-05-05
 
 - We'll demonstrate building a basic "hello" package using both Flakes and Traditional Nix to highlight the differences in handling purity.
 
-### Using Nix Flakes
+## Using Nix Flakes
 
 1.  **Setup:**
 
@@ -96,7 +98,7 @@ date = 2025-05-05
     nix build .#myHello
     ```
 
-### Using Traditional Nix
+## Using Traditional Nix
 
 1.  **Setup:**
 

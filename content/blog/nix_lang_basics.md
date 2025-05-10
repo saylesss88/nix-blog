@@ -10,7 +10,8 @@ date = 2025-05-06
 <!--toc:start-->
 
 - [The Nix Language](#the-nix-language)
-  - [How does Nix work?](#how-does-nix-work) - [Syntax Basics](#syntax-basics) - [Derivations](#derivations) - [Evaluating Nix Files](#evaluating-nix-files) - [Resources](#resources)
+  - [How does Nix work?](#how-does-nix-work)
+  - [Syntax Basics](#syntax-basics) - [Derivations](#derivations) - [Evaluating Nix Files](#evaluating-nix-files) - [Resources](#resources)
   <!--toc:end-->
 
 Nix as a programming language can be thought of as a kind of "JSON, but with
@@ -48,7 +49,7 @@ language.
 
 Think of a package definition as the initial instructions, and the derivation as the detailed, low-level plan that Nix uses to actually perform the build."
 
-### Syntax Basics
+## Syntax Basics
 
 - Dashes are allowed as identifiers:
 

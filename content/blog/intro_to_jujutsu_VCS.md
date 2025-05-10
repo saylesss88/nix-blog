@@ -9,8 +9,11 @@ date = 2025-05-07
 
 <!--toc:start-->
 
-- [**Here's an example:**](#heres-an-example) - [JJ and Git Side by Side](#jj-and-git-side-by-side)
-<!--toc:end-->
+- [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
+
+  - [**Here's an example:**](#heres-an-example)
+  - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+  <!--toc:end-->
 
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
@@ -50,7 +53,7 @@ jj git init
 Initialized repo in "."
 ```
 
-### JJ and Git Side by Side
+## JJ and Git Side by Side
 
 Or for example, with Git if you wanted to move to a different branch before
 running `nix flake update` to see if it introduced errors before merging

@@ -77,7 +77,7 @@ in {
   `home.packages = [ pkgs.waybar ];` without conditionals, waybar would install
   even if hyprland was disabled.
 
-### Wlogout Module
+## Wlogout Module
 
 I can then have my default for something like wlogout be to install only if
 the `custom.hyprland` module is enabled:

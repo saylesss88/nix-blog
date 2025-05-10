@@ -9,12 +9,13 @@ date = 2025-05-08
 
 <!--toc:start-->
 
-- [Adding the `overlays` output to `flake.nix`](#adding-the-overlays-output-to-flakenix)
+- [Using Overlays to add Packages that aren't in Nixpkgs](#using-overlays-to-add-packages-that-arent-in-nixpkgs)
+  - [Adding the `overlays` output to `flake.nix`](#adding-the-overlays-output-to-flakenix)
   - [The Actual Overlay](#the-actual-overlay)
-    - [The pokego Package definition](#the-pokego-package-definition)
-      - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
-- [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
-<!--toc:end-->
+  - [The pokego Package definition](#the-pokego-package-definition)
+  - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
+  - [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
+  <!--toc:end-->
 
 It is very common to use overlays in Nix to install packages that aren't
 available in the standard Nixpkgs repository.
@@ -74,7 +75,7 @@ I'll show the process of adding the `pokego` package that is not in Nixpkgs:
 
 ```
 
-### The Actual Overlay
+## The Actual Overlay
 
 2. In the `overlay.nix` I have this helper function and the defined package:
 
@@ -151,7 +152,7 @@ in
    within this packages set (including pokego) will be added to the overall Nix
    package set.
 
-#### The pokego Package definition
+## The pokego Package definition
 
 The following is the `./pac_defs/pokego.nix`, it may be helpful to first read my
 [PackageDefinition](https://saylesss88.github.io/blog/package-definitions/)
@@ -199,7 +200,7 @@ buildGoModule rec {
 }
 ```
 
-##### Adding the overlay to your configuration
+## Adding the overlay to your configuration
 
 There are a few places you could choose to put the following, I choose to use
 my `configuration.nix` because of my setup:
@@ -230,7 +231,7 @@ home.packages = [
 ]
 ```
 
-#### Another Overlay Example
+### Another Overlay Example
 
 ```nix
 {

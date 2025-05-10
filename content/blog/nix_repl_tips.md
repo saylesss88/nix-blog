@@ -10,7 +10,9 @@ date = 2025-05-06
 <!--toc:start-->
 
 - [Nix Repl List available commands](#nix-repl-list-available-commands)
-  - [Load Nix expressions Directly](#load-nix-expressions-directly) - [Load Flakes](#load-flakes) - [Debugging with a Flake REPL output](#debugging-with-a-flake-repl-output) - [Usage](#usage) - [Debugging](#debugging)
+  - [Load Nix expressions Directly](#load-nix-expressions-directly)
+    - [Load Flakes](#load-flakes)
+  - [Debugging with a Flake REPL output](#debugging-with-a-flake-repl-output) - [Usage](#usage) - [Debugging](#debugging)
   <!--toc:end-->
 
 List available commands with `:?`:
@@ -84,7 +86,7 @@ nix-repl> :lf github:nix-community/home-manager
 nix-repl> :lf /path/to/your/flake
 ```
 
-#### Debugging with a Flake REPL output
+## Debugging with a Flake REPL output
 
 - One way to do this is to launch the repl with `nix repl` and inside the repl type `:lf /path/to/flake`. Or `nixos-rebuild repl --flake /path/to/flake` the latter provides a helpful welcome script showing what is loaded into your repl's scope.
 
@@ -145,7 +147,7 @@ And in `repl.nix`:
 
 > ❗: Replace `magic` with your host name
 
-##### Usage
+### Usage
 
 Load REPL environment with:
 `nix repl .#repl`
@@ -215,7 +217,7 @@ configs.magic.config.home-manager.users.jr.home.packages
 TSawyer87
 ```
 
-##### Debugging
+### Debugging
 
 - Check if the module system is fully evaluating, anything other than a "set" the configuration isn't fully evaluated (e.g. "lambda" might indicate an unevaluated thunk):
 
