@@ -3,6 +3,17 @@ title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
 
+<!--toc:start-->
+
+- [NixOS Modules](#nixos-modules)
+  - [Declaring Options](#declaring-options)
+    - [Module Composition](#module-composition)
+    - [NixOS Modules and Dependency Locking with npins](#nixos-modules-and-dependency-locking-with-npins)
+  - [Resources on Modules](#resources-on-modules)
+- [Videos](#videos)
+- [Tweag Module System Recursion](https://www.youtube.com/watch?v=czJoZoHb2oW) - [Resources on Modules](#resources-on-modules)
+<!--toc:end-->
+
 # NixOS Modules
 
 TL;DR: In this post I break down the NixOS module system and explain how to
@@ -11,9 +22,10 @@ define options. As well as how to test modules with the repl.
 - Most modules are functions that take an attribute set and return an attribute
   set.
 
-Refresher:
+**Refresher**:
 
-- An attribute set is a collection of name-value pairs wrapped in curly braces:
+- An **attribute set** is a collection of name-value pairs wrapped in curly
+  braces:
 
 ```nix
 {
@@ -22,13 +34,13 @@ Refresher:
 }
 ```
 
-- A function with an attribute set argument:
+- A **function** with an attribute set argument:
 
 ```nix
 { a, b }: a + b
 ```
 
-- The simplest possible NixOS Module:
+- The simplest possible **NixOS Module**:
 
 ```nix
 { ... }:
@@ -44,8 +56,8 @@ first things you should understand when learning about NixOS.
   components, allowing users to extend, customize, and compose configurations
   declaratively.
 
-- A module is a file containing a Nix expression with a specific structure. It
-  _declares_ options for other modules to define (give a value). Modules were
+- A **module** is a file containing a Nix expression with a specific structure.
+  It _declares_ options for other modules to define (give a value). Modules were
   introduced to allow extending NixOS without modifying its source code.
 
 - To define any values, the module system first has to know which ones are
