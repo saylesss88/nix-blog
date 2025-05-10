@@ -8,10 +8,10 @@ date = 2025-05-09
 <!--toc:start-->
 - [Building a Custom NixOS Service with Flakes and Overlays](#building-a-custom-nixos-service-with-flakes-and-overlays)
   - [Create Project Directory](#create-project-directory)
-  - [Create `flake.nix`](#create-flakenix)
+    - [Create `flake.nix`](#create-flakenix)
     - [Create `nixos-module.nix`](#create-nixos-modulenix)
-    - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output)
-    - [Build the System Configuration](#build-the-system-configuration)
+      - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output)
+      - [Build the System Configuration](#build-the-system-configuration)
 <!--toc:end-->
 
 
@@ -29,7 +29,7 @@ Start by creating a directory to hold your project, I called mine `meow`:
 mkdir meow && cd meow
 ```
 
-## Create `flake.nix`
+### Create `flake.nix`
 
 Create a `flake.nix` with the following:
 
@@ -89,7 +89,7 @@ let cfg = config.services.meow; in {
 }
 ```
 
-### Add `nixosConfigurations` Output
+#### Add `nixosConfigurations` Output
 
 Lastly, we will add a `nixosConfigurations` output to the `flake.nix`
 
@@ -178,7 +178,7 @@ The final product will look like this:
 }
 ```
 
-### Build the System Configuration
+#### Build the System Configuration
 
 Then build the system configuration:
 
