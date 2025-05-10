@@ -1,43 +1,58 @@
 +++
-title = "Top-Level Attributes"
+title = "Understanding Top-Level Attributes in NixOS Modules"
 date = 2025-05-07
 +++
 
-## Top-Level Attributes
+# Understanding Top-Level Attributes in NixOS Modules
 
-The following is a comment by Infinisil (Nix legend) on Reddit:
+This explanation is based on insights from Infinisil, a prominent figure in the
+Nix community, to help clarify the concept of top-level attributes within
+NixOS modules.
 
-A NixOS system is described by a single system derivation. nixos-rebuild builds this derivation with
+## The Core of a NixOS System: `system.build.toplevel`
 
-```nix
-$ nix-build '<nixpkgs/nixos>' -A system
-```
+In a NixOS system, everything is built from a single "system derivation." The
+command `nix-build '<nixpkgs/nixos>' -A system` initiates this build process.
 
-and then switches to that system with
+The `-A system` part tells Nix to focus on the `system` attribute defined in
+the `'<nixpkgs/nixos>'` file (which is essentially `./default.nix` within the
+Nixpkgs repository).
 
-```nix
-$ result/bin/switch-to-configuration
-```
+This `system` attribute is specifically the NixOS option `system.build.toplevel`
+. Think of `system.build.toplevel` as the **very top of the configuration
+hierarchy** for your entire NixOS system. Almost every setting you configure
+eventually influences this top-level derivation, often through a series of
+intermediate steps.
 
-The entrypoint is the file at `'<nixpkgs/nixos>'` (`./default.nix`), which defines the system attribute to be the NixOS option `system.build.toplevel`. This toplevel option is the topmost level of the NixOS evaluation and it's what almost all options eventually end up influencing through potentially a number of intermediate options.
+**Key Takeaway:** `system.build.toplevel` is the ultimate output that defines your entire NixOS system.
 
-As an example:
+## How Options Relate: A Chain of Influence
 
-- The high-level option `services.nginx.enable` uses the lower-level option `systemd.services.nginx`
+Options in NixOS are not isolated; they often build upon each other. Here's an example of how a high-level option can lead down to a low-level system configuration:
 
-- Which in turn uses the even-lower-level option `systemd.units."nginx.service"`
+- You enable Nginx with `services.nginx.enable = true;`.
+- This setting influences the lower-level option `systemd.services.nginx`.
+- Which, in turn, affects the even lower-level option
+  `systemd.units."nginx.service"`.
+- Ultimately, this leads to the creation of a systemd unit file within
+  `environment.etc."systemd/system"`.
+- Finally, this unit file ends up as `result/etc/systemd/system/nginx.service`
+  within the final `system.build.toplevel` derivation.
 
-- Which in turn uses `environment.etc."systemd/system"`
+**Key Takeaway:** Higher-level, user-friendly options are translated into
+lower-level system configurations that are part of the final system build.
 
-- Which then ends up as `result/etc/systemd/system/nginx.service` in the top-level derivation
+## The NixOS Module System: Evaluating Options
 
-So high-level options use lower-level ones, eventually ending up at `system.build.toplevel`.
+So, how do these options get processed and turned into the final system
+configuration? That's the job of the **NixOS module system**, located in the
+`./lib` directory of Nixpkgs (specifically in `modules.nix`, `options.nix`,
+and `types.nix`).
 
-How do these options get evaluated though? That's what the NixOS module system does, which lives in the ./lib directory (in modules.nix, options.nix and types.nix). The module system can even be used without NixOS, allowing you to use it for your own option sets. Here's a simple example of this, whose toplevel option you can evaluate with:
+Interestingly, the module system isn't exclusive to NixOS; you can use it to
+manage option sets in your own Nix projects.
 
-```bash
-nix-instantiate --eval file.nix -A config.toplevel
-```
+Here's a simplified example of using the module system outside of NixOS:
 
 ```nix
 let
@@ -65,77 +80,155 @@ in (import <nixpkgs/lib>).evalModules {
 }
 ```
 
-The module system itself is rather complex, but here's a short overview. A module evaluation consists of a set of "modules", which can do three things:
+**You can evaluate the `config.toplevel` option from this example using:**
 
-- Import other modules (through `imports = [ ./other-module.nix ];`)
+```bash
+nix-instantiate --eval file.nix -A config.toplevel
+```
 
-- Declare options (through `options = { ... };`)
+**Key Takeaway**: The NixOS module system is responsible for evaluating and
+merging option configurations from different modules.
 
-- Define option values (through `config = { ... };`, or without the config key as a shorthand if you don't have imports or options)
+## How the Module System Works: A Simplified Overview
 
-To do the actual evaluation, there's these rough steps:
+The module system processes a set of "modules" through these general steps:
 
-- Recursively collect all modules by looking at all imports statements
+1. **Importing Modules**: It recursively finds and includes all modules
+   specified in `imports = [ ... ];` statements.
 
-- Collect all option declarations (with options) of all modules and merge them together if necessary
+2. **Declaring Options**: It collects all option declarations defined using
+   `options = { ... };` from all the modules and merges them. If the same option
+   is declared in multiple modules, the module system handles this
+   (details omitted for simplicity).
 
-- For each option, evaluate it by collecting all its definitions (with config) from all modules and merging them together according to the options type.
+3. **Defining Option Values**: For each declared option, it gathers all the
+   value assignments (defined using `config = { ... };` or directly at the top
+   level if no `options` or `config` are present) from all modules and merges
+   them according to the option's defined type.
 
-Note that the last step is lazy (only the options you need are evaluated) and depends on other options itself (all the ones that influence it).
+> **Important Note**: Option evaluation is lazy, meaning an option's value is
+> only computed when it's actually needed. It can also depend on the values of
+> other options.
 
-This is the end of Infinisil's comment.
+**Key Takeaway**: The module system imports, declares, and then evaluates
+option values from various modules to build the final configuration.
 
-`system.build.toplevel` The top-level option that builds the entire NixOS system. Everything else in your configuration is indirectly pulled in by this option. This is what nixos-rebuild builds and what /run/current-system points to afterwards.
+**Top-Level Attributes in a Module: `imports`, `options`, and `config`**
 
-Top-level attributes are those defined directly inside the module's function, they include:
+Within a NixOS module (the files that define parts of your system configuration)
+, the attributes defined directly at the top level of the module's function
+have specific meanings:
 
-- Imports
-- Options
-- Config
+- `imports`: This attribute is a list of other module files to include. Their
+  options and configurations will also be part of the evaluation.
 
-In any module that you define a top-level option any non-option attributes need to be moved under the config attribute.
+- `options`: This attribute is where you declare new configuration options. You
+  define their type, default value, description, etc., using functions like
+  `lib.mkOption` or `lib.mkEnableOption`.
 
-For example:
+- `config`: This attribute is where you assign values to the options that have
+  been declared (either in the current module or in imported modules).
+
+**Key Takeaway**: The top-level attributes `imports`, `options`, and `config`
+are the primary ways to structure a NixOS module.
+
+**The Rule: Move Non-Option Attributes Under `config`**
+
+If you define either an `options` or a `config` attribute at the top level of
+your module, any other attributes that are not option declarations must be
+moved inside the config attribute.
+
+Let's look at an example of what not to do:
 
 ```nix
 { pkgs, lib, config, ... }:
 {
-  imports = [];
+imports = [];
 
-# defining this option at top level
+# Defining an option at the top level
+
 options.mine.desktop.enable = lib.mkEnableOption "desktop settings";
 
-# will cause this to fail
+# This will cause an error because 'environment' and 'appstream'
+
+# are not 'options' and 'config' is also present at the top level.
+
 environment.systemPackages =
-  lib.mkIf config.appstream.enable [ pkgs.git ];
+lib.mkIf config.appstream.enable [ pkgs.git ];
 
 appstream.enable = true;
 }
 ```
 
-error: Module has an unsupported attribute 'appstream' This is caused by introducing a top-level `config` or `options` attribute. Add configuration attributes immediately on the top level instead, or move all of them into the explicit `config` attribute.
+This will result in the error: `error: Module has an unsupported attribute
+'appstream' This is caused by introducing a top-level 'config' or 'options'
+attribute. Add configuration attributes immediately on the top level instead,
+or move all of them into the explicit 'config' attribute`.
 
-- The environment.systemPackages and `appstream.enable` don't declare any options, they assign values to the options so they need to be moved under the config attribute like so:
+**Key Takeaway**: When you have `options` or `config` at the top level, all
+value assignments need to go inside the config block.
+
+**The Correct Way**): Using the `config` Attribute
+
+To fix the previous example, you need to move the value assignments for
+`environment.systemPackages` and `appstream.enable` inside the config attribute:
 
 ```nix
 { pkgs, lib, config, ... }:
 {
-  imports = [];
+imports = [];
 
-# defining this option at top level
+# Defining an option at the top level
+
 options.mine.desktop.enable = lib.mkEnableOption "desktop settings";
 
 config = {
- environment.systemPackages =
-  lib.mkIf config.appstream.enable [ pkgs.git ];
+environment.systemPackages =
+lib.mkIf config.appstream.enable [ pkgs.git ];
 
-appstream.enable = true;
+    appstream.enable = true;
+
 };
 }
 ```
 
-- This lets Nix know that you're not declaring an option, but rather setting/defining them.
+Now, Nix knows that you are declaring an option (`options.mine.desktop.enable`)
+and then setting values for other options (`environment.systemPackages`,
+`appstream.enable`) within the `config` block.
 
-- Otherwise, if you don't have either `config` or `option` you can just have them at the top-level, and it will implicitely put all of them under the config section.
+**Key Takeaway**: The `config` attribute is used to define the values of
+options.
 
-- If you remove the option, the config = { environment.systemPackages will still work.
+**Implicit `config`: When `options` is Absent**
+
+If your module does not define either `options` or `config` at the top level,
+then any attributes you define directly at the top level are implicitly
+treated as being part of the config.
+
+For example, this is valid:
+
+```nix
+{ pkgs, lib, config, ... }:
+{
+environment.systemPackages =
+lib.mkIf config.appstream.enable [ pkgs.git ];
+
+appstream.enable = true;
+}
+```
+
+Nix will implicitly understand that `environment.systemPackages` and
+`appstream.enable` are configuration settings.
+
+**Key Takeaway**: If no explicit options or config are present, top-level
+attributes are automatically considered part of the configuration.
+
+**Removing an Option: What Happens to `config`**
+
+Even if you remove the `options` declaration from a module that has a `config`
+section, the `config = { environment.systemPackages = ... };` part will still
+function correctly, assuming the option it's referencing (`appstream.enable`
+in this case) is defined elsewhere (e.g., in an imported module).
+
+**Key Takeaway**: The `config` section defines values for options, regardless
+of whether those options are declared in the same module.
