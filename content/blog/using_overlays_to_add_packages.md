@@ -8,8 +8,6 @@ date = 2025-05-08
 # Using Overlays to add Packages that aren't in Nixpkgs
 
 <!--toc:start-->
-- [Using Overlays to add Packages that aren't in Nixpkgs](#using-overlays-to-add-packages-that-arent-in-nixpkgs)
-  - [Adding the `overlays` output to `flake.nix`](#adding-the-overlays-output-to-flakenix)
   - [The Actual Overlay](#the-actual-overlay)
   - [The pokego Package definition](#the-pokego-package-definition)
   - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)

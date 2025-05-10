@@ -11,11 +11,11 @@ date = 2025-05-06
 - [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
   - [The Problem with `specialArgs`](#the-problem-with-specialargs)
   - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option)
-  - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix)
-  - [Benefits of this Approach](#benefits-of-this-approach)
-    - [Example Usage](#example-usage)
-    - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules)
-    - [Conclusion](#conclusion)
+    - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix)
+      - [Benefits of this Approach](#benefits-of-this-approach)
+      - [Example Usage](#example-usage)
+      - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules)
+      - [Conclusion](#conclusion)
 <!--toc:end-->
 
 
@@ -35,14 +35,14 @@ a flake in a more declarative way, offering an alternative to `specialArgs`.
   Instead of explicit dependency passing, modules receive extra, unstructured
   variables that aren't part of the standard module options.
 
-## A Declarative Solution: Injecting via a Custom Option
+### A Declarative Solution: Injecting via a Custom Option
 
 This post introduces a more declarative and centralized technique to share
 dependencies across modules by defining a custom option within your `flake.nix`
 . This method makes dependencies accessible to all importing modules without
 relying on explicit `specialArgs` in your flake's `outputs`.
 
-## Defining the `dep-inject` Module in `flake.nix`
+#### Defining the `dep-inject` Module in `flake.nix`
 
 Within the `outputs` function's `let` block in your `flake.nix`, define the
 following module:
@@ -82,7 +82,7 @@ in {
 - By importing depInject, configurations automatically gain access to these
   dependencies.
 
-## Benefits of this Approach
+#### Benefits of this Approach
 
 - **Declarative Dependency Flow**: Encourages a more declarative style by
   accessing dependencies through a well-defined option (`config.dep-inject`)
@@ -97,7 +97,7 @@ in {
 - **Reduced Boilerplate**: Avoids the need to explicitly include dependency
   arguments (`{ inputs, userVars, ... }`) in every module.
 
-### Example Usage
+#### Example Usage
 
 Here's a practical example of how this `dep-inject` module is defined and used
 within a `flake.nix`:
@@ -282,7 +282,7 @@ nixosConfigurations = {
   associated with `specialArgs`, as highlighted in resources like
   "flakes-arent-real"
 
-### Conclusion
+#### Conclusion
 
 While `specialArgs` offers a seemingly straightforward way to inject
 dependencies, this declarative approach using a custom `dep-inject` option

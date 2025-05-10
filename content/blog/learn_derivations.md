@@ -13,9 +13,9 @@ date = 2025-05-09
     - [Why a Builder Script?](#why-a-builder-script)
     - [The Challenge with Shebangs in Nix](#the-challenge-with-shebangs-in-nix)
     - [The Importance of Statelessness in Nix](#the-importance-of-statelessness-in-nix)
-    - [Our `builder.sh` Script](#our-buildersh-script)
-  - [Our Second Derivation](#our-second-derivation)
-    - [Links To Articles about Derivations](#links-to-articles-about-derivations)
+      - [Our `builder.sh` Script](#our-buildersh-script)
+      - [Our Second Derivation](#our-second-derivation)
+      - [Links To Articles about Derivations](#links-to-articles-about-derivations)
 <!--toc:end-->
 
 - A derivation in Nix is a fundamental concept that describes how to build a piece of software or a resource (e.g., a package, library, or configuration file). Think of it as a recipe for creating something within the Nix ecosystem.
@@ -84,7 +84,7 @@ date = 2025-05-09
     across different machines if they are "pure" (don't rely on external
     system state).
 
-### Our `builder.sh` Script
+#### Our `builder.sh` Script
 
 - For our first derivation, we'll create a simple `builder.sh` file in the current directory:
 
@@ -136,7 +136,7 @@ this derivation produced the following outputs:
   is a loosely defined term, but a derivation is simply the result of calling
   `builtins.derivation`.
 
-## Our Second Derivation
+#### Our Second Derivation
 
 The following is a simple `hello-drv` derivation:
 
@@ -156,7 +156,7 @@ nix-repl> hello-drv
 - Derivations have a `.drv` suffix, as you can see the result of calling
   `hello-drv` is the nix store path to a derivation.
 
-### Links To Articles about Derivations
+#### Links To Articles about Derivations
 
 - [NixPillsOurFirstDerivation](https://nixos.org/guides/nix-pills/06-our-first-derivation)
 

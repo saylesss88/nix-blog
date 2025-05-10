@@ -9,8 +9,8 @@ date = 2025-05-07
 
 <!--toc:start-->
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
-  - [**Here's an example:**](#heres-an-example)
-  - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+    - [**Here's an example:**](#heres-an-example)
+    - [JJ and Git Side by Side](#jj-and-git-side-by-side)
 <!--toc:end-->
 
 
@@ -30,7 +30,7 @@ date = 2025-05-07
     already done for you. This is handy with flakes by preventing a
     "dirty working tree" and can instantly be rebuilt after making a change.
 
-## **Here's an example:**
+#### **Here's an example:**
 
 Say I have my configuration flake in the `~/flakes/` directory that is an
 existing Git repository. To use JJ as the front-end I could do something like:
@@ -52,7 +52,7 @@ jj git init
 Initialized repo in "."
 ```
 
-## JJ and Git Side by Side
+#### JJ and Git Side by Side
 
 Or for example, with Git if you wanted to move to a different branch before
 running `nix flake update` to see if it introduced errors before merging

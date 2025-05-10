@@ -11,10 +11,10 @@ date = 2025-05-05
 - [Nix Flakes Explained](#nix-flakes-explained)
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts)
-  - [`flake.nix`: The Heart of a Flake](#flakenix-the-heart-of-a-flake)
-  - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
-  - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
-    - [Further Resources](#further-resources)
+    - [`flake.nix`: The Heart of a Flake](#flakenix-the-heart-of-a-flake)
+    - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
+    - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
+      - [Further Resources](#further-resources)
 <!--toc:end-->
 
 
@@ -32,7 +32,7 @@ Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
 
 ## Key Concepts
 
-## `flake.nix`: The Heart of a Flake
+### `flake.nix`: The Heart of a Flake
 
 - The `flake.nix` file is mandatory for any flake. It must contain an attribute
   set with at least one required attribute: `outputs`. It can also optionally
@@ -48,7 +48,7 @@ Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
 }
 ```
 
-## Attribute Sets: The Building Blocks
+### Attribute Sets: The Building Blocks
 
 - Attribute sets are fundamental in Nix. They are simply collections of
   name-value pairs wrapped in curly braces `{}`.
@@ -74,7 +74,7 @@ Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
     (without dot notation). The most common ones are inputs, outputs,
     and nixConfig.
 
-## Anatomy of `flake.nix`
+### Anatomy of `flake.nix`
 
 **`inputs`: Declaring Dependencies**
 
@@ -277,7 +277,7 @@ myPackage
   evaluates the expressions within `default.nix` as if you had specified its
   path directly in the import statement.
 
-### Further Resources
+#### Further Resources
 
 - [practical-nix-flakes](https://serokell.io/blog/practical-nix-flakes)
 
