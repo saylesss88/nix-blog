@@ -3,7 +3,7 @@ title = "Intro to Jujutsu VCS"
 date = 2025-05-07
 +++
 
-# Intro to Jujutsu
+# Intro to Jujutsu (Using jj in an existing Git Repo)
 
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
@@ -21,7 +21,7 @@ date = 2025-05-07
     already done for you. This is handy with flakes by preventing a
     "dirty working tree" and can instantly be rebuilt after making a change.
 
-Here's an example:
+**Here's an example:**
 
 Say I have my configuration flake in the `~/flakes/` directory that is an
 existing Git repository. To use JJ as the front-end I could do something like:

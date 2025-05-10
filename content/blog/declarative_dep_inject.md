@@ -1,31 +1,52 @@
 +++
-title = "Declarative Dependency Injection"
+title = "Declarative Dependency Injection in Nix Flakes"
 date = 2025-05-06
 +++
 
-### Injecting Dependencies into Modules from a Flake
+# Declarative Dependency Injection in Nix Flakes
 
-- In my last [post](https://saylesss88.github.io/blog/nix-flakes-tips-and-tricks/) I touched on `specialArgs` and `extraSpecialArgs` being ways to inject dependencies and variables from flakes to modules, this is another way to inject dependencies. `specialArgs` dumps values directly into every module's argument list, which breaks the usual declarative data flow model of NixOS. Instead of passing dependencies explicitly, your modules suddenly receive extra variables that aren't structured like normal module options.
+This post explores a method for injecting dependencies into NixOS modules from
+a flake in a more declarative way, offering an alternative to `specialArgs`.
 
-  First we'll define a custom option in an inline module that has the needed dependencies in its lexical closure inside of `flake.nix` to inject said dependencies into our NixOS configuration. This makes those dependencies available to all modules that import this configuration, without needing to pass them explicitly via `specialArgs` in your flakes `outputs`. It's a more declarative and centralized way to share dependencies across modules.
+## The Problem with `specialArgs`
 
-This is defined within the `outputs` function's `let` block in your `flake.nix`:
+- As mentioned in [post](https://saylesss88.github.io/blog/nix-flakes-tips-and-tricks/),
+  `specialArgs` and `extraSpecialArgs` can be used to pass dependencies and
+  variables from flakes to modules.
+
+- However, `specialArgs` injects values directly into every module's argument
+  list.
+
+- This approach deviates from NixOS's typical declarative data flow model.
+  Instead of explicit dependency passing, modules receive extra, unstructured
+  variables that aren't part of the standard module options.
+
+## A Declarative Solution: Injecting via a Custom Option
+
+This post introduces a more declarative and centralized technique to share
+dependencies across modules by defining a custom option within your `flake.nix`
+. This method makes dependencies accessible to all importing modules without
+relying on explicit `specialArgs` in your flake's `outputs`.
+
+### Defining the `dep-inject` Module in `flake.nix`
+
+Within the `outputs` function's `let` block in your `flake.nix`, define the
+following module:
 
 ```nix
 # flake.nix
 let
-  # list deps you want passed here
+  # Module to inject dependencies
   depInject = { pkgs, lib, ... }: {
     options.dep-inject = lib.mkOption {
-      # dep-inject is an attr set of unspecified values
+      # dep-inject is an attribute set of unspecified values
       type = with lib.types; attrsOf unspecified;
       default = { };
     };
     config.dep-inject = {
-      # inputs comes from the outer environment of flake.nix
-      # usually contains flake inputs, user-defined vars
-      # sys metadata
-      flake-inputs = inputs;
+      # 'inputs' comes from the outer environment of flake.nix
+      # usually contains flake inputs, user-defined vars, system metadata
+      "flake-inputs" = inputs;
       userVars = userVars;
       system = system;
       host = host;
@@ -39,14 +60,33 @@ in {
 }
 ```
 
-- This defines a reusable NixOS module (`nixosModules.default`) that creates a `dep-inject` option and sets it to include your flakes inputs. It automates the process of passing `inputs` to individual modules in your `nixosConfigurations`
+- This code defines a reusable NixOS module (`nixosModules.default`).
 
-- This allows you to access these dependencies directly from `config.dep-inject`, without the need to explicitly declare them in their argument list (e.g.
-  `{ inputs, pkgs, lib, ... }`) and promotes a more declarative approach moving away from the imperative step of explicitly passing arguments everywhere.
+- This module creates a `dep-inject` option, which is an attribute set
+  containing your flake's inputs and other relevant variables.
 
-- The `depInject` module becomes a reusable component that any NixOS configuration within your flake can import this module automatically and gain access to the injected dependencies.
+- By importing depInject, configurations automatically gain access to these
+  dependencies.
 
-Example use:
+#### Benefits of this Approach
+
+- **Declarative Dependency Flow**: Encourages a more declarative style by
+  accessing dependencies through a well-defined option (`config.dep-inject`)
+  rather than implicit arguments.
+
+- **Centralized Dependency Management**: Defines dependencies in one place
+  (`flake.nix`), making it easier to manage and update them.
+
+- **Automatic Availability**: Modules importing the configuration automatically
+  have access to the injected dependencies.
+
+- **Reduced Boilerplate**: Avoids the need to explicitly include dependency
+  arguments (`{ inputs, userVars, ... }`) in every module.
+
+##### Example Usage
+
+Here's a practical example of how this `dep-inject` module is defined and used
+within a `flake.nix`:
 
 ```nix
 {
@@ -133,11 +173,12 @@ Example use:
 }
 ```
 
-#### Use `dep-inject` in any Module
+**Using `dep-inject` in Modules**
 
-- In any module that's part of this configuration, you can access the injected dependencies via `config.dep-inject`. You don't need to add `inputs` or `userVars` to the module's arguments.
+Once the `dep-inject` module is imported, you can access the injected
+dependencies within any module via `config.dep-inject`.
 
-Example: System Configuration Module
+**Example: System Configuration Module (`configuration.nix`)**
 
 ```nix
 # configuration.nix
@@ -151,21 +192,20 @@ Example: System Configuration Module
 }
 ```
 
-- `config.dep-inject.flake-inputs.nixpkgs`: Accesses the `nixpkgs` input
+- `config.dep-inject.flake-inputs.nixpkgs`: Accesses the `nixpkgs` input.
 
-- `config.dep-inject.userVars`: Access your `userVars`
+- `config.dep-inject.userVars`: Accesses your `userVars`.
 
-- Unlike `specialArgs`, you don't need `{ inputs, userVars, ... }`
+- You no longer need to explicitly declare `{ inputs, userVars, ... }` in the
+  module's arguments.
 
-#### Use `dep-inject` in home-manager modules
+#### Applying `dep-inject` to Home Manager Modules
 
-- By default, `dep-inject` is available in NixOS modules but not automatically in home-manager modules unless you either:
+By default, the `dep-inject` module is available to NixOS modules but not
+automatically to Home Manager modules. There are two main ways to make it
+accessible:
 
-  - Pass `dep-inject` via `extraSpecialArgs` (less ideal)
-    or
-  - Import the `depInject` module into home-managers configuration.
-
-1. Using `extraSpecialArgs`
+1. Using `extraSpecialArgs` (Less Ideal)
 
 ```nix
 home-manager.extraSpecialArgs = {
@@ -174,7 +214,7 @@ home-manager.extraSpecialArgs = {
 };
 ```
 
-Then in `./hosts/${host}/home.nix`:
+Then, in your Home Manager configuration (`./hosts/${host}/home.nix`):
 
 ```nix
 # home.nix
@@ -187,7 +227,7 @@ Then in `./hosts/${host}/home.nix`:
 }
 ```
 
-2. Import `depInject` into home-manager:
+2. Importing `depInject` into Home Manager Configuration (More Idiomatic)
 
 ```nix
 # flake.nix
@@ -221,14 +261,26 @@ nixosConfigurations = {
 };
 ```
 
-- `imports = [ self.nixosModules.default ]`: Makes `dep-inject` available in home-managers `config`.
+- By adding `imports = [ self.nixosModules.default ];` within the Home Manager
+  user configuration, the `dep-inject` option becomes available under `config`.
 
-- **Access**: Use `config.dep-inject` directly in home-manager modules, no `extraSpecialArgs` needed.
+- This approach is generally considered more idiomatic and avoids the issues
+  associated with `specialArgs`, as highlighted in resources like
+  "flakes-arent-real"
 
-- This is considered more idiomatic and as mentioned in "flakes-arent-real" linked below, `specialArgs` is uglier, since it gets dumped into the arguments for every module, which is unlike how every other bit of data flow works in NixOS, and it also doesn't work outside of the flake that's actually invoking `nixpkgs.lib.nixosSystem`, if you try using modules outside of that particular Flake, the injected arguments won't persist.
+##### Conclusion
 
-- By explicitly handling dependency injection in a more declarative way (e.g. `config.dep-inject`), you ensure that dependencies remain accessible accross different modules, regardless of where they are used.
+While `specialArgs` offers a seemingly straightforward way to inject
+dependencies, this declarative approach using a custom `dep-inject` option
+promotes a cleaner, more structured, and potentially more robust method for
+managing dependencies across your NixOS modules. It aligns better with NixOS's
+declarative principles and can enhance the maintainability and
+understandability of your configuration.
 
-- I don't personally use this technique for injecting dependencies in my NixOS configuration. It adds complexity that I believe `specialArgs` was supposed to solve and on modern computers I don't think it will matter too much. This is just another way to do things and a way to enhance understanding.
+**Disclaimer**
 
-- I got this example from [flakes-arent-real](https://jade.fyi/blog/flakes-arent-real/) and built on it to enhance understanding. If you have any tips or notice any inaccuracies please let me know.
+- I don't currently personally use this technique in my configuration, it adds
+  complexity that `specialArgs` aimed to solve. However, presenting this
+  alternative enhances understanding of different dependency injection methods
+  in Nix Flakes. This example is inspired by and builds upon concepts discussed in
+  [flakes-arent-real](https://jade.fyi/blog/flakes-arent-real/)

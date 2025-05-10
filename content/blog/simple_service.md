@@ -3,13 +3,15 @@ title = "Building a Custom NixOS Service with Flakes and Overlays"
 date = 2025-05-09
 +++
 
-## Building a Custom NixOS Service with Flakes and Overlays
+# Building a Custom NixOS Service with Flakes and Overlays
 
-TL;DR NixOS's declarative configuration and flakes make it easy to create custom services. This post shows how to build a minimal service using flakes and overlays for a fun "meow" command
+TL;DR NixOS's declarative configuration and flakes make it easy to create
+custom services. This post shows how to build a minimal service using flakes
+and overlays for a "meow" command
 
 - This will be a complete minimal configuration for testing purposes.
 
-Start by creating a directory to hold your project, I called mine `meow` lol:
+Start by creating a directory to hold your project, I called mine `meow`:
 
 ```bash
 mkdir meow && cd meow
@@ -41,7 +43,8 @@ Create a `flake.nix` with the following:
 }
 ```
 
-Next we'll create the `nixos-module.nix` in the same directory with the following content:
+Next we'll create the `nixos-module.nix` in the same directory with the
+following content:
 
 ```nix
 # nixos-module.nix
@@ -95,7 +98,8 @@ nixosConfigurations.test = nixpkgs.lib.nixosSystem {
 };
 ```
 
-- `nixosConfigurations.test` is simply the name we chose for this particular NixOS system configuration.
+- `nixosConfigurations.test` is simply the name we chose for this particular
+  NixOS system configuration.
 
 The final product will look like this:
 
@@ -160,10 +164,14 @@ Then build the system configuration:
 
 `nix build .#nixosConfigurations.test.config.system.build.toplevel`
 
-- If this builds successfully you'll see a `result` directory within your `meow` directory.
+- If this builds successfully you'll see a `result` directory within your `meow`
+  directory.
 
-- I wouldn't recommend actually switching to this configuration but you could build it to gain familiarity with it. If you were to switch to it you would run `./result/bin/switch-to-configuration`
+- I wouldn't recommend actually switching to this configuration but you could
+  build it to gain familiarity with it. If you were to switch to it you would
+  run `./result/bin/switch-to-configuration`
 
-- Test in a NixOS Virtual Machine (Recommended):The safest way to see the "meow" output is to build the configuration and then run it in a NixOS virtual machine. You can do this using tools like `nixos-generate-config` and a virtualization tool (like VirtualBox, QEMU, or GNOME Boxes).
-
-- I forget exactly where I found this example.
+- Test in a NixOS Virtual Machine (Recommended):The safest way to see the "meow"
+  output is to build the configuration and then run it in a NixOS virtual
+  machine. You can do this using tools like `nixos-generate-config` and a
+  virtualization tool (like VirtualBox, QEMU, or GNOME Boxes).
