@@ -2,6 +2,7 @@
 title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
+# NixOS Modules
 **TOC**
 <!--toc:start-->
 - [NixOS Modules](#nixos-modules)
@@ -12,8 +13,6 @@ date = 2025-05-05
 - [Videos](#videos)
 - [[tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)
 <!--toc:end-->
-
-# NixOS Modules
 
 TL;DR: In this post I break down the NixOS module system and explain how to
 define options. As well as how to test modules with the repl.
