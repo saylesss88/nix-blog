@@ -5,13 +5,14 @@ date = 2025-05-07
 
 **TOC**
 
+# Intro to Jujutsu (Using jj in an existing Git Repo)
+
 <!--toc:start-->
 
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
-  - [Here's an example:](#heres-an-example)
-  - [JJ and Git Side by Side](#jj-and-git-side-by-side) <!--toc:end-->
 
-# Intro to Jujutsu (Using jj in an existing Git Repo)
+  - [**Here's an example:**](#heres-an-example) - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+  <!--toc:end-->
 
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.

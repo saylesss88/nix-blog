@@ -15,9 +15,7 @@ date = 2025-05-05
 
   - [Usage and Deployment](#usage-and-deployment)
 
-  - [Adding a Configuration VM Output](#adding-a-configuration-vm-output)
-  - [Debugging](#debugging)
-  - [Understanding Atomicity:](#understanding-atomicity)
+  - [Adding a Configuration VM Output](#adding-a-configuration-vm-output) - [Debugging](#debugging) - [Understanding Atomicity:](#understanding-atomicity)
   <!--toc:end-->
 
 - TL;DR This post demonstrates other ways to modularize your config as well as
@@ -177,7 +175,7 @@ My `~/my-nixos/nixos/default.nix` looks like this:
 }
 ```
 
-### Usage and Deployment
+## Usage and Deployment
 
 To build the package configuration run:
 
@@ -186,7 +184,7 @@ nix build .#nixos
 sudo ./result/bin/switch-to-configuration switch
 ```
 
-#### Adding a Configuration VM Output
+## Adding a Configuration VM Output
 
 Building on what we already have, add this under `defaultConfig`:
 
@@ -340,7 +338,7 @@ context:
     };
 ```
 
-##### Debugging
+### Debugging
 
 - Before switching configurations, verify what's inside your built package:
 
@@ -383,7 +381,7 @@ nix-repl> flake.nixosConfigurations.magic # Inspect host-specific config
 - You can make a change to your configuration while in the repl and reload with
   `:r`
 
-###### Understanding Atomicity:
+### Understanding Atomicity:
 
 - Atomicity means that a system update (e.g. changing `configuration.nix` or a
   flake-based `toplevel` package) either fully succeeds or leaves the system

@@ -3,8 +3,6 @@ title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
 
-**TOC**
-
 <!--toc:start-->
 
 - [NixOS Modules](#nixos-modules)
@@ -13,8 +11,10 @@ date = 2025-05-05
     - [NixOS Modules and Dependency Locking with npins](#nixos-modules-and-dependency-locking-with-npins)
   - [Resources on Modules](#resources-on-modules)
 - [Videos](#videos)
-- [Tweag Module System Recursion](https://www.youtube.com/watch?v=czJoZoHb2oW)
+- [[tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)
 <!--toc:end-->
+
+**TOC**
 
 # NixOS Modules
 

@@ -11,14 +11,7 @@ date = 2025-05-06
 
 - [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
   - [The Problem with `specialArgs`](#the-problem-with-specialargs)
-  - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option)
-    - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix)
-    - [Benefits of this Approach](#benefits-of-this-approach)
-  - [Example Usage](#example-usage)
-  - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules)
-    - [Using `extraSpecialArgs` (Less Ideal)](#using-extraspecialargs-less-ideal)
-    - [Importing `depInject` into Home Manager Configuration (More Idiomatic)](#importing-depinject-into-home-manager-configuration-more-idiomatic)
-  - [Conclusion](#conclusion)
+  - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
   <!--toc:end-->
 
 This post explores a method for injecting dependencies into NixOS modules from
