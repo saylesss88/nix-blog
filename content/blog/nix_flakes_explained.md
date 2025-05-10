@@ -3,9 +3,28 @@ title = "Nix Flakes Explained"
 date = 2025-05-05
 +++
 
-**TOC**
 
 # Nix Flakes Explained
+
+<!--toc:start-->
+- [Nix Flakes Explained](#nix-flakes-explained)
+  - [What is a Nix Flake?](#what-is-a-nix-flake)
+  - [Key Concepts](#key-concepts)
+    - [`flake.nix`: The Heart of a Flake](#flakenix-the-heart-of-a-flake)
+    - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
+    - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
+      - [Understanding the `outputs` Function](#understanding-the-outputs-function)
+      - [Referencing the Current Flake (`self`)](#referencing-the-current-flake-self)
+      - [Variadic Attributes (...) and @-patterns](#variadic-attributes--and--patterns)
+      - [Platform Specificity in Outputs](#platform-specificity-in-outputs)
+      - [`legacyPackages` Explained](#legacypackages-explained)
+      - [The Sole Argument of `outputs`](#the-sole-argument-of-outputs)
+      - [Outputs of the Flake (Return Value)](#outputs-of-the-flake-return-value)
+    - [Imports: Including Other Nix Expressions](#imports-including-other-nix-expressions)
+      - [Passing Arguments During Import](#passing-arguments-during-import)
+      - [Importing Directories (`default.nix`)](#importing-directories-defaultnix)
+  - [Further Resources](#further-resources)
+<!--toc:end-->
 
 
 This explanation highlights common areas of confusion for those new to Nix
