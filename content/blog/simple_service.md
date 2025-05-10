@@ -9,11 +9,10 @@ date = 2025-05-09
 - [Building a Custom NixOS Service with Flakes and Overlays](#building-a-custom-nixos-service-with-flakes-and-overlays)
   - [Create Project Directory](#create-project-directory)
     - [Create `flake.nix`](#create-flakenix)
-    - [Create `nixos-module.nix`](#create-nixos-modulenix)
-      - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output)
-      - [Build the System Configuration](#build-the-system-configuration)
+  - [Create `nixos-module.nix`](#create-nixos-modulenix)
+  - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output)
+    - [Build the System Configuration](#build-the-system-configuration)
 <!--toc:end-->
-
 
 TL;DR NixOS's declarative configuration and flakes make it easy to create
 custom services. This post shows how to build a minimal service using flakes
@@ -57,7 +56,7 @@ Create a `flake.nix` with the following:
 }
 ```
 
-### Create `nixos-module.nix`
+## Create `nixos-module.nix`
 
 Next we'll create the `nixos-module.nix` in the same directory with the
 following content:
@@ -89,7 +88,7 @@ let cfg = config.services.meow; in {
 }
 ```
 
-#### Add `nixosConfigurations` Output
+## Add `nixosConfigurations` Output
 
 Lastly, we will add a `nixosConfigurations` output to the `flake.nix`
 
@@ -178,7 +177,7 @@ The final product will look like this:
 }
 ```
 
-#### Build the System Configuration
+### Build the System Configuration
 
 Then build the system configuration:
 
