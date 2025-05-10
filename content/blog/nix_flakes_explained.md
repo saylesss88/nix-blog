@@ -11,7 +11,7 @@ date = 2025-05-05
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts)
     - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
-  - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
+      - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
       - [Further Resources](#further-resources)
 <!--toc:end-->
 
@@ -72,7 +72,7 @@ Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
     (without dot notation). The most common ones are inputs, outputs,
     and nixConfig.
 
-### Anatomy of `flake.nix`
+#### Anatomy of `flake.nix`
 
 **`inputs`: Declaring Dependencies**
 
