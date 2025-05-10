@@ -3,208 +3,268 @@ title = "Nix Flakes Explained"
 date = 2025-05-05
 +++
 
-### Nix Flakes For NixOS Configuration Explained
+# Nix Flakes Explained
 
-- This is more intended to highlight some common gotchas and places of confusion for beginners than to be a complete guide.
+This explanation highlights common areas of confusion for those new to Nix
+Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
 
-- You can think of the `flake.nix` as an entry point and a way of acquiring dependencies (`inputs`) that are required for evaluation.
+## What is a Nix Flake?
 
-- A flake is simply a source tree (e.g. git repo) containing a `flake.nix` that provides a standardized interface to Nix artifacts (e.g. packages, modules)
+- At its core, a flake is a source tree (like a Git repository) that contains
+  a `flake.nix` file. This file provides a standardized way to access Nix
+  artifacts such as packages and modules.
 
-- Attribute sets are all over Nix Code, they are simply name value pairs wrapped in curly braces:
+- Think of `flake.nix` as the central entry point of a flake. It not only
+  defines what the flake produces but also declares its dependencies.
 
-```nix
-let
-  my_attrset = { foo = "bar"; };
-in my_attrset.foo
-```
+## Key Concepts
 
-Output: `"bar"`
+### `flake.nix`: The Heart of a Flake
 
-- Note: `{}` is a valid attribute set in Nix.
-
-- Flakes have what are called top-level attributes (i.e. you can access them without using dot notation). Some top-level attributes are `inputs`, `outputs`, and `nixConfig`.
-
-- Flake commands are space separation for subcommands like this: `nix build`, the older cli commands are written with a hyphen `nix-build`.
-
-Basic Flake Structure:
+- The `flake.nix` file is mandatory for any flake. It must contain an attribute
+  set with at least one required attribute: `outputs`. It can also optionally
+  include `description` and `inputs`.
+- **Basic Structure:**
 
 ```nix
 {
-  description = package description
-  inputs = dependencies
-  outputs = what the flake produces
-  nixConfig = advanced configuration options
+  description = "Package description";
+  inputs = { /* Dependencies go here */ };
+  outputs = { /* What the flake produces */ };
+  nixConfig = { /* Advanced configuration options */ };
 }
 ```
 
-- The `flake.nix` file must contain an attribute set with one required attribute - `outputs` - and optionally `description` and `inputs`.
+### Attribute Sets: The Building Blocks
 
-#### Inputs
+- Attribute sets are fundamental in Nix. They are simply collections of
+  name-value pairs wrapped in curly braces `{}`.
 
-- You can think of `inputs` as the dependencies this flake relies on.
+  - Example:
 
-- `inputs`: An attribute set specifying the dependencies of the flake where the keys are the names of your flakes dependencies, and the values are references to those other flakes. To access something from a dependency, you would typically go through `inputs` (i.e. `inputs.helix.packages`)
+  ```nix
+  let
+    my_attrset = { foo = "bar"; };
+  in
+  my_attrset.foo
+  ```
 
-The following specifies a dependency on the `nixpkgs` and `import-cargo` repositories:
+  - Output:
 
-```nix
-inputs = {
-  import-cargo.url = "github:edolstra/import-cargo";
-  nixpkgs.url = "nixpkgs";
-}
-```
+  ```nix
+  "bar"
+  ```
 
-- Each input is fetched, evaluated and passed to the `outputs` function as a set of attributes with the same name as the corresponding input.
+- **Top-Level Attributes of a Flake**:
 
-  - The special input `self` refers to the outputs and source tree of _this flake_.
+  - Flakes have specific top-level attributes that can be accessed directly
+    (without dot notation). The most common ones are inputs, outputs,
+    and nixConfig.
 
-  - Each input is fetched, evaluated and passed to the `outputs` function as a set of attributes with the same name as the corresponding input.
+#### Anatomy of `flake.nix`
 
-#### Outputs
+**`inputs`: Declaring Dependencies**
 
-- You can think of outputs as the things your flake provides (i.e. Your configuration, packages, devShells, derivations)
+- The **`inputs`** attribute set specifies the other flakes that your current
+  flake depends on.
 
-- Flakes can provide arbitrary Nix values, such as packages, NixOS modules or library functions. These are called _outputs_. Some outputs have special meaning to certain Nix commands and therefore must be a specific type. If you look at the [output schema](https://nixos.wiki/wiki/Flakes) you'll see that most expect a derivation
+- Each key in the **`inputs`** set is a name you choose for the dependency, and
+  the value is a reference to that flake (usually a URL or a Git Repo).
 
-Show your flakes outputs with:
+- To access something from a dependency, you generally go through the `inputs`
+  attribute (e.g., `inputs.helix.packages`).
+
+  - **Example:** This declares dependencies on the `nixpkgs` and `import-cargo`
+    flakes:
+
+  ```nix
+  inputs = {
+    import-cargo.url = "github:edolstra/import-cargo";
+    nixpkgs.url = "nixpkgs";
+  };
+  ```
+
+  - When Nix evaluates your flake, it fetches and evaluates each input. These
+    evaluated inputs are then passed as an attribute set to the outputs function,
+    with the keys matching the names you gave them in the inputs set.
+
+  - The special input self is a reference to the outputs and the source tree of
+    the current flake itself.
+
+**`outputs`: Defining What Your Flake Provides**
+
+- The **`outputs`** attribute defines what your flake makes available. This can
+  include packages, NixOS modules, development environments (`devShells`) and
+  other Nix derivations.
+
+- Flakes can output arbitrary Nix values. However, certain outputs have
+  specific meanings for Nix commands and must adhere to particular types
+  (often derivations, as described in the
+  [output schema](https://nixos.wiki/wiki/Flakes)).
+
+- You can inspect the outputs of a flake using the command:
 
 ```nix
 nix flake show
 ```
 
-This command actually takes a flake URI and prints all the outputs of the flake as a nice tree structure, mapping attribute paths to the types of values.
+> This command takes a flake URI and displays its outputs in a tree structure,
+> showing the attribute paths and their corresponding types.
 
-- Beginners might initially think that `self` and `nixpkgs` within the `outputs = { self, nixpkgs, ... }` definition are the 'outputs' themselves. However, these are actually the _input arguments_ (which are often called _output arguments_) to the `outputs` function. This distinction is key to grasping the outputs of a flake.
+**Understanding the `outputs` Function**
 
-- Remember that the `outputs` function itself takes a single argument, which is an attribute set. Even though it looks like multiple arguments `{ self, nixpkgs, ... }`, this syntax in Nix is destructuring that single input attribute set to extract its individual fields.
+- Beginners often mistakenly think that self and nixpkgs within
+  `outputs = { self, nixpkgs, ... }: { ... }` are the outputs themselves.
+  Instead, they are the _input arguments_ (often called _output arguments_)
+  to the outputs function.
 
-- `self` is a way to reference "this" flake. You could use `self.inputs` to access the `inputs` top-level attribute. The `outputs` function always receives an argument conventionally named `self`. This argument is a reference to the flake itself including all of it's top-level attributes. You typically use `self` to refer to things within your own flake. (i.e. `self.packages.my-package`)
+- The outputs function in `flake.nix` always takes a single argument,
+  which is an attribute set. The syntax `{ self, nixpkgs, ... }` is Nix's
+  way of destructuring this single input attribute set to extract the values
+  associated with the keys self and nixpkgs.
 
-> [!NOTE]: The `...` syntax is for variadic attributes, (i.e. a varying number of attributes). If you notice most flakes have many more inputs than are explicitly listed in the _input arguments_ this is possible because of variadic attributes.
+**Referencing the Current Flake** (`self`)
 
-In the following example `c = 2` is an extra attribute:
+- `self` provides a way to refer back to the current flake from within the
+  outputs function. You can use it to access other top-level attributes like
+  inputs (e.g., `self.inputs`).
 
-```nix
-mul = { a, b, ... }: a*b
-mul { a = 3; b = 4; c = 2; }
-```
+- The outputs function always receives an argument conventionally named self,
+  which represents the entire flake, including all its top-level attributes.
+  You'll typically use self to reference things defined within your own flake
+  (e.g., `self.packages.my-package`).
 
-However, in the function body you cannot access the "c" attribute. The solution is to give a name to the given set with the @-pattern:
+**Variadic Attributes (...) and @-patterns**
 
-```nix
-nix-repl> mul = s@{ a, b, ... }: a*b*s.c  # s.c = 2
-nix-repl> mul { a = 3; b = 4; c = 2; }
-24
-```
+- The `...` syntax in the input arguments of the outputs function indicates
+  variadic attributes, meaning the input attribute set can contain more
+  attributes than just those explicitly listed (like `self` and `nixpkgs`).
 
-- `@-patterns` in the `outputs` function argument list provides a convenient way to bind the entire attribute set to a name (i.e. `outputs = { pkgs, ... } @ inputs`).
+  **Example:**
 
-- When you write `outputs = { pkgs, ... } @ inputs`, it does the following:
+  ```nix
+  mul = { a, b, ... }: a \* b;
+  mul { a = 3; b = 4; c = 2; } # 'c' is an extra attribute
+  ```
 
-  - Destructures the input attribute set: It tries to extract the value associated with the key `pkgs` from the input attribute set and bind it to the variable `pkgs`. The `...` allows for other keys in the input attr set to be ignored in this direct destructuring.
+  However, you cannot directly access these extra attributes within the
+  function body unless you use the @-pattern:
 
-  - Binds the entire attribute set to `inputs`
+  ```nix
+  mul = s@{ a, b, ... }: a _ b _ s.c; # 's' now refers to the entire input set
+  mul { a = 3; b = 4; c = 2; } # Output: 24
+  ```
+
+  - When used in the outputs function argument list (e.g.,
+    `outputs = { pkgs, ... } @ inputs)`, the @-pattern binds the entire input
+    attribute set to a name (in this case, `inputs`) while also allowing you to
+    destructure specific attributes like pkgs.
+
+  - **What `outputs = { pkgs, ... } @ inputs: { ... };` does:**
+
+1. **Destructuring:** It tries to extract the value associated with the key
+   `pkgs` from the input attribute set and binds it to the variable `pkgs`.
+   The `...` allows for other keys in the input attribute set to be ignored
+   during this direct destructuring.
+
+2. **Binding the Entire Set:** It binds the entire input attribute set to the
+   variable inputs.
+
+   - Example `flake.nix`:
 
 ```nix
 {
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-  inputs.home-manager.url = github:nix-community/home-manager;
+inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+inputs.home-manager.url = "github:nix-community/home-manager";
 
-  # outputs is a function that takes an attribute set that returns an
-  # attribute set (e.g. outputs multiple values)
-  outputs = { self, nixpkgs, ... }@attrs: {
+outputs = { self, nixpkgs, ... } @ attrs: { # A `packages` output for the x86_64-linux platform
+packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
 
-    # a `packages` output
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    # Below is the nixosConfigurations output (e.g. your NixOs configuration)
+    # A `nixosConfigurations` output (for a NixOS system named "fnord")
     nixosConfigurations.fnord = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [ ./configuration.nix ];
     };
-  };
+
+};
 }
 ```
 
-- Flakes promise that the outputs of a flake should be the same regardless of the evaluator's environment. Because of this, all flake outputs that have anything to do with packages must specify the platform explicitly in some way.
+**Platform Specificity in Outputs**
 
-  - Platform is a combination of architecture and OS. (e.g. `x86_64-linux`).
+- Flakes ensure that their outputs are consistent across different evaluation
+  environments. Therefore, any package-related output must explicitly specify
+  the target platform (a combination of architecture and OS, `x86_64-linux`).
 
-  - `legacyPackages` is designed specifically for nixpkgs. It makes it possible to work with `nixpkgs` arbitrary attribute format from older packages. What this means is that `nixpkgs` traditionally organizes packages directly under the top level (e.g. `pkgs.hello`), and `legacyPackages` provides a consistent platform-aware way to access these within the flake's structured output format.
+**legacyPackages Explained**
 
-  - To expand further, Flakes enforce a more structured way of organizing outputs. For package outputs, the expected schema typically has the platform specification as a top-level attribute (i.e. `packages.x86_64-linux.my-package`). This ensures that when you ask a flake for a package, it's clear which platform the package is intended for. It's kind of like an API for flakes and legacy packages to be able to work together.
+- `legacyPackages` is a way for flakes to interact with the traditional,
+  less structured package organization of nixpkgs. Instead of packages being
+  directly at the top level (e.g., `pkgs.hello`), `legacyPackages` provides a
+  platform-aware way to access them within the flake's structured output format
+  (e.g., `nixpkgs.legacyPackages.x86_64-linux.hello`). It acts as a bridge
+  between the flake's expected output structure and nixpkgs's historical
+  organization.
 
-- Flakes take a sole argument which is another point of confusion, how is it a sole argument if im passing `{ self, nixpkgs, ... }`? This syntax is actually shorthand for a single argument that is an attribute set.
+**The Sole Argument of outputs**
 
-  - Remember, a valid attribute set in nix is `{}`. `{ a = 1; }` is an attribute set with a single value. An attribute set is simply a set of name value pairs wrapped in curly braces.(e.g. `{self, nixpkgs, ... }`). Notice also that in the _inputs arguments_ commas are used and everywhere else uses semicolon `;`
+- It's crucial to remember that the outputs function accepts only one argument,
+  which is an attribute set. The `{ self, nixpkgs, ... }` syntax is simply
+  destructuring that single input attribute set.
 
-- Outputs (of the Flake): Refers to the attribute set that is returned by the `outputs` function.
+**Outputs of the Flake (Return Value)**
 
-- To recap the `outputs` function takes an attribute set as its argument and returns an attribute set.
+- The outputs of the flake refer to the attribute set that is returned by the
+  `outputs` function. This attribute set can contain various named outputs like
+  `packages`, `nixosConfigurations`, `devShells`, etc.
 
-- I already covered that `nixosConfigurations` outputs your NixOS configuration, there can be many other types of outputs explained below.
+**Imports: Including Other Nix Expressions**
 
-### Imports
+- The `import` function in Nix is used to evaluate the Nix expression found at
+  a specified path (usually a file or directory) and return its value.
 
-- You can think of `import` as "evaluate the Nix expression in this file" and return its value.
+- Basic Usage: import `./path/to/file.nix`
 
-- The `import` function in Nix takes a path (usually a string representating a file or directory i.e. `./lib/dev-shell.nix`) and evaluates the Nix expression found at that location.
+**Passing Arguments During Import**
 
-- One point of confusion is the following:
-
-```nix
-{
-  outputs = { self, nixpkgs, ... }: {
-    nixosConfigurations.my-system = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./modules/base.nix
-        (import ./modules/desktop.nix { pkgs = nixpkgs; })
-      ];
-    };
-  };
-}
-```
-
-- With `(import ./modules/desktop.nix { pkgs = nixpkgs; })` you're actually saying import the file at this location but also export `nixpkgs` to said file to make it available.
-
-When you see:
+- You can also pass an attribute set as an argument to the Nix expression being
+  imported:
 
 ```nix
 let
-  myHelpers = import ./lib/my-helpers.nix { pkgs = nixpkgs; };
+myHelpers = import ./lib/my-helpers.nix { pkgs = nixpkgs; };
 in
+# ... use myHelpers
 ```
 
-You are:
-
-1. Importing the Nix expression from `./lib/my-helpers.nix`
-
-2. Passing an attribute set `{ pkgs = nixpkgs; }` as an argument to the evaluated expression in the imported file.
-
-Inside `lib/my-helpers.nix`, there will likely be a function definiton that expects an argument (often also named `pkgs` by convention):
+- In this case, the Nix expression in `./lib/my-helpers.nix` is likely a
+  function that expects an argument (often named `pkgs` by convention):
 
 ```nix
 # ./lib/my-helpers.nix
+
 { pkgs }:
 let
-  myPackage = pkgs.stdenv.mkDerivation {
-    name = "my-package";
-    # ...
-  };
+myPackage = pkgs.stdenv.mkDerivation {
+name = "my-package"; # ...
+};
 in
 myPackage
 ```
 
-- By passing `{ pkgs = nixpkgs; }` during the import, you are essentially saying: The `pkgs` that the code in `./lib/my-helpers.nix` expects as an argument should be the `nixpkgs` that is available within the scope of my current `flake.nix`(the `nixpkgs` passed as an argument to the `outputs` function)
+- By passing `{ pkgs = nixpkgs; }` during the import, you are providing the
+  nixpkgs value from your current `flake.nix` scope to the pkgs parameter
+  expected by the code in `./lib/my-helpers.nix`.
 
-- When you use import with a path that points to a directory, Nix doesn't just try to import the directory itself (which wouldn't make sense as a Nix value). Instead, it automatically looks for a file named `default.nix` within that directory.
+**Importing Directories (`default.nix`)**
 
-- If a `default.nix` file is found inside the specified directory, Nix will then evaluate the Nix expressions within that `default.nix` file, just as if you had directly specified the path to `default.nix` in your import statement. The result of evaluating `default.nix` becomes the value returned by the import function.
+- When you use import with a path that points to a directory, Nix automatically
+  looks for a file named `default.nix` within that directory. If found, Nix
+  evaluates the expressions within `default.nix` as if you had specified its
+  path directly in the import statement.
 
-#### Resources
+##### Further Resources
 
 - [practical-nix-flakes](https://serokell.io/blog/practical-nix-flakes)
 

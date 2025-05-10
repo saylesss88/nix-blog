@@ -143,7 +143,7 @@ nix-repl> hello-drv
 - Derivations have a `.drv` suffix, as you can see the result of calling
   `hello-drv` is the nix store path to a derivation.
 
-### Links and short Overview
+### Links To Articles about Derivations
 
 - [NixPillsOurFirstDerivation](https://nixos.org/guides/nix-pills/06-our-first-derivation)
 
