@@ -1,169 +1,158 @@
 +++
-title = "Working with Nixpkgs Locally & why you might want to"
+title = "Working with Nixpkgs Locally: Benefits and Best Practices"
 date = 2025-05-07
 +++
 
 # Working with Nixpkgs Locally: Benefits and Best Practices
 
-Nixpkgs, the package repository for NixOS, is a powerful resource for building and customizing software. Working with a local copy of Nixpkgs lets you debug, test, and contribute to packages efficiently. This post explains how to set up a local Nixpkgs repository, search for dependencies, and leverage its benefits, with tips from the Nix community.
+- Nixpkgs, the package repository for NixOS, is a powerful resource for building and customizing software.
+- Working with a local copy enhances development, debugging, and contribution workflows.
+- This post covers setting up a local Nixpkgs repository, searching for dependencies, and leveraging its advantages, incorporating tips from the Nix community.
 
-## Why Work with Nixpkgs Locally?
+## I. Why Work with Nixpkgs Locally?
 
-A local Nixpkgs repository offers several advantages:
+- A local Nixpkgs repository offers significant advantages for Nix developers:
 
-- **Faster Development**: Local searches and builds are quicker than querying remote repositories or channels, speeding up debugging and prototyping.
+  ### A. Faster Development Cycle
 
-- **Full Version Control**: Pin specific commits or branches (e.g., `nixos-unstable`) to ensure reproducibility and avoid unexpected upstream changes.
+  - Local searches for packages and dependencies are significantly quicker than querying remote repositories or channels.
+  - This speedup is crucial for efficient debugging and rapid prototyping of Nix expressions.
 
-- **Debugging Flexibility**: Test and modify package derivations locally to fix issues like missing dependencies without waiting for upstream updates.
+  ### B. Enhanced Version Control
 
-- **Contribution Workflow**: Develop and test changes (e.g., new packages, patches) before submitting pull requests to Nixpkgs.
+  - By pinning your local repository to specific commits or branches (e.g., `nixos-unstable`), you ensure build reproducibility.
+  - This prevents unexpected issues arising from upstream changes in Nixpkgs.
 
-- **Up-to-Date Reference**: The repository’s source code and comments often provide the latest documentation, outpacing official guides.
+  ### C. Flexible Debugging Capabilities
 
-- **Storage Efficiency**: Proper setup (e.g., shallow clones, avoiding flakes) minimizes disk usage and build times.
+  - You can directly test and modify package derivations within your local copy.
+  - This allows for quick fixes to issues like missing dependencies without waiting for upstream updates or releases.
 
-For reference, here is a comparison of Flake vs. Non-Flake Syntax:
+  ### D. Streamlined Contribution Workflow
 
-- Flake Syntax: Uses `nix build .#<package>` or similar, where the current directory (.) is treated as a flake.
-  For a local Nixpkgs repository, this involves evaluating the flake.nix in the repository root, which defines
-  outputs like `packages.<system>.<package>`. Flakes copy the entire working directory (including checked-out files)
-  to /nix/store for evaluation, which can be slow and storage-intensive for large repositories like Nixpkgs.
+  - Developing and testing new packages or patches locally is essential before submitting them as pull requests to Nixpkgs.
+  - A local setup provides an isolated environment for experimentation.
 
-- Non-Flake Syntax: Uses `nix-build -f . <package>` or `nix build -f . <package>`, where -f . specifies the Nix
-  expression in the current directory (e.g., default.nix or a specific file). This evaluates the Nix expression
-  directly without copying the worktree to /nix/store, making it faster and more storage-efficient for local development.
+  ### E. Up-to-Date Documentation Source
 
-## Setting Up a Local Nixpkgs Repository
+  - The source code and comments within the Nixpkgs repository often contain the most current information about packages.
+  - This can sometimes be more up-to-date than official, external documentation.
 
-Nixpkgs is a large repository, so cloning it efficiently is key to avoiding slowdowns and storage bloat.
+  ### F. Optimized Storage and Performance
 
-- Working on Nixpkgs locally can be powerful, but using it as a flake directly
-  can lead to unexpected slowdowns and storage issues...
+  - Employing efficient cloning strategies (e.g., shallow clones) and avoiding unnecessary practices (like directly using Nixpkgs as a flake for local development) minimizes disk usage and build times.
 
-- First the Nixpkgs repo is massive. Only clone the latest revision to avoid cloning the entire history of Nixpkgs:
+## II. Flake vs. Non-Flake Syntax for Local Nixpkgs
 
-```bash
-git clone https://github.com/NixOS/nixpkgs --depth 1
-cd nixpkgs
-```
+- When working with Nixpkgs locally, the choice between Flake and non-Flake syntax has implications for performance and storage:
 
-- Now you can either fetch all of the branches or just the one you need:
+  ### A. Flake Syntax (`nix build .#<package>`)
 
-```bash
-git fetch --all --prune --depth=1
-git worktree add -b nixos-unstable nixos-unstable # for just unstable
-```
+  - Treats the current directory as a flake, requiring evaluation of `flake.nix`.
+  - For local Nixpkgs, this evaluates the flake definition in the repository root.
+  - **Performance and Storage Overhead:** Flakes copy the entire working directory (including Git history if present) to `/nix/store` for evaluation. This can be slow and storage-intensive for large repositories like Nixpkgs.
 
-- The `worktree` is a feature in Git that allows you to have multiple working
-  directories attached to the same Git repository. The main working directory is
-  created when you clone a repository or run `git init`. You can then create
-  additional worktrees using the `git worktree add` command. Each worktree has its
-  own set of checked-out files, but they all share the same .git directory, which
-  contains the repository's history and objects.
+  ### B. Non-Flake Syntax (`nix-build -f . <package>` or `nix build -f . <package>`)
 
-- `git worktree add` Adds a new working directory for a branch or commit, in this case `nixos-unstable`.
+  - `-f .` specifies the Nix expression (e.g., `default.nix` or a specific file) in the current directory.
+  - **Efficiency:** Evaluates the Nix expression directly _without_ copying the entire worktree to `/nix/store`. This is significantly faster and more storage-efficient for local development on large repositories.
 
-- Now lets say you want to build a derivation for `icat` and you get a missing dependency error like this:
+## III. Setting Up a Local Nixpkgs Repository Efficiently
 
-```nix
-nix-build -A icat
-this derivation will be built:
-  /nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv
-...
-error: builder for '/nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv' failed with exit code 2;
-       last 10 log lines:
-       >                  from icat.c:31:
-       > /nix/store/hkj250rjsvxcbr31fr1v81cv88cdfp4l-glibc-2.37-8-dev/include/features.h:195:3: warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wcpp-Wcpp8;;]
-       >   195 | # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-       >       |   ^~~~~~~
-       > In file included from icat.c:39:
-       > /nix/store/4fvrh0sjc8sbkbqda7dfsh7q0gxmnh9p-imlib2-1.11.1-dev/include/Imlib2.h:45:10: fatal error: X11/Xlib.h: No such file or directory
-       >    45 | #include <X11/Xlib.h>
-       >       |          ^~~~~~~~~~~~
-       > compilation terminated.
-       > make: *** [Makefile:16: icat.o] Error 1
-       For full logs, run 'nix log /nix/store/bw2d4rp2k1l5rg49hds199ma2mz36x47-icat.drv'.
-```
+- Cloning Nixpkgs requires careful consideration due to its size.
 
-- `fatal error: X11/xlib.h: No such file or directory`(a missing dependency)
+  ### A. Initial Clone: Shallow Cloning
 
-- The easiest way to find what you need is to [search.nixos.org/packages](https://search.nixos.org/packages)
+  - To avoid downloading the entire history, perform a shallow clone:
+    ```bash
+    git clone [https://github.com/NixOS/nixpkgs](https://github.com/NixOS/nixpkgs) --depth 1
+    cd nixpkgs
+    ```
 
-- Unfortunately in this case, searching for x11 produces too many irrelevant results because
-  X11 is ubiquitous. On the left side bar there is a list package sets, and selecting xorg shows
-  something promising.
+  ### B. Managing Branches with Worktrees
 
-- In this case, it helps to become familiar with searching the Nixpkgs source code for keywords.
+  - Use Git worktrees to manage different branches efficiently:
+    ```bash
+    git fetch --all --prune --depth=1
+    git worktree add -b nixos-unstable nixos-unstable # For just unstable
+    ```
+  - **Explanation of `git worktree`:** Allows multiple working directories attached to the same `.git` directory, sharing history and objects but with separate checked-out files.
+  - `git worktree add`: Creates a new working directory for the specified branch (`nixos-unstable` in this case).
 
-In the `nixpkgs/` directory you could run:
+## IV. Debugging Missing Dependencies: A Practical Example
 
-```bash
-rg "x11 =" pkgs  # case sensitive search
-```
+- Let's say you're trying to build `icat` locally and encounter a missing dependency error:
 
-**Output**:
+  ```nix
+  nix-build -A icat
+  # ... (Error log showing "fatal error: X11/Xlib.h: No such file or directory")
+  ```
 
-```bash
-pkgs/tools/X11/primus/default.nix
-21:  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
-22:  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
+  - The error `fatal error: X11/Xlib.h: No such file or directory` indicates a missing X11 dependency.
 
-pkgs/applications/graphics/imv/default.nix
-38:    x11 = [ libGLU xorg.libxcb xorg.libX11 ];
-```
+  ### A. Online Search with `search.nixos.org`
 
-- The important bit here is `xorg.libX11`. We can further refine our search and
-  make sure we aren't missing anything with:
+  - The Nixpkgs package search website ([https://search.nixos.org/packages](https://search.nixos.org/packages)) is a valuable first step.
+  - However, broad terms like "x11" can yield many irrelevant results.
+  - **Tip:** Utilize the left sidebar to filter by package sets (e.g., "xorg").
 
-```bash
-rg -i "libx11 =" pkgs    # case insensitive
-```
+  ### B. Local Source Code Search with `rg` (ripgrep)
 
-Output:
+  - Familiarity with searching the Nixpkgs source code is crucial for finding dependencies.
+  - Navigate to your local `nixpkgs/` directory and use `rg`:
 
-```bash
-1541:    enableX11 = false;
-1726:  bucklespring-x11 = callPackage ../applications/audio/bucklespring { legacy = true; };
-5344:    libX11 = xorg.libX11;
-6327:    nvidia_x11 = linuxPackages.nvidia_x11;
-6564:  mitschemeX11 = mitscheme.override {
-```
+    ```bash
+    rg "x11 =" pkgs # Case-sensitive search
+    ```
 
-### Local derivation search
+    **Output:**
 
-To search derivations on the command line, use `nix-locate` from `nix-index`
+    ```
+    pkgs/tools/X11/primus/default.nix
+    21:  primus = if useNvidia then primusLib_ else primusLib_.override { nvidia_x11 = null; };
+    22:  primus_i686 = if useNvidia then primusLib_i686_ else primusLib_i686_.override { nvidia_x11 = null; };
 
-> **NOTE:** You need to first install `nix-index` and run the command `nix-index` to create the initial index of your system and takes a while.
+    pkgs/applications/graphics/imv/default.nix
+    38:    x11 = [ libGLU xorg.libxcb xorg.libX11 ];
+    ```
 
-```bash
-nix-locate libx11
-2.0.2/share/xdg-ninja/programs/libx11.json
-x11basic.out                                          0 s /nix/store/809yni8vijakvfdiha65ym1j85dgc9im-X11basic-1.27/lib/libx11basic.so
-x11basic.out                                          0 s /nix/store/809yni8vijakvfdiha65ym1j85dgc9im-X11basic-1.27/lib/libx11basic.so.1
-x11basic.out                                    767,712 r /nix/store/809yni8vijakvfdiha65ym1j85dgc9im-X11basic-1.27/lib/libx11basic.so.1.27
-vcpkg.out                                             9 d /nix/store/bhhd9xy5n8qn6hc4bfk06c9dc55pcy8p-vcpkg-2024.1
-# ...
-```
+  - Refining the search (case-insensitive):
+    ```bash
+    rg -i "libx11 =" pkgs
+    ```
+    **Output:**
+    ```
+    # ... (Output showing "xorg.libX11")
+    ```
+  - The key result is `xorg.libX11`, which is likely the missing dependency.
 
-- Combining online resources like `search.nixos.org` with local searches with `rg` or `grep` provides a powerful toolkit.
+## V. Local Derivation Search with `nix-locate`
 
-- Local searches and builds can be faster than dealing with remote repos.
+- `nix-locate` (from the `nix-index` package) allows searching for derivations on the command line.
 
-- A local copy of Nixpkgs gives you full control over the Nixpkgs version you're using.
+  > **Note:** Install `nix-index` and run `nix-index` to create the initial index.
 
-- Documentation can lag behind the Nixpkgs Repository updates making it a good source for new info.
+  ```bash
+  nix-locate libx11
+  # ... (Output showing paths related to libx11)
+  ```
 
-- Never merge the upstream into your branch! Always rebase your branch on top of
-  master (or whatever your upstream branch is). Merging is how you accidentally
-  ping like 30,000 people in your PR. This tip came from soulsssx3 on reddit.
+- Combining online and local search tools (`search.nixos.org`, `rg`, `nix-locate`) provides a comprehensive approach to finding dependencies.
 
-- The following Tips come from ElvishJErrico:
+## VI. Key Benefits of Working with Nixpkgs Locally (Recap)
 
-Another tip: For nixpkgs (or any very large repos), avoid using it as a flake when working directly on it. Use nix build -f . hello instead of nix build .#hello. The reason to avoid the flake is that it will copy the worktree into /nix/store. The copy itself is slow, and it takes a couple hundred megabytes. So even just 10 "edit -> rebuild" cycles will waste a couple minutes of time and over a gig of storage. And the worst part is when you go to garbage collect your store. Large numbers of small files (exactly what nixpkgs is) is the worst case scenario for the performance of any file system, so GC'ing one or two hundred nixpkgs copies takes forever. I was convinced to stop using flake syntax while working on nixpkgs when a GC took over an hour longer than I expected because of all the nixpkgs copies.
+- **Speed:** Faster searches and builds compared to remote operations.
+- **Control:** Full control over the Nixpkgs version.
+- **Up-to-Date Information:** Repository source often has the latest details.
 
-There are still some edge cases where you'll want to use flake syntax though. Like the "installer" NixOS tests, which copy the nixpkgs directory. You'll want to use flake syntax so this copy doesn't include the whole .git history, which makes these tests even slower. Also, there's work in development to address all of this so flake syntax doesn't have these problems, but it's slow going and it's not clear when we'll finally benefit from it.
+## VII. Best Practices and Tips from the Community
 
-Another tip: Base your changes on the nixos-unstable branch, not master. It will merge into master just fine assuming no conflicts have come up in the past couple days, and nixos-unstable has much better binary cache hits than master. Even when I'm working on something for staging, I'll base my changes on the merge-base for staging and nixos-unstable if I can.
+- **Rebasing over Merging:** Never merge upstream changes into your local branch. Always rebase your branch onto the upstream (e.g., `master` or `nixos-unstable`) to avoid accidental large-scale pings in pull requests (Tip from `soulsssx3` on Reddit).
 
-Finally, jujutsu. This is a git alternative that's git-compatible. It's so much better than git. It's a little slower at some things, and it takes a lot of getting used to, but it's way more intuitive and makes a lot of workflows very very easy, especially on large monorepos like nixpkgs where you might have a dozen different parallel things you're interested in working on. I've been an emacs-magit user for years (probably the best GUI / TUI for making git easy to use), and I've switched to jujutsu. I still miss how magit is integrated with the editor and how everything is done with lightning fast keystrokes, but jujutsu is worth it. And I can still use magit for a number of things since jujutsu is git compatible.
+- **Tip from `ElvishJErrico`:** Avoid using Nixpkgs directly as a flake for local development due to slow copying to `/nix/store` and performance issues with garbage collection on large numbers of small files. Use `nix build -f . <package>` instead of `nix build .#<package>`.
+
+- **Edge Cases for Flake Syntax:** Flake syntax might be necessary in specific scenarios, such as NixOS installer tests where copying the Git history should be avoided.
+
+- **Base Changes on `nixos-unstable`:** For better binary cache hits, base your changes on the `nixos-unstable` branch instead of `master`. Consider the merge-base for staging branches as well.
+
+- **Consider `jujutsu`:** Explore `jujutsu`, a Git-compatible alternative that can offer a more intuitive workflow, especially for large monorepos like Nixpkgs. While it has a learning curve, it can significantly improve parallel work and branch management.

@@ -3,9 +3,12 @@ title = "Conditional Configuration"
 date = 2025-05-06
 +++
 
-## Conditional Configuration
+# Conditional Configuration
 
-With options it's easy to conditionally install something based on if another program is enabled in your configuration.
+With options it's easy to conditionally install something based on if another
+program is enabled in your configuration.
+
+## Hyprland and Wlogout interaction
 
 For example, if I have an option to enable or disable hyprland like this:
 
@@ -55,11 +58,18 @@ in {
 # .. snip ..
 ```
 
-- Since the above module is set to false, it is necessary to add `custom.hyprland.enable = true` to my `home.nix` to have Nix add it to my configuration. And since `home.packages` is wrapped in `config = lib.mkIf cfg.enable` Those packages will only be installed if the module is enabled.
+- Since the above module is set to false, it is necessary to add
+  `custom.hyprland.enable = true` to my `home.nix` to have Nix add it
+  to my configuration. And since `home.packages` is wrapped in
+  `config = lib.mkIf cfg.enable` Those packages will only be installed
+  if the module is enabled.
 
-- if I used `programs.hyprland.enable` and added `home.packages = [ pkgs.waybar ];` without conditionals, waybar would install even if hyprland was disabled.
+- if I used `programs.hyprland.enable` and added
+  `home.packages = [ pkgs.waybar ];` without conditionals, waybar would install
+  even if hyprland was disabled.
 
-I can then have my default for something like wlogout be to install only if the `custom.hyprland` module is enabled:
+I can then have my default for something like wlogout be to install only if
+the `custom.hyprland` module is enabled:
 
 ```nix
 # wlogout.nix
@@ -85,6 +95,16 @@ in {
 # .. snip ..
 ```
 
-- The default value of `config.custom.wlogout.enable` is set to `config.custom.hyprland.enable`. Therefore, if `config.custom.hyprland.enable` evaluates to true, the wlogout module will be enabled by default.
+- The default value of `config.custom.wlogout.enable` is set to
+  `config.custom.hyprland.enable`. Therefore, if `config.custom.hyprland.enable`
+  evaluates to true, the wlogout module will be enabled by default.
 
-The `lib.mkIf cfg.enable` ensures that wlogout’s configuration (e.g., enabling `programs.wlogout`) is only applied when `custom.wlogout.enable = true`, which defaults to `custom.hyprland.enable`. This means wlogout is enabled by default only if Hyprland is enabled, but I can override this (e.g., `custom.wlogout.enable = true` without Hyprland). This conditional logic prevents wlogout from being installed unnecessarily when Hyprland is disabled, unlike a simpler approach like `programs.wlogout.enable = config.programs.hyprland.enable`, which hardcodes the dependency and offers less flexibility.
+The `lib.mkIf cfg.enable` ensures that wlogout’s configuration
+(e.g., enabling `programs.wlogout`) is only applied when
+`custom.wlogout.enable = true`, which defaults to `custom.hyprland.enable`.
+This means wlogout is enabled by default only if Hyprland is enabled, but
+I can override this (e.g., `custom.wlogout.enable = true` without Hyprland).
+This conditional logic prevents wlogout from being installed unnecessarily
+when Hyprland is disabled, unlike a simpler approach like `programs.wlogout.
+enable = config.programs.hyprland.enable`, which hardcodes the dependency and
+offers less flexibility.
