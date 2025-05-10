@@ -3,15 +3,21 @@ title = "Building your Configuration as a Package"
 date = 2025-05-05
 +++
 
-#### Building your configuration as a Package
+# Building your configuration as a Package
 
-- TL;DR This post demonstrates other ways to modularize your config as well as going into more advanced outputs.
+- TL;DR This post demonstrates other ways to modularize your config as well as
+  going into more advanced outputs.
 
-- This is long winded, and maybe unnecessary for your workflow. Also I take notes in markdown so this is written in markdown. It demonstrates other ways to modularize your config as well as going into more advanced outputs.
+- This allows you to build your configuration as a package allowing you to
+  separate the process of creating a configuration artifact and applying it to
+  the live system giving you a reusable artifact that can be used to deploy to
+  different systems. This can make it easier to isolate it from other parts of
+  your system making debugging easier.
 
-- This allows you to build your configuration as a package allowing you to separate the process of creating a configuration artifact and applying it to the live system giving you a reusable artifact that can be used to deploy to different systems. This can make it easier to isolate it from other parts of your system making debugging easier.
+The following is a snip of my `flake.nix`:
 
 ```nix
+# flake.nix
   outputs = my-inputs @ {
     self,
     nixpkgs,
@@ -66,15 +72,20 @@ date = 2025-05-05
     }
 ```
 
-- I didn't want to change the name of `inputs` and effect other areas of my config so I first renamed `@ inputs` to `@ my-inputs` to make the merged attribute set use the original `inputs` name.
+- I didn't want to change the name of `inputs` and effect other areas of my
+  config so I first renamed `@ inputs` to `@ my-inputs` to make the merged
+  attribute set use the original `inputs` name.
 
-- Note, I'm still using home-manager as a module I just had to move it for all modules to be available inside the artifact built with `nix build .#nixos`
+- Note, I'm still using home-manager as a module I just had to move it for all
+  modules to be available inside the artifact built with `nix build .#nixos`
 
 ### Benefits of `nixosConfiguration` as a Package
 
 `packages.x86_64-linux.nixos = self.nixosConfigurations.magic.config.system.build.toplevel;`
 
-- This exposes the `toplevel` derivation of `nixosConfiguration.magic` as a package, which is the complete system closure of your NixOS configuration.
+- The above expression exposes the `toplevel` derivation of
+  `nixosConfiguration.magic` as a package, which is the complete system closure
+  of your NixOS configuration.
 
 Here is the `/hosts/magic/default.nix`:
 
@@ -88,7 +99,11 @@ inputs.nixpkgs.lib.nixosSystem {
 }
 ```
 
-- Because we want all modules, not just NixOS modules this requires changing your `configuration.nix` to include your home-manager configuration. The core reason for this is that the `packages.nixos` output builds a NixOS system, and home-manager needs to be a part of that system's definition to be included in the build.
+- Because we want all modules, not just NixOS modules this requires changing
+  your `configuration.nix` to include your home-manager configuration. The core
+  reason for this is that the `packages.nixos` output builds a NixOS system, and
+  home-manager needs to be a part of that system's definition to be included in
+  the build.
 
 ```nix
 # configuration.nix
@@ -128,7 +143,10 @@ inputs.nixpkgs.lib.nixosSystem {
   nixpkgs.overlays = [inputs.lib.overlays];
 ```
 
-> [!NOTE]: `inputs.lib.nixOsModules` is equivalent to `../../home` in my case and imports all of my nixOS modules. This comes from the `flake.nix` where I have `nixOsModules = import ./nixos` Which looks for a `default.nix` in the `nixos` directory.
+> [!NOTE]: `inputs.lib.nixOsModules` is equivalent to `../../home` in my case
+> and imports all of my nixOS modules. This comes from the `flake.nix` where I
+> have `nixOsModules = import ./nixos` Which looks for a `default.nix` in the
+> `nixos` directory.
 
 My `~/my-nixos/nixos/default.nix` looks like this:
 
@@ -269,7 +287,9 @@ nixosConfiguration.extendModules {
 
 - Uncomment and add your username to auto login.
 
-And an `apps` output that will build and deploy in one step with `nix build .#deploy-nixos` I'll show `packages` and `apps` outputs for context:
+And an `apps` output that will build and deploy in one step with
+`nix build .#deploy-nixos` I'll show `packages` and `apps` outputs for
+context:
 
 ```nix
    # flake.nix
@@ -317,7 +337,8 @@ nix show-derivation .#nixos
 
 - Explore the Package Contents
 
-Once the build completes, you get a store path like `/nix/store/...-nixos-system`. You can explore the contents using:
+Once the build completes, you get a store path like
+`/nix/store/...-nixos-system`. You can explore the contents using:
 
 ```bash
 nix path-info -r .#nixos
@@ -344,22 +365,28 @@ nix-repl> flake.nixosConfigurations.nixos # confirm the built package
 nix-repl> flake.nixosConfigurations.magic # Inspect host-specific config
 ```
 
-- You can make a change to your configuration while in the repl and reload with `:r`
+- You can make a change to your configuration while in the repl and reload with
+  `:r`
 
 ### Understanding Atomicity:
 
-- Atomicity means that a system update (e.g. changing `configuration.nix` or a flake-based `toplevel` package) either fully succeeds or leaves the system unchanged, preventing partial or inconsistent states.
+- Atomicity means that a system update (e.g. changing `configuration.nix` or a
+  flake-based `toplevel` package) either fully succeeds or leaves the system
+  unchanged, preventing partial or inconsistent states.
 
-- The `toplevel` package is the entry point for your entire NixOS system, including the kernel, initrd, system services, and `home-manager` settings.
+- The `toplevel` package is the entry point for your entire NixOS system,
+  including the kernel, initrd, system services, and `home-manager` settings.
 
-- Building with `nix build .#nixos` creates the `toplevel` derivation upfront, allowing you to inspect or copy it before activation:
+- Building with `nix build .#nixos` creates the `toplevel` derivation upfront,
+  allowing you to inspect or copy it before activation:
 
 ```nix
 nix build .#nixos
 ls -l result
 ```
 
-- In contrast, `nixos-rebuild switch` builds and activates in one step, similar to `cargo run` although both do involve the same `toplevel` derivation.
+- In contrast, `nixos-rebuild switch` builds and activates in one step, similar
+  to `cargo run` although both do involve the same `toplevel` derivation.
 
 The `toplevel` package can be copied to another NixOS machine:
 
@@ -374,6 +401,10 @@ ssh jr@server
 sudo /nix/store/...-nixos-system-magic/bin/switch-to-configuration switch
 ```
 
-- I got the examples for building your configuration as a package and vm from the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file) configuration and adapted them to [my config](https://github.com/saylesss88/flake).
+- I got the examples for building your configuration as a package and vm from
+  the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file)
+  configuration and adapted them to [my config](https://github.com/saylesss88/flake).
 
-- I got the examples for building your configuration as a package and vm from the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file) configuration and adapted them to [my config](https://github.com/TSawyer87/my-nixos).
+- I got the examples for building your configuration as a package and vm from
+  the [hydenix](https://github.com/richen604/hydenix/tree/main?tab=readme-ov-file)
+  configuration and adapted them to [my config](https://github.com/saylesss88/flake).

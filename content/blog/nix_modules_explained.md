@@ -3,13 +3,13 @@ title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
 
-## NixOS Modules
+# NixOS Modules
 
-TL;DR: In this post I break down the NixOS module system and explain how to define options. As well as how to test modules with the repl.
+TL;DR: In this post I break down the NixOS module system and explain how to
+define options. As well as how to test modules with the repl.
 
-TL;DR: In this post I break down the NixOS module system and explain how to define options. I take notes in markdown so it's written in markdown (sorry old reddit). I write about things to deepen understanding, you think you know until you try to explain it to someone. Anyways, I hope this is useful.
-
-- Most modules are functions that take an attribute set and return an attribute set.
+- Most modules are functions that take an attribute set and return an attribute
+  set.
 
 Refresher:
 
@@ -36,15 +36,27 @@ Refresher:
 }
 ```
 
-NixOS produces a full system configuration by combining smaller, more isolated and reusable components: **Modules**. In my opinion modules are one of the first things you should understand when learning about NixOS.
+NixOS produces a full system configuration by combining smaller, more isolated
+and reusable components: **Modules**. In my opinion modules are one of the
+first things you should understand when learning about NixOS.
 
-- A NixOS module defines configuration options and behaviors for system components, allowing users to extend, customize, and compose configurations declaratively.
+- A NixOS module defines configuration options and behaviors for system
+  components, allowing users to extend, customize, and compose configurations
+  declaratively.
 
-- A module is a file containing a Nix expression with a specific structure. It _declares_ options for other modules to define (give a value). Modules were introduced to allow extending NixOS without modifying its source code.
+- A module is a file containing a Nix expression with a specific structure. It
+  _declares_ options for other modules to define (give a value). Modules were
+  introduced to allow extending NixOS without modifying its source code.
 
-- To define any values, the module system first has to know which ones are allowed. This is done by declaring options that specify which attributes can be set and used elsewhere.
+- To define any values, the module system first has to know which ones are
+  allowed. This is done by declaring options that specify which attributes can
+  be set and used elsewhere.
 
-- If you want to write your own modules, I recommend setting up [nixd](https://github.com/nix-community/nixd?tab=readme-ov-file) or [nil](https://github.com/oxalica/nil) with your editor of choice. This will allow your editor to warn you about missing arguments and dependencies as well as syntax errors.
+- If you want to write your own modules, I recommend setting up
+  [nixd](https://github.com/nix-community/nixd?tab=readme-ov-file)
+  or [nil](https://github.com/oxalica/nil) with your editor of choice.
+  This will allow your editor to warn you about missing arguments and
+  dependencies as well as syntax errors.
 
 ### Declaring Options
 
@@ -84,7 +96,8 @@ in
 }
 ```
 
-- It provides options to enable Vim, set it as the default editor, and specify the Vim package to use.
+- It provides options to enable Vim, set it as the default editor, and specify
+  the Vim package to use.
 
 1. Module Inputs and Structure:
 
@@ -99,15 +112,25 @@ in
 
 - Inputs: The module takes the above inputs and `...` (catch-all for other args)
 
-  - `config`: Allows the module to read option values (e.g. `config.programs.vim.enable`). It provides access to the evaluated configuration.
+  - `config`: Allows the module to read option values (e.g.
+    `config.programs.vim.enable`). It provides access to the evaluated
+    configuration.
 
-  - `lib`: The Nixpkgs library, giving us helper functions like `mkEnableOption`, `mkIf`, and `mkOverride`.
+  - `lib`: The Nixpkgs library, giving us helper functions like `mkEnableOption`
+    , `mkIf`, and `mkOverride`.
 
   - `pkgs`: The Nixpkgs package set, used to access packages like `pkgs.vim`
 
-  - `...`: Allows the module to accept additional arguments, making it flexible for extension in the future.
+  - `...`: Allows the module to accept additional arguments, making it flexible
+    for extension in the future.
 
-> Key Takeaways: A NixOS module is typically a function that can include `config`, `lib`, and `pkgs`, but it doesn’t require them. The `...` argument ensures flexibility, allowing a module to accept extra inputs without breaking future compatibility. Using `lib` simplifies handling options (mkEnableOption, mkIf, mkOverride) and helps follow best practices. Modules define options, which users can set in their configuration, and `config`, which applies changes based on those options.
+> Key Takeaways: A NixOS module is typically a function that can include
+> `config`, `lib`, and `pkgs`, but it doesn’t require them. The `...`
+> argument ensures flexibility, allowing a module to accept extra inputs
+> without breaking future compatibility. Using `lib` simplifies handling
+> options (mkEnableOption, mkIf, mkOverride) and helps follow best practices.
+> Modules define options, which users can set in their configuration, and
+> `config`, which applies changes based on those options.
 
 2. Local Configuration Reference:
 
@@ -117,7 +140,8 @@ let
 in
 ```
 
-- This is a local alias. Instead of typing `config.programs.vim` over and over, the module uses `cfg`.
+- This is a local alias. Instead of typing `config.programs.vim` over and over,
+  the module uses `cfg`.
 
 3. Option Declaration
 
@@ -137,7 +161,8 @@ This defines three user-configurable options:
 
 - `package`: lets the user override which Vim package is used.
 
-> `mkPackageOption` is a helper that defines a package-typed option with a default (`pkgs.vim`) and provides docs + example.
+> `mkPackageOption` is a helper that defines a package-typed option with a
+> default (`pkgs.vim`) and provides docs + example.
 
 4. Conditional Configuration
 
@@ -145,7 +170,8 @@ This defines three user-configurable options:
 config = lib.mkIf (cfg.enable || cfg.defaultEditor) {
 ```
 
-- This block is only activated if _either_ `programs.vim.enable` or `defaultEditor` is set.
+- This block is only activated if _either_ `programs.vim.enable` or
+  `defaultEditor` is set.
 
 5. Warnings
 
@@ -155,7 +181,8 @@ warnings = lib.mkIf (cfg.defaultEditor && !cfg.enable) [
 ];
 ```
 
-- Gives you a soft warning if you try to set `defaultEditor = true` without also enabling Vim.
+- Gives you a soft warning if you try to set `defaultEditor = true` without
+  also enabling Vim.
 
 6. Actual System Config Changes
 
@@ -167,7 +194,8 @@ environment = {
 };
 ```
 
-- It adds Vim to your `systemPackages`, sets `$EDITOR` if `defaultEditor` is true, and makes `/share/vim-plugins` available in the environment.
+- It adds Vim to your `systemPackages`, sets `$EDITOR` if `defaultEditor` is
+  true, and makes `/share/vim-plugins` available in the environment.
 
 The following is a bat home-manager module that I wrote:
 
@@ -221,21 +249,33 @@ custom = {
 }
 ```
 
-- If I set this option to true the bat configuration is dropped in place. If it's not set to true, it won't put the bat configuration in the system. Same as with options defined in modules within the Nixpkgs repository.
+- If I set this option to true the bat configuration is dropped in place. If
+  it's not set to true, it won't put the bat configuration in the system. Same
+  as with options defined in modules within the Nixpkgs repository.
 
-- If I had set the default to `true`, it would automatically enable the module without requiring an explicit `custom.batModule.enable = true;` call in my `home.nix`.
+- If I had set the default to `true`, it would automatically enable the module
+  without requiring an explicit `custom.batModule.enable = true;` call in my
+  `home.nix`.
 
-### Module Composition
+#### Module Composition
 
-- NixOS achieves its full system configuration by combining the configurations defined in various modules. This composition is primarily handled through the `imports` mechanism.
+- NixOS achieves its full system configuration by combining the configurations
+  defined in various modules. This composition is primarily handled through the
+  `imports` mechanism.
 
-- `imports`: This is a standard option within a NixOS or Home Manager configuration (often found in your configuration.nix or home.nix). It takes a list of paths to other Nix modules. When you include a module in the imports list, the options and configurations defined in that module become part of your overall system configuration.
+- `imports`: This is a standard option within a NixOS or Home Manager
+  configuration (often found in your configuration.nix or home.nix). It takes
+  a list of paths to other Nix modules. When you include a module in the imports
+  list, the options and configurations defined in that module become part of
+  your overall system configuration.
 
-- You declaratively state the desired state of your system by setting options across various modules. The NixOS build system then evaluates and merges these option settings. The culmination of this process, which includes building the entire system closure, is represented by the derivation built by `config.system.build.toplevel`.
+- You declaratively state the desired state of your system by setting options
+  across various modules. The NixOS build system then evaluates and merges these
+  option settings. The culmination of this process, which includes building the
+  entire system closure, is represented by the derivation built by
+  `config.system.build.toplevel`.
 
-<<<<<<< HEAD
-
-### NixOS Modules and Dependency Locking with npins
+#### NixOS Modules and Dependency Locking with npins
 
 This is the file structure:
 
@@ -251,6 +291,7 @@ This is the file structure:
 ```
 
 This uses `npins` for dependency locking. Install it and run this in the project
+
 directory:
 
 ```bash
@@ -326,7 +367,9 @@ And a `desktop.nix` with the following:
 }
 ```
 
-`mkEnableOption` defaults to false. Now in your `configuration.nix` you can uncomment `mine.desktop.enable = true;` to enable the desktop config and vice-versa.
+`mkEnableOption` defaults to false. Now in your `configuration.nix` you can
+uncomment `mine.desktop.enable = true;` to enable the desktop config and
+vice-versa.
 
 You can test that this works by running:
 
