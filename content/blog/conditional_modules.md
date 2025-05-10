@@ -3,10 +3,9 @@ title = "Conditional Configuration"
 date = 2025-05-06
 +++
 
-**TOC**
 
 # Conditional Configuration
-
+**TOC**
 <!--toc:start-->
 - [Conditional Configuration](#conditional-configuration)
   - [Hyprland Module](#hyprland-module)
