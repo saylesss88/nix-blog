@@ -5,7 +5,7 @@ date = 2025-05-05
 
 
 # Nix Flakes Explained
-
+**TOC**
 <!--toc:start-->
 - [Nix Flakes Explained](#nix-flakes-explained)
   - [What is a Nix Flake?](#what-is-a-nix-flake)

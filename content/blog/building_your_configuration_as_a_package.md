@@ -3,10 +3,9 @@ title = "Building your Configuration as a Package"
 date = 2025-05-05
 +++
 
-**TOC**
 
 # Building your configuration as a Package
-
+**TOC**
 <!--toc:start-->
 - [Building your configuration as a Package](#building-your-configuration-as-a-package)
   - [Benefits of `nixosConfiguration` as a Package](#benefits-of-nixosconfiguration-as-a-package)
