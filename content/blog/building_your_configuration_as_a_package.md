@@ -13,12 +13,12 @@ date = 2025-05-05
 
   - [Benefits of `nixosConfiguration` as a Package](#benefits-of-nixosconfiguration-as-a-package)
 
-    - [Usage and Deployment](#usage-and-deployment)
+  - [Usage and Deployment](#usage-and-deployment)
 
   - [Adding a Configuration VM Output](#adding-a-configuration-vm-output)
-    - [Debugging](#debugging)
-    - [Understanding Atomicity:](#understanding-atomicity)
-    <!--toc:end-->
+  - [Debugging](#debugging)
+  - [Understanding Atomicity:](#understanding-atomicity)
+  <!--toc:end-->
 
 - TL;DR This post demonstrates other ways to modularize your config as well as
   going into more advanced outputs.

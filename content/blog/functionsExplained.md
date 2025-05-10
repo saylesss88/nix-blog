@@ -9,10 +9,7 @@ date = 2025-05-05
 
 - [Understanding Nix Functions](#understanding-nix-functions)
   - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
-    - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon)
-    - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments)
-  - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules)
-- [Resources](#resources)
+  - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon) - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
   <!--toc:end-->
 
 # Understanding Nix Functions
@@ -23,7 +20,7 @@ Functions are a fundamental concept in Nix and are prevalent throughout Nix code
 
 A key concept to understand is that in Nix, every function conceptually takes **exactly one argument**. What might appear as multi-argument functions are actually achieved through a technique called **currying**, where a series of nested single-argument functions are used.
 
-### Identifying Function Structure: The Colon (`:`)
+## Identifying Function Structure: The Colon (`:`)
 
 The colon (`:`) acts as a clear separator within a function definition:
 
@@ -52,7 +49,7 @@ greet "Anonymous"  # Evaluates to "Hello, Anonymous!"
 The value `"Anonymous"` is substituted for the `personName` placeholder within
 the function body.
 
-#### Function Declarations: Single and "Multiple" Arguments
+### Function Declarations: Single and "Multiple" Arguments
 
 **Single-Argument Functions**
 
@@ -167,7 +164,7 @@ helloGreeting "Sally" # Evaluates to "Hello, Sally!"
   arguments. Partial application allows you to adapt existing functions to fit
   these requirements.
 
-##### The Function Nature of NixOS and Home Manager Modules
+### The Function Nature of NixOS and Home Manager Modules
 
 It's crucial to understand that most NixOS and Home Manager modules are
 fundamentally **functions**.
