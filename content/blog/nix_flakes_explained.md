@@ -10,9 +10,8 @@ date = 2025-05-05
 - [Nix Flakes Explained](#nix-flakes-explained)
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts)
-    - [`flake.nix`: The Heart of a Flake](#flakenix-the-heart-of-a-flake)
     - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
-    - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
+  - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
       - [Further Resources](#further-resources)
 <!--toc:end-->
 
@@ -47,7 +46,7 @@ Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
 }
 ```
 
-### Attribute Sets: The Building Blocks
+## Attribute Sets: The Building Blocks
 
 - Attribute sets are fundamental in Nix. They are simply collections of
   name-value pairs wrapped in curly braces `{}`.
