@@ -9,7 +9,8 @@ date = 2025-05-07
 
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
 
-  - [**Here's an example:**](#heres-an-example) - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+  - [**Here's an example:**](#heres-an-example)
+  - [JJ and Git Side by Side](#jj-and-git-side-by-side)
   <!--toc:end-->
 
 # Intro to Jujutsu (Using jj in an existing Git Repo)

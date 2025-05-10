@@ -8,7 +8,11 @@ date = 2025-05-05
 <!--toc:start-->
 
 - [Understanding Nix Functions](#understanding-nix-functions)
-  - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions) - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon) - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
+  - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
+    - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon)
+    - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments)
+  - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules)
+- [Resources](#resources)
   <!--toc:end-->
 
 # Understanding Nix Functions

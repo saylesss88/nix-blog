@@ -8,7 +8,11 @@ date = 2025-05-06
 <!--toc:start-->
 
 - [Shallow Clone Nixpkgs](#shallow-clone-nixpkgs)
-  - [Import your Non-Flake Wallpaper Repo](#import-your-non-flake-wallpaper-repo) - [Understanding @-patterns](#understanding-patterns) - [Understanding `specialArgs`](#understanding-specialargs) - [Set up Flake Check and Formatter Outputs](#set-up-flake-check-and-formatter-outputs) - [Add a devShell Output](#add-a-devshell-output)
+  - [Import your Non-Flake Wallpaper Repo](#import-your-non-flake-wallpaper-repo)
+  - [Understanding @-patterns](#understanding-patterns)
+  - [Understanding `specialArgs`](#understanding-specialargs)
+  - [Set up Flake Check and Formatter Outputs](#set-up-flake-check-and-formatter-outputs)
+- [Add a devShell Output](#add-a-devshell-output)
   <!--toc:end-->
 
 # Shallow Clone Nixpkgs

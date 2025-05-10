@@ -8,9 +8,14 @@ date = 2025-05-05
 <!--toc:start-->
 
 - [Introduction: Flakes and Traditional Nix](#introduction-flakes-and-traditional-nix)
-
   - [What is Purity in Nix?](#what-is-purity-in-nix)
-  - [Building a Simple "hello" Package: Flakes vs. Traditional Nix](#building-a-simple-hello-package-flakes-vs-traditional-nix) - [Using Nix Flakes](#using-nix-flakes) - [Using Traditional Nix](#using-traditional-nix) - [Updating Nixpkgs](#updating-nixpkgs) - [Updating Traditional Nix (using `niv`)](#updating-traditional-nix-using-niv) - [Adding Home-Manager with Flakes](#adding-home-manager-with-flakes) - [Adding Home-Manager with Traditional Nix](#adding-home-manager-with-traditional-nix)
+  - [Building a Simple "hello" Package: Flakes vs. Traditional Nix](#building-a-simple-hello-package-flakes-vs-traditional-nix)
+    - [Using Nix Flakes](#using-nix-flakes)
+    - [Using Traditional Nix](#using-traditional-nix)
+  - [Updating Nixpkgs](#updating-nixpkgs)
+  - [Updating Traditional Nix (using `niv`)](#updating-traditional-nix-using-niv)
+- [Adding Home-Manager with Flakes](#adding-home-manager-with-flakes)
+- [Adding Home-Manager with Traditional Nix](#adding-home-manager-with-traditional-nix)
   <!--toc:end-->
 
 # Introduction: Flakes and Traditional Nix

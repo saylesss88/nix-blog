@@ -8,7 +8,11 @@ date = 2025-05-06
 <!--toc:start-->
 
 - [The Nix Language](#the-nix-language)
-  - [How does Nix work?](#how-does-nix-work) - [Syntax Basics](#syntax-basics) - [Derivations](#derivations) - [Evaluating Nix Files](#evaluating-nix-files) - [Resources](#resources)
+  - [How does Nix work?](#how-does-nix-work)
+    - [Syntax Basics](#syntax-basics)
+    - [Derivations](#derivations)
+  - [Evaluating Nix Files](#evaluating-nix-files)
+- [Resources](#resources)
   <!--toc:end-->
 
 # The Nix Language

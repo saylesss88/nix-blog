@@ -12,8 +12,9 @@ date = 2025-05-08
     - [The Actual Overlay](#the-actual-overlay)
       - [The pokego Package definition](#the-pokego-package-definition)
         - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
-  - [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
-  <!--toc:end-->
+  - [Installing Pokego](#installing-pokego)
+    - [Another Overlay Example](#another-overlay-example)
+    <!--toc:end-->
 
 # Using Overlays to add Packages that aren't in Nixpkgs
 

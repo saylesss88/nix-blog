@@ -15,7 +15,9 @@ date = 2025-05-09
     - [The Challenge with Shebangs in Nix](#the-challenge-with-shebangs-in-nix)
     - [The Importance of Statelessness in Nix](#the-importance-of-statelessness-in-nix)
     - [Our `builder.sh` Script](#our-buildersh-script)
-  - [Our Second Derivation](#our-second-derivation) - [Links To Articles about Derivations](#links-to-articles-about-derivations)
+  - [Our Second Derivation](#our-second-derivation)
+
+- [Links To Articles about Derivations](#links-to-articles-about-derivations)
   <!--toc:end-->
 
 # Introduction to Nix Derivations
