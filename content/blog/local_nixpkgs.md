@@ -19,7 +19,6 @@ date = 2025-05-07
   - [A. Initial Clone: Shallow Cloning](#a-initial-clone-shallow-cloning)
   - [B. Managing Branches with Worktrees](#b-managing-branches-with-worktrees)
 - [IV. Debugging Missing Dependencies: A Practical Example](#iv-debugging-missing-dependencies-a-practical-example)
-  - [A. Online Search with `search.nixos.org`](#a-online-search-with-searchnixosorg)
   - [B. Local Source Code Search with `rg` (ripgrep)](#b-local-source-code-search-with-rg-ripgrep)
 - [V. Local Derivation Search with `nix-locate`](#v-local-derivation-search-with-nix-locate)
 - [VI. Key Benefits of Working with Nixpkgs Locally (Recap)](#vi-key-benefits-of-working-with-nixpkgs-locally-recap)
