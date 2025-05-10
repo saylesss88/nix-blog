@@ -3,8 +3,6 @@ title = "Understanding Nix Derivations: A Beginner's Guide & Resources"
 date = 2025-05-09
 +++
 
-# Introduction to Nix Derivations
-
 **TOC**
 
 <!--toc:start-->
@@ -19,6 +17,8 @@ date = 2025-05-09
     - [Our `builder.sh` Script](#our-buildersh-script)
   - [Our Second Derivation](#our-second-derivation) - [Links To Articles about Derivations](#links-to-articles-about-derivations)
   <!--toc:end-->
+
+# Introduction to Nix Derivations
 
 - A derivation in Nix is a fundamental concept that describes how to build a piece of software or a resource (e.g., a package, library, or configuration file). Think of it as a recipe for creating something within the Nix ecosystem.
 

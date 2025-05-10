@@ -3,8 +3,6 @@ title = "Nix Flakes Tips and Tricks"
 date = 2025-05-06
 +++
 
-# Shallow Clone Nixpkgs
-
 **TOC**
 
 <!--toc:start-->
@@ -12,6 +10,8 @@ date = 2025-05-06
 - [Shallow Clone Nixpkgs](#shallow-clone-nixpkgs)
   - [Import your Non-Flake Wallpaper Repo](#import-your-non-flake-wallpaper-repo) - [Understanding @-patterns](#understanding-patterns) - [Understanding `specialArgs`](#understanding-specialargs) - [Set up Flake Check and Formatter Outputs](#set-up-flake-check-and-formatter-outputs) - [Add a devShell Output](#add-a-devshell-output)
   <!--toc:end-->
+
+# Shallow Clone Nixpkgs
 
 1. Shallow clone nixpkgs, the full Git history isn't always necessary and this
    can speed up build times.

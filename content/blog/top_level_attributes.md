@@ -3,8 +3,6 @@ title = "Understanding Top-Level Attributes in NixOS Modules"
 date = 2025-05-07
 +++
 
-# Understanding Top-Level Attributes in NixOS Modules
-
 **TOC**
 
 <!--toc:start-->
@@ -15,6 +13,8 @@ date = 2025-05-07
   - [The NixOS Module System: Evaluating Options](#the-nixos-module-system-evaluating-options)
   - [How the Module System Works: A Simplified Overview](#how-the-module-system-works-a-simplified-overview)
   <!--toc:end-->
+
+# Understanding Top-Level Attributes in NixOS Modules
 
 This explanation is based on insights from Infinisil, a prominent figure in the
 Nix community, to help clarify the concept of top-level attributes within

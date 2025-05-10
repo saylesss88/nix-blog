@@ -3,8 +3,6 @@ title = "Working with Nixpkgs Locally: Benefits and Best Practices"
 date = 2025-05-07
 +++
 
-# Working with Nixpkgs Locally: Benefits and Best Practices
-
 **TOC**
 
 <!--toc:start-->
@@ -31,6 +29,8 @@ date = 2025-05-07
   - [VI. Key Benefits of Working with Nixpkgs Locally (Recap)](#vi-key-benefits-of-working-with-nixpkgs-locally-recap)
   - [VII. Best Practices and Tips from the Community](#vii-best-practices-and-tips-from-the-community)
   <!--toc:end-->
+
+# Working with Nixpkgs Locally: Benefits and Best Practices
 
 - Nixpkgs, the package repository for NixOS, is a powerful resource for building and customizing software.
 - Working with a local copy enhances development, debugging, and contribution workflows.

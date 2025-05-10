@@ -3,8 +3,6 @@ title = "Nix Flakes Explained"
 date = 2025-05-05
 +++
 
-# Nix Flakes Explained
-
 **TOC**
 
 <!--toc:start-->
@@ -13,6 +11,8 @@ date = 2025-05-05
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts) - [`flake.nix`: The Heart of a Flake](#flakenix-the-heart-of-a-flake) - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks) - [Anatomy of `flake.nix`](#anatomy-of-flakenix) - [Further Resources](#further-resources)
   <!--toc:end-->
+
+# Nix Flakes Explained
 
 This explanation highlights common areas of confusion for those new to Nix
 Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.

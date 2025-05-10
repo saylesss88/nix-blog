@@ -3,15 +3,16 @@ title = "Conditional Configuration"
 date = 2025-05-06
 +++
 
-# Conditional Configuration
-
 **TOC**
 
 <!--toc:start-->
 
 - [Conditional Configuration](#conditional-configuration)
-  - [Hyprland Module](#hyprland-module) - [Wlogout Module](#wlogout-module)
-  <!--toc:end-->
+  - [Hyprland Module](#hyprland-module)
+    - [Wlogout Module](#wlogout-module)
+    <!--toc:end-->
+
+# Conditional Configuration
 
 With options it's easy to conditionally install something based on if another
 program is enabled in your configuration.

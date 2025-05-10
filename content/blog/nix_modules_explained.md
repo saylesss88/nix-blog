@@ -13,7 +13,7 @@ date = 2025-05-05
     - [NixOS Modules and Dependency Locking with npins](#nixos-modules-and-dependency-locking-with-npins)
   - [Resources on Modules](#resources-on-modules)
 - [Videos](#videos)
-- [Tweag Module System Recursion](https://www.youtube.com/watch?v=czJoZoHb2oW) - [Resources on Modules](#resources-on-modules)
+- [Tweag Module System Recursion](https://www.youtube.com/watch?v=czJoZoHb2oW)
 <!--toc:end-->
 
 # NixOS Modules
@@ -445,15 +445,3 @@ true
 [infinisilModules](https://infinisil.com/modules.mp4)
 
 # [tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)
-
-#### Resources on Modules
-
-- [xeiaso Nixos Modules for fun & profit](https://xeiaso.net/talks/asg-2023-nixos/)
-
-- [NixOS Wiki NixOS modules](https://nixos.wiki/wiki/NixOS_modules)
-
-- [nix.dev Module System](https://nix.dev/tutorials/module-system/index.html)
-
-- [nix.dev A basic module](https://nix.dev/tutorials/module-system/a-basic-module/index.html)
-
-- [NixOS Flakes Book Module System](https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/module-system)

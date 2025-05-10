@@ -3,8 +3,6 @@ title = "Using Overlays to add Packages that aren't in Nixpkgs"
 date = 2025-05-08
 +++
 
-# Using Overlays to add Packages that aren't in Nixpkgs
-
 **TOC**
 
 <!--toc:start-->
@@ -16,6 +14,8 @@ date = 2025-05-08
         - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
   - [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
   <!--toc:end-->
+
+# Using Overlays to add Packages that aren't in Nixpkgs
 
 It is very common to use overlays in Nix to install packages that aren't
 available in the standard Nixpkgs repository.

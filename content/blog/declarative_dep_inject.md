@@ -3,8 +3,6 @@ title = "Declarative Dependency Injection in Nix Flakes"
 date = 2025-05-06
 +++
 
-# Declarative Dependency Injection in Nix Flakes
-
 **TOC**
 
 <!--toc:start-->
@@ -13,6 +11,8 @@ date = 2025-05-06
   - [The Problem with `specialArgs`](#the-problem-with-specialargs)
   - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
   <!--toc:end-->
+
+# Declarative Dependency Injection in Nix Flakes
 
 This post explores a method for injecting dependencies into NixOS modules from
 a flake in a more declarative way, offering an alternative to `specialArgs`.
