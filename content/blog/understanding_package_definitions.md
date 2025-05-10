@@ -13,7 +13,6 @@ date = 2025-05-08
   - [Skeleton of a Derivation](#skeleton-of-a-derivation)
   - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition)
     - [Swaytools Package Definition](#swaytools-package-definition)
-    - [Breakdown of the Above `default.nix`](#breakdown-of-the-above-defaultnix)
     - [Resources](#resources)
 <!--toc:end-->
 
