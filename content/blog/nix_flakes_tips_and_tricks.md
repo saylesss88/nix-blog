@@ -3,11 +3,21 @@ title = "Nix Flakes Tips and Tricks"
 date = 2025-05-06
 +++
 
-### Nix Flake Tips and Tricks
+# Shallow Clone Nixpkgs
 
-1. Shallow clone nixpkgs, the full Git history isn't always necessary and this can speed up build times.
+**TOC**
 
-- The only issue I've had is `nix-index-database` not working well with the shallow clone... Other than that no issues after running for a few months.
+<!--toc:start-->
+
+- [Shallow Clone Nixpkgs](#shallow-clone-nixpkgs)
+  - [Import your Non-Flake Wallpaper Repo](#import-your-non-flake-wallpaper-repo) - [Understanding @-patterns](#understanding-patterns) - [Understanding `specialArgs`](#understanding-specialargs) - [Set up Flake Check and Formatter Outputs](#set-up-flake-check-and-formatter-outputs) - [Add a devShell Output](#add-a-devshell-output)
+  <!--toc:end-->
+
+1. Shallow clone nixpkgs, the full Git history isn't always necessary and this
+   can speed up build times.
+
+- The only issue I've had is `nix-index-database` not working well with the
+  shallow clone... Other than that no issues after running for a few months.
 
 ```nix
 # flake.nix
@@ -16,8 +26,10 @@ inputs = {
 };
 ```
 
-- Some times when you might need a full clone are debugging and working with repository history
-  but those are rare.
+- Some times when you might need a full clone are debugging and working with
+  repository history but those are rare.
+
+## Import your Non-Flake Wallpaper Repo
 
 2. Importing your non-flake wallpapers repo:
 
@@ -33,6 +45,8 @@ inputs = {
 
 - After adding the input I can access individual wallpapers by adding the `inputs` argument and
   something like `path = "${inputs.wallpapers}/Aesthetic Scenery.jpg";`
+
+### Understanding @-patterns
 
 3. Understanding `@-patterns`, being able to reference your outputs argument set as a whole. An
    `@-pattern` is a way for a function can access variadic attributes (i.e. varying number of
@@ -76,6 +90,8 @@ modules = [
   then you would need `modules = [ inputs.home-manager.nixosModules.home-manager];` This can be confusing
   because many docs assume your not using an @-pattern so if you have one in your flake you need to prefix
   with `inputs`. I use this to reference my personal wallpapers repo mentioned earlier.
+
+#### Understanding `specialArgs`
 
 4. Understanding `specialArgs` (nixos) and `extraSpecialArgs` (home-manager). Building on the @-patterns, using
    `specialArgs` and `extraSpecialArgs` is a way to pass arguments from your flake to your NixOS and home-manager
@@ -160,6 +176,8 @@ nixosConfigurations = {
 }
 ```
 
+#### Set up Flake Check and Formatter Outputs
+
 5. Set up `checks` and `formatter` outputs with `treefmt-nix`. Add `treefmt-nix` to your inputs and outputs arguments.
    Inside the `let` expression from tip 4 I would add:
 
@@ -230,6 +248,8 @@ settings.formatter = {
 - Now you can run `nix flake check` to run your checks. Running `nix flake show` will list your outputs.
 
 - Tools like `nix-fast-build` rely on flake checks and can be used after setting this up.
+
+##### Add a devShell Output
 
 6. Make a devShell output:
 

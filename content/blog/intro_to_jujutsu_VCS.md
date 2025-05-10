@@ -5,6 +5,15 @@ date = 2025-05-07
 
 # Intro to Jujutsu (Using jj in an existing Git Repo)
 
+**TOC**
+
+<!--toc:start-->
+
+- [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
+
+  - [**Here's an example:**](#heres-an-example) - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+  <!--toc:end-->
+
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
   The native repository format for jj is still a work in progress so people
@@ -21,7 +30,7 @@ date = 2025-05-07
     already done for you. This is handy with flakes by preventing a
     "dirty working tree" and can instantly be rebuilt after making a change.
 
-**Here's an example:**
+## **Here's an example:**
 
 Say I have my configuration flake in the `~/flakes/` directory that is an
 existing Git repository. To use JJ as the front-end I could do something like:
@@ -33,8 +42,8 @@ jj describe -m "first jj commit"
 jj commit
 ```
 
-Or to do this in a directory that isn't already a git repo you can do something
-like:
+**Or** to do this in a directory that isn't already a git repo you can do
+something like:
 
 ```bash
 cargo new hello-world --vcs=none
@@ -42,6 +51,8 @@ cd hello-world
 jj git init
 Initialized repo in "."
 ```
+
+### JJ and Git Side by Side
 
 Or for example, with Git if you wanted to move to a different branch before
 running `nix flake update` to see if it introduced errors before merging

@@ -5,6 +5,15 @@ date = 2025-05-05
 
 # Building your configuration as a Package
 
+**TOC**
+
+<!--toc:start-->
+
+- [Building your configuration as a Package](#building-your-configuration-as-a-package)
+
+  - [Benefits of `nixosConfiguration` as a Package](#benefits-of-nixosconfiguration-as-a-package) - [Usage and Deployment](#usage-and-deployment) - [Adding a Configuration VM Output](#adding-a-configuration-vm-output) - [Debugging](#debugging) - [Understanding Atomicity:](#understanding-atomicity)
+  <!--toc:end-->
+
 - TL;DR This post demonstrates other ways to modularize your config as well as
   going into more advanced outputs.
 
@@ -79,7 +88,7 @@ The following is a snip of my `flake.nix`:
 - Note, I'm still using home-manager as a module I just had to move it for all
   modules to be available inside the artifact built with `nix build .#nixos`
 
-### Benefits of `nixosConfiguration` as a Package
+## Benefits of `nixosConfiguration` as a Package
 
 `packages.x86_64-linux.nixos = self.nixosConfigurations.magic.config.system.build.toplevel;`
 
@@ -162,7 +171,7 @@ My `~/my-nixos/nixos/default.nix` looks like this:
 }
 ```
 
-#### Usage and Deployment
+### Usage and Deployment
 
 To build the package configuration run:
 
@@ -325,7 +334,7 @@ context:
     };
 ```
 
-#### Debugging
+##### Debugging
 
 - Before switching configurations, verify what's inside your built package:
 
@@ -368,7 +377,7 @@ nix-repl> flake.nixosConfigurations.magic # Inspect host-specific config
 - You can make a change to your configuration while in the repl and reload with
   `:r`
 
-### Understanding Atomicity:
+###### Understanding Atomicity:
 
 - Atomicity means that a system update (e.g. changing `configuration.nix` or a
   flake-based `toplevel` package) either fully succeeds or leaves the system

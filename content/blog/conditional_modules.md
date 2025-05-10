@@ -5,10 +5,18 @@ date = 2025-05-06
 
 # Conditional Configuration
 
+**TOC**
+
+<!--toc:start-->
+
+- [Conditional Configuration](#conditional-configuration)
+  - [Hyprland Module](#hyprland-module) - [Wlogout Module](#wlogout-module)
+  <!--toc:end-->
+
 With options it's easy to conditionally install something based on if another
 program is enabled in your configuration.
 
-## Hyprland and Wlogout interaction
+## Hyprland Module
 
 For example, if I have an option to enable or disable hyprland like this:
 
@@ -67,6 +75,8 @@ in {
 - if I used `programs.hyprland.enable` and added
   `home.packages = [ pkgs.waybar ];` without conditionals, waybar would install
   even if hyprland was disabled.
+
+### Wlogout Module
 
 I can then have my default for something like wlogout be to install only if
 the `custom.hyprland` module is enabled:

@@ -5,6 +5,14 @@ date = 2025-05-06
 
 # The Nix Language
 
+**TOC**
+
+<!--toc:start-->
+
+- [The Nix Language](#the-nix-language)
+  - [How does Nix work?](#how-does-nix-work) - [Syntax Basics](#syntax-basics) - [Derivations](#derivations) - [Evaluating Nix Files](#evaluating-nix-files) - [Resources](#resources)
+  <!--toc:end-->
+
 Nix as a programming language can be thought of as a kind of "JSON, but with
 functions".
 
