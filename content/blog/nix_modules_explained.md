@@ -2,11 +2,7 @@
 title = "NixOS Modules Explained"
 date = 2025-05-05
 +++
-
-**TOC**
-
 <!--toc:start-->
-
 - [NixOS Modules](#nixos-modules)
   - [Declaring Options](#declaring-options)
     - [Module Composition](#module-composition)

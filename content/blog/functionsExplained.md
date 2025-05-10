@@ -8,12 +8,14 @@ date = 2025-05-05
 # Understanding Nix Functions
 
 <!--toc:start-->
-
 - [Understanding Nix Functions](#understanding-nix-functions)
   - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
   - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon)
-  - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
-  <!--toc:end-->
+  - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments)
+    - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules)
+    - [Resources](#resources)
+<!--toc:end-->
+
 
 Functions are a fundamental concept in Nix and are prevalent throughout Nix code. Grasping how they work is crucial for understanding and writing Nix expressions.
 

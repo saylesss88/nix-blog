@@ -4,9 +4,7 @@ date = 2025-05-07
 +++
 
 **TOC**
-
 <!--toc:start-->
-
 - [Working with Nixpkgs Locally: Benefits and Best Practices](#working-with-nixpkgs-locally-benefits-and-best-practices)
 - [I. Why Work with Nixpkgs Locally?](#i-why-work-with-nixpkgs-locally)
   - [A. Faster Development Cycle](#a-faster-development-cycle)
