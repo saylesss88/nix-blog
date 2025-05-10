@@ -3,10 +3,9 @@ title = "Using Overlays to add Packages that aren't in Nixpkgs"
 date = 2025-05-08
 +++
 
-**TOC**
 
 # Using Overlays to add Packages that aren't in Nixpkgs
-
+**TOC**
 <!--toc:start-->
   - [The Actual Overlay](#the-actual-overlay)
   - [The pokego Package definition](#the-pokego-package-definition)
