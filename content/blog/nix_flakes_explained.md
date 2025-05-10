@@ -10,8 +10,8 @@ date = 2025-05-05
 - [Nix Flakes Explained](#nix-flakes-explained)
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts)
-    - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
-      - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
+  - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
+  - [Anatomy of `flake.nix`](#anatomy-of-flakenix)
       - [Further Resources](#further-resources)
 <!--toc:end-->
 
