@@ -8,13 +8,13 @@ author = "T Sawyer"
 
 **TOC**
 
-<!--toc:start-->
-
 - [Understanding Package Definitions in Nix](#understanding-package-definitions-in-nix)
   - [The Journey from Definition to Package](#the-journey-from-definition-to-package)
   - [Skeleton of a Derivation](#skeleton-of-a-derivation)
-  - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition) - [Swaytools Package Definition](#swaytools-package-definition) - [Resources](#resources)
-  <!--toc:end-->
+  - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition)
+    - [Swaytools Package Definition](#swaytools-package-definition)
+    - [Breakdown of the Above default\.nix](#breakdown-of-the-above-defaultnix)
+    - [Resources](#resources)
 
 <img src="/images/gruv1.png" alt="Nix Flake Logo" width="500">
 
@@ -237,7 +237,7 @@ buildPythonApplication rec {
 }
 ```
 
-### Breakdown of the Above `default.nix`
+### Breakdown of the Above default.nix
 
 1 **Function Structure**:
 
