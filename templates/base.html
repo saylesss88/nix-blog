@@ -141,9 +141,15 @@
       <a href="{{ get_url(path='rss.xml') }}" id="rss-button"
         >📡 Subscribe via RSS</a
       >
-      <p>This is a sample blog content. Add your posts here.</p>
-    </div>
 
+      <!-- Loop through blog posts -->
+      {% for page in section.pages %}
+      <article>
+        <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+        <p>{{ page.summary | safe }}</p>
+      </article>
+      {% endfor %}
+    </div>
     <script>
       // Dark mode toggle script
       document
