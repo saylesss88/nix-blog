@@ -8,13 +8,15 @@ author = "T Sawyer"
 
 **TOC**
 
-<!--toc:start-->
-
 - [Introduction to Nix Derivations](#introduction-to-nix-derivations)
-
   - [Creating Derivations in Nix](#creating-derivations-in-nix)
-  - [Our First Simple Derivation: Understanding the Builder](#our-first-simple-derivation-understanding-the-builder) - [Why a Builder Script?](#why-a-builder-script) - [The Challenge with Shebangs in Nix](#the-challenge-with-shebangs-in-nix) - [The Importance of Statelessness in Nix](#the-importance-of-statelessness-in-nix) - [Our Second Derivation](#our-second-derivation) - [Links To Articles about Derivations](#links-to-articles-about-derivations)
-  <!--toc:end-->
+  - [Our First Simple Derivation: Understanding the Builder](#our-first-simple-derivation-understanding-the-builder)
+    - [Why a Builder Script?](#why-a-builder-script)
+    - [The Challenge with Shebangs in Nix](#the-challenge-with-shebangs-in-nix)
+    - [The Importance of Statelessness in Nix](#the-importance-of-statelessness-in-nix)
+      - [Our builder\.sh Script](#our-buildersh-script)
+      - [Our Second Derivation](#our-second-derivation)
+      - [Links To Articles about Derivations](#links-to-articles-about-derivations)
 
 <img src="/images/gruv10.png" alt="Cyber" width="700">
 
