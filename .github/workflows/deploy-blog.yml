@@ -47,11 +47,11 @@ jobs:
           PUBLISH_DIR="nix-blog/public"
 
           echo "Cloning GitHub Pages repo..."
-          git clone --depth 1 --branch "$TARGET_BRANCH" "https://x-access-token:${GH_PAGES_TOKEN}@github.com/${REPO}.git" gh-pages
-          cd gh-pages
+          git clone --depth 1 --branch "$TARGET_BRANCH" "https://x-access-token:${GH_PAGES_TOKEN}@github.com/${REPO}.git" "$REPO"
+          cd "$REPO"
 
           echo "Cleaning existing files (excluding .git and rss.xml)..."
-          git rm -rf --ignore-unmatch $(ls -A | grep -vE '^\.git$|^rss\.xml$')
+          find . -mindepth 1 ! -name ".git" ! -name "rss.xml" -exec rm -rf {} +
 
           echo "Copying new site files..."
           cp -r "../$PUBLISH_DIR"/* .
