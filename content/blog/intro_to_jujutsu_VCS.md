@@ -9,7 +9,7 @@ author = "T Sawyer"
 **TOC**
 
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
-  - [<strong>Here's an example:</strong>](#heres-an-example)
+  - [Here's an example](#heres-an-example)
     - [JJ and Git Side by Side](#jj-and-git-side-by-side)
     - [Resources](#resources)
 
@@ -31,7 +31,7 @@ author = "T Sawyer"
     already done for you. This is handy with flakes by preventing a
     "dirty working tree" and can instantly be rebuilt after making a change.
 
-## **Here's an example:**
+## Here's an example
 
 Say I have my configuration flake in the `~/flakes/` directory that is an
 existing Git repository. To use JJ as the front-end I could do something like:
