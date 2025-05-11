@@ -11,7 +11,7 @@ author = "T Sawyer"
 <!--toc:start-->
 
 - [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
-  - [The Problem with `specialArgs`](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the `dep-inject` Module in `flake.nix`](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
+  - [The Problem with specialArgs](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the dep-inject Module in flake.nix](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying dep-inject to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
   <!--toc:end-->
 
 <img src="/images/gruv6.png" alt="Cyber" width="700">
@@ -19,7 +19,7 @@ author = "T Sawyer"
 This post explores a method for injecting dependencies into NixOS modules from
 a flake in a more declarative way, offering an alternative to `specialArgs`.
 
-## The Problem with `specialArgs`
+## The Problem with specialArgs
 
 - As mentioned in [post](https://saylesss88.github.io/blog/nix-flakes-tips-and-tricks/),
   `specialArgs` and `extraSpecialArgs` can be used to pass dependencies and
@@ -39,7 +39,7 @@ dependencies across modules by defining a custom option within your `flake.nix`
 . This method makes dependencies accessible to all importing modules without
 relying on explicit `specialArgs` in your flake's `outputs`.
 
-#### Defining the `dep-inject` Module in `flake.nix`
+#### Defining the dep-inject Module in flake.nix
 
 Within the `outputs` function's `let` block in your `flake.nix`, define the
 following module:
@@ -210,7 +210,7 @@ dependencies within any module via `config.dep-inject`.
 - You no longer need to explicitly declare `{ inputs, userVars, ... }` in the
   module's arguments.
 
-### Applying `dep-inject` to Home Manager Modules
+### Applying dep-inject to Home Manager Modules
 
 By default, the `dep-inject` module is available to NixOS modules but not
 automatically to Home Manager modules. There are two main ways to make it
