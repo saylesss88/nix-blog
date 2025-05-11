@@ -51,7 +51,7 @@ jobs:
           cd gh-pages
 
           echo "Cleaning existing files (excluding .git and rss.xml)..."
-          find . -mindepth 1 ! -name ".git" ! -path "./.git/*" ! -name "rss.xml" -delete
+          git rm -rf --ignore-unmatch $(ls -A | grep -vE '^\.git$|^rss\.xml$')
 
           echo "Copying new site files..."
           cp -r "../$PUBLISH_DIR"/* .
