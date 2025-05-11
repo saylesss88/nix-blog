@@ -28,4 +28,5 @@ highlight_themes_css = [
 
 [extra]
 subtitle = "Nix-Blog"
+author = "T Sawyer"
 # Put all your custom variables here
