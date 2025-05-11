@@ -8,14 +8,13 @@ author = "T Sawyer"
 
 **TOC**
 
-<!--toc:start-->
-
 - [Conditional Configuration](#conditional-configuration)
   - [Hyprland Module](#hyprland-module)
   - [Wlogout Module](#wlogout-module)
-  <!--toc:end-->
+  - [Benefits of this Approach](#benefits-of-this-approach)
 
 <img src="/images/gruv5.png" alt="Cyber" width="700">
+
 With options it's easy to conditionally install something based on if another
 program is enabled in your configuration.
 
@@ -111,6 +110,8 @@ in {
 - The default value of `config.custom.wlogout.enable` is set to
   `config.custom.hyprland.enable`. Therefore, if `config.custom.hyprland.enable`
   evaluates to true, the wlogout module will be enabled by default.
+
+## Benefits of this Approach
 
 The `lib.mkIf cfg.enable` ensures that wlogout’s configuration
 (e.g., enabling `programs.wlogout`) is only applied when
