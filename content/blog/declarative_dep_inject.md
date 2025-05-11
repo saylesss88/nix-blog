@@ -6,13 +6,16 @@ author = "T Sawyer"
 
 # Declarative Dependency Injection in Nix Flakes
 
-<!--toc:start-->
+**TOC**
 
 - [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
-- [The Problem with specialArgs](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying dep-inject to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
-<!--toc:end-->
-
-**TOC**
+  - [The Problem with specialArgs](#the-problem-with-specialargs)
+    - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option)
+      - [Defining the dep\-inject Module in flake\.nix](#defining-the-dep-inject-module-in-flakenix)
+      - [Benefits of this Approach](#benefits-of-this-approach)
+      - [Example Usage](#example-usage)
+    - [Applying dep\-inject to Home Manager Modules](#applying-dep-inject-to-home-manager-modules)
+    - [Conclusion](#conclusion)
 
 <img src="/images/gruv6.png" alt="Cyber" width="700">
 
