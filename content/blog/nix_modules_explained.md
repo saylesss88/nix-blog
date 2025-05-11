@@ -19,6 +19,8 @@ author = "T Sawyer"
 - [[tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)
 <!--toc:end-->
 
+<img src="/images/cyber.png" alt="Nix Winter" width="500">
+
 TL;DR: In this post I break down the NixOS module system and explain how to
 define options. As well as how to test modules with the repl.
 
