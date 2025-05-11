@@ -86,7 +86,7 @@ author = "T Sawyer"
     across different machines if they are "pure" (don't rely on external
     system state).
 
-#### Our `builder.sh` Script
+#### Our builder.sh Script
 
 - For our first derivation, we'll create a simple `builder.sh` file in the current directory:
 
