@@ -10,11 +10,13 @@ author = "T Sawyer"
 
 <!--toc:start-->
 
-- [The Actual Overlay](#the-actual-overlay)
-- [The pokego Package definition](#the-pokego-package-definition)
-- [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
-- [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
-<!--toc:end-->
+- [Using Overlays to add Packages that aren't in Nixpkgs](#using-overlays-to-add-packages-that-arent-in-nixpkgs)
+  - [Adding the overlays output to your Flake](#adding-the-overlays-output-to-your-flake)
+  - [The Actual Overlay](#the-actual-overlay)
+  - [The pokego Package definition](#the-pokego-package-definition)
+  - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
+  - [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
+  <!--toc:end-->
 
 <img src="/images/pokego.png" alt="Cyber" width="700">
 
@@ -33,7 +35,7 @@ available in the standard Nixpkgs repository.
   [NixFlakesTips](https://saylesss88.github.io/blog/nix-flakes-tips-and-tricks/)
   post first to understand the outputs in my flake.
 
-## Adding the `overlays` output to `flake.nix`
+## Adding the overlays output to your Flake
 
 I'll show the process of adding the `pokego` package that is not in Nixpkgs:
 

@@ -4,9 +4,9 @@ date = 2025-05-06
 author = "T Sawyer"
 +++
 
-**TOC**
-
 # Shallow Clone Nixpkgs
+
+**TOC**
 
 <!--toc:start-->
 
