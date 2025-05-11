@@ -17,6 +17,7 @@ author = "T Sawyer"
   <!--toc:end-->
 
 <img src="/images/lines.png" alt="Nix Winter" width="600">
+
 This explanation highlights common areas of confusion for those new to Nix
 Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.
 
