@@ -142,8 +142,7 @@
         >📡 Subscribe via RSS</a
       >
 
-      <!-- Loop through blog posts -->
-      {% for page in section.pages %}
+      {% block content %} {% endblock content %} {% for page in section.pages %}
       <article>
         <h2><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
         <p>{{ page.summary | safe }}</p>
