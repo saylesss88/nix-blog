@@ -16,7 +16,7 @@ author = "T Sawyer"
   - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks) - [Further Resources](#further-resources)
   <!--toc:end-->
 
-<img src="/images/lines.png" alt="Nix Winter" width="700">
+<img src="/images/gruv2.png" alt="Nix Winter" width="700">
 
 This explanation highlights common areas of confusion for those new to Nix
 Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.

@@ -15,6 +15,7 @@ author = "T Sawyer"
   - [Wlogout Module](#wlogout-module)
   <!--toc:end-->
 
+<img src="/images/gruv5.png" alt="Cyber" width="700">
 With options it's easy to conditionally install something based on if another
 program is enabled in your configuration.
 

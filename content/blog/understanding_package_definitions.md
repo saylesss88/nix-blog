@@ -16,7 +16,7 @@ author = "T Sawyer"
   - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition) - [Swaytools Package Definition](#swaytools-package-definition) - [Resources](#resources)
   <!--toc:end-->
 
-<img src="/images/comp.png" alt="Nix Flake Logo" width="500">
+<img src="/images/gruv1.png" alt="Nix Flake Logo" width="500">
 
 In Nix, the concept of a **package** can refer to two things:
 

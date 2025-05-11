@@ -17,6 +17,7 @@ author = "T Sawyer"
   - [Adding a Configuration VM Output](#adding-a-configuration-vm-output) - [Debugging](#debugging) - [Understanding Atomicity:](#understanding-atomicity)
   <!--toc:end-->
 
+<img src="/images/gruv4.png" alt="Cyber" width="700">
 - TL;DR This post demonstrates other ways to modularize your config as well as
   going into more advanced outputs.
 

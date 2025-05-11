@@ -14,6 +14,8 @@ author = "T Sawyer"
   - [The Problem with `specialArgs`](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying `dep-inject` to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
   <!--toc:end-->
 
+<img src="/images/gruv6.png" alt="Cyber" width="700">
+
 This post explores a method for injecting dependencies into NixOS modules from
 a flake in a more declarative way, offering an alternative to `specialArgs`.
 
