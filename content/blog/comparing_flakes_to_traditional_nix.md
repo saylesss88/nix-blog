@@ -18,7 +18,7 @@ author = "T Sawyer"
   - [Using Traditional Nix](#using-traditional-nix) - [Updating Nixpkgs](#updating-nixpkgs) - [Updating Traditional Nix (using `niv`)](#updating-traditional-nix-using-niv) - [Adding Home-Manager with Flakes](#adding-home-manager-with-flakes) - [Adding Home-Manager with Traditional Nix](#adding-home-manager-with-traditional-nix)
   <!--toc:end-->
 
-![Nix Winter](/images/nixWinter.png)
+<img src="/images/nixWinter.png" alt="Nix Winter" width="500">
 
 - This post is based on notes from Nix-Hour #4, comparing Traditional Nix and Flakes, focusing on achieving pure build results. See the [YouTube video](https://www.youtube.com/watch?v=atmoYyBAhF4) for the original content. This guide adapts the information for clarity and ease of understanding.
 
