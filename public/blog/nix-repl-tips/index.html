@@ -4,35 +4,187 @@
     <meta charset="utf-8" />
     <title>My-Nix-Blog</title>
     <style>
+      /* General styles */
       body {
-        background-color: #282828; /* Dark background */
-        color: #ebdbb2; /* Light text for readability */
-      }
-      ul li {
-        margin-bottom: 0.75em; /* Add space below each link item */
+        background-color: #fbf1c7;
+        color: #3c3836;
+        line-height: 1.6;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        font-family: Arial, sans-serif;
       }
 
-     /* style for inline code blocks */
+      .container {
+        /* max-width: 800px; */
+        max-width: 95%;
+        margin: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f2e5bc;
+      }
+
+      ul li {
+        margin-bottom: 0.75em;
+      }
+
+      a {
+        color: #cc6600;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+      }
+
+      a:visited {
+        color: #386841;
+      }
+
+      a:hover {
+        color: #af3a03;
+        text-decoration: underline;
+      }
+
       :not(pre) > code {
-        font-family: monospace, monospace; /* Use a monospace font */
-        font-size: 0.85em; /* Slightly smaller font size can help */
-        background-color: #444444; /* A slightly lighter dark background */
-        color: #f8f8f2; /* A common light code text color (like Monokai) */
-        padding: 2px 5px; /* Add some padding around the text */
-        border-radius: 3px; /* Slightly rounded corners */
-        border: 1px solid #666666; /* Optional: Add a subtle border */
+        font-family: monospace;
+        font-size: 0.85em;
+        background-color: #f2e5bc;
+        color: #3c3836;
+        padding: 2px 5px;
+        border-radius: 3px;
+        border: 1px solid #ebdbb2;
+      }
+
+      pre {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 1em;
+        padding: 10px;
+        background-color: #f2e5bc;
+        border-radius: 5px;
+      }
+
+      @media (max-width: 600px) {
+        pre {
+          font-size: 1.1em;
+          padding: 12px;
+        }
+      }
+
+      h1,
+      h2 {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      img:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #fbf1c7;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #cc6600;
+        border-radius: 4px;
+      }
+
+      .dark-mode {
+        background-color: #282828;
+        color: #ebdbb2;
+      }
+
+      .dark-mode .container {
+        background-color: #3c3836;
+      }
+
+      #dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+      }
+
+      #dark-mode-toggle:hover {
+        background-color: #af3a03;
+      }
+
+      #rss-button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-size: 0.9em;
+      }
+
+      #rss-button:hover {
+        background-color: #af3a03;
+        text-decoration: none;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-dark.css" media="(prefers-color-scheme: dark)" />
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-light.css" media="(prefers-color-scheme: light)" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-dark.css"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-light.css"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href="https://saylesss88.github.io/rss.xml"
+    />
   </head>
-
   <body>
-    <section class="section">
-      <div class="container">
+    <div class="container">
+      <h1>Welcome to My-Nix-Blog</h1>
+      <button id="dark-mode-toggle">Toggle Dark Mode</button>
+      <a href="https://saylesss88.github.io/rss.xml" id="rss-button"
+        >📡 Subscribe via RSS</a
+      >
+
+      
 <h1 class="title">Nix Repl</h1>
 <p class="subtitle"><strong>2025-05-06</strong></p>
-<h1 id="nix-repl">Nix Repl</h1>
+<p><strong>TOC</strong></p>
+<h1 id="nix-repl-list-available-commands">Nix Repl List available commands</h1>
+<!--toc:start-->
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#nix-repl-list-available-commands">Nix Repl List available commands</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#load-nix-expressions-directly">Load Nix expressions Directly</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#load-flakes">Load Flakes</a></li>
+</ul>
+</li>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#debugging-with-a-flake-repl-output">Debugging with a Flake REPL output</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#usage">Usage</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-repl-tips/#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!--toc:end-->
 <p>List available commands with <code>:?</code>:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">nix repl
 </span><span style="color:#ffcc66;">Nix 2</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">24</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">11
@@ -65,7 +217,7 @@
 </span><span>                               </span><span style="color:#ffcc66;">errors
 </span><span>  </span><span style="color:#ff3333;">:</span><span style="color:#f29e74;">?</span><span style="color:#ff3333;">, :</span><span style="color:#ffcc66;">help                    Brings up this help menu
 </span></code></pre>
-<h2 id="load-directly-nix-expressions">Load directly Nix expressions</h2>
+<h2 id="load-nix-expressions-directly">Load Nix expressions Directly</h2>
 <p>You can quickly evaluate a random Nix expression:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">nix repl </span><span style="color:#f29e74;">--</span><span style="color:#ffcc66;">expr </span><span style="color:#ff3333;">&#39;</span><span>{</span><span style="color:#ffd580;">a </span><span style="color:#f29e74;">= </span><span>{ </span><span style="color:#ffd580;">b </span><span style="color:#f29e74;">= </span><span style="color:#ffcc66;">3</span><span style="color:#ccc9c2cc;">; </span><span style="color:#ffd580;">c </span><span style="color:#f29e74;">= </span><span style="color:#ffcc66;">4</span><span style="color:#ccc9c2cc;">; </span><span>}</span><span style="color:#ccc9c2cc;">; </span><span>}</span><span style="color:#ff3333;">&#39;
 </span><span>
@@ -80,7 +232,7 @@
 <li>The <code>--expr</code> flag is helpful to prime directly the Nix REPL with valuable data
 or values.</li>
 </ul>
-<h2 id="load-flakes">Load Flakes</h2>
+<h3 id="load-flakes">Load Flakes</h3>
 <p>We can use the <code>--expr</code> flag to load a random Nix Flake directly:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">nix repl </span><span style="color:#f29e74;">--</span><span style="color:#ffcc66;">expr </span><span style="color:#ff3333;">&#39;</span><span style="color:#ffcc66;">builtins</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">getFlake </span><span style="color:#bae67e;">&quot;github:nix-community/ethereum.nix&quot;</span><span style="color:#ff3333;">&#39;
 </span></code></pre>
@@ -91,7 +243,7 @@ or values.</li>
 </span><span style="font-style:italic;color:#5c6773;"># or
 </span><span style="color:#ffcc66;">nix-repl</span><span style="color:#f29e74;">&gt; </span><span style="color:#ff3333;">:</span><span style="color:#ffcc66;">lf </span><span style="color:#bae67e;">/path/to/your/flake
 </span></code></pre>
-<h3 id="debugging-with-a-flake-repl-output">Debugging with a Flake REPL output</h3>
+<h2 id="debugging-with-a-flake-repl-output">Debugging with a Flake REPL output</h2>
 <ul>
 <li>One way to do this is to launch the repl with <code>nix repl</code> and inside the repl type <code>:lf /path/to/flake</code>. Or <code>nixos-rebuild repl --flake /path/to/flake</code> the latter provides a helpful welcome script showing what is loaded into your repl's scope.</li>
 </ul>
@@ -146,7 +298,7 @@ or values.</li>
 <blockquote>
 <p>❗: Replace <code>magic</code> with your host name</p>
 </blockquote>
-<h2 id="usage">Usage</h2>
+<h3 id="usage">Usage</h3>
 <p>Load REPL environment with:
 <code>nix repl .#repl</code></p>
 <p>Attributes:</p>
@@ -227,7 +379,15 @@ or values.</li>
 </ul>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ff3333;">:</span><span style="color:#ffcc66;">p builtins</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">attrNames configs</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">magic
 </span></code></pre>
- </div>
-    </section>
+ 
+    </div>
+    <script>
+      // Dark mode toggle script
+      document
+        .getElementById("dark-mode-toggle")
+        .addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+        });
+    </script>
   </body>
 </html>

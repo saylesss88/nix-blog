@@ -4,43 +4,195 @@
     <meta charset="utf-8" />
     <title>My-Nix-Blog</title>
     <style>
+      /* General styles */
       body {
-        background-color: #282828; /* Dark background */
-        color: #ebdbb2; /* Light text for readability */
-      }
-      ul li {
-        margin-bottom: 0.75em; /* Add space below each link item */
+        background-color: #fbf1c7;
+        color: #3c3836;
+        line-height: 1.6;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        font-family: Arial, sans-serif;
       }
 
-     /* style for inline code blocks */
+      .container {
+        /* max-width: 800px; */
+        max-width: 95%;
+        margin: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f2e5bc;
+      }
+
+      ul li {
+        margin-bottom: 0.75em;
+      }
+
+      a {
+        color: #cc6600;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+      }
+
+      a:visited {
+        color: #386841;
+      }
+
+      a:hover {
+        color: #af3a03;
+        text-decoration: underline;
+      }
+
       :not(pre) > code {
-        font-family: monospace, monospace; /* Use a monospace font */
-        font-size: 0.85em; /* Slightly smaller font size can help */
-        background-color: #444444; /* A slightly lighter dark background */
-        color: #f8f8f2; /* A common light code text color (like Monokai) */
-        padding: 2px 5px; /* Add some padding around the text */
-        border-radius: 3px; /* Slightly rounded corners */
-        border: 1px solid #666666; /* Optional: Add a subtle border */
+        font-family: monospace;
+        font-size: 0.85em;
+        background-color: #f2e5bc;
+        color: #3c3836;
+        padding: 2px 5px;
+        border-radius: 3px;
+        border: 1px solid #ebdbb2;
+      }
+
+      pre {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 1em;
+        padding: 10px;
+        background-color: #f2e5bc;
+        border-radius: 5px;
+      }
+
+      @media (max-width: 600px) {
+        pre {
+          font-size: 1.1em;
+          padding: 12px;
+        }
+      }
+
+      h1,
+      h2 {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      img:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #fbf1c7;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #cc6600;
+        border-radius: 4px;
+      }
+
+      .dark-mode {
+        background-color: #282828;
+        color: #ebdbb2;
+      }
+
+      .dark-mode .container {
+        background-color: #3c3836;
+      }
+
+      #dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+      }
+
+      #dark-mode-toggle:hover {
+        background-color: #af3a03;
+      }
+
+      #rss-button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-size: 0.9em;
+      }
+
+      #rss-button:hover {
+        background-color: #af3a03;
+        text-decoration: none;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-dark.css" media="(prefers-color-scheme: dark)" />
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-light.css" media="(prefers-color-scheme: light)" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-dark.css"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-light.css"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href="https://saylesss88.github.io/rss.xml"
+    />
   </head>
-
   <body>
-    <section class="section">
-      <div class="container">
+    <div class="container">
+      <h1>Welcome to My-Nix-Blog</h1>
+      <button id="dark-mode-toggle">Toggle Dark Mode</button>
+      <a href="https://saylesss88.github.io/rss.xml" id="rss-button"
+        >📡 Subscribe via RSS</a
+      >
+
+      
 <h1 class="title">NixOS Modules Explained</h1>
 <p class="subtitle"><strong>2025-05-05</strong></p>
-<h2 id="nixos-modules">NixOS Modules</h2>
-<p>TL;DR: In this post I break down the NixOS module system and explain how to define options. As well as how to test modules with the repl.</p>
-<p>TL;DR: In this post I break down the NixOS module system and explain how to define options. I take notes in markdown so it's written in markdown (sorry old reddit). I write about things to deepen understanding, you think you know until you try to explain it to someone. Anyways, I hope this is useful.</p>
+<h1 id="nixos-modules">NixOS Modules</h1>
+<p><strong>TOC</strong></p>
+<!--toc:start-->
 <ul>
-<li>Most modules are functions that take an attribute set and return an attribute set.</li>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#nixos-modules">NixOS Modules</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#declaring-options">Declaring Options</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#module-composition">Module Composition</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#nixos-modules-and-dependency-locking-with-npins">NixOS Modules and Dependency Locking with npins</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#resources-on-modules">Resources on Modules</a></li>
 </ul>
-<p>Refresher:</p>
+</li>
+</ul>
+</li>
+<li><a href="https://saylesss88.github.io/blog/nix-modules-explained/#videos">Videos</a></li>
+<li>[<a href="https://www.youtube.com/watch?v=cZjOzOHb2ow">tweagModuleSystemRecursion</a>](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)</li>
+</ul>
+<!--toc:end-->
+<p>TL;DR: In this post I break down the NixOS module system and explain how to
+define options. As well as how to test modules with the repl.</p>
 <ul>
-<li>An attribute set is a collection of name-value pairs wrapped in curly braces:</li>
+<li>Most modules are functions that take an attribute set and return an attribute
+set.</li>
+</ul>
+<p><strong>Refresher</strong>:</p>
+<ul>
+<li>An <strong>attribute set</strong> is a collection of name-value pairs wrapped in curly
+braces:</li>
 </ul>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
 </span><span>  </span><span style="color:#ffd580;">string </span><span style="color:#f29e74;">= </span><span style="color:#bae67e;">&quot;hello&quot;</span><span style="color:#ccc9c2cc;">;
@@ -48,33 +200,45 @@
 </span><span>}
 </span></code></pre>
 <ul>
-<li>A function with an attribute set argument:</li>
+<li>A <strong>function</strong> with an attribute set argument:</li>
 </ul>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{ </span><span style="color:#ffcc66;">a</span><span style="color:#f29e74;">, </span><span style="color:#ffcc66;">b </span><span>}: </span><span style="color:#ffcc66;">a </span><span style="color:#f29e74;">+ </span><span style="color:#ffcc66;">b
 </span></code></pre>
 <ul>
-<li>The simplest possible NixOS Module:</li>
+<li>The simplest possible <strong>NixOS Module</strong>:</li>
 </ul>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{ </span><span style="color:#f29e74;">... </span><span>}:
 </span><span>{
 </span><span style="color:#ff3333;">}
 </span></code></pre>
-<p>NixOS produces a full system configuration by combining smaller, more isolated and reusable components: <strong>Modules</strong>. In my opinion modules are one of the first things you should understand when learning about NixOS.</p>
+<p>NixOS produces a full system configuration by combining smaller, more isolated
+and reusable components: <strong>Modules</strong>. In my opinion modules are one of the
+first things you should understand when learning about NixOS.</p>
 <ul>
 <li>
-<p>A NixOS module defines configuration options and behaviors for system components, allowing users to extend, customize, and compose configurations declaratively.</p>
+<p>A NixOS module defines configuration options and behaviors for system
+components, allowing users to extend, customize, and compose configurations
+declaratively.</p>
 </li>
 <li>
-<p>A module is a file containing a Nix expression with a specific structure. It <em>declares</em> options for other modules to define (give a value). Modules were introduced to allow extending NixOS without modifying its source code.</p>
+<p>A <strong>module</strong> is a file containing a Nix expression with a specific structure.
+It <em>declares</em> options for other modules to define (give a value). Modules were
+introduced to allow extending NixOS without modifying its source code.</p>
 </li>
 <li>
-<p>To define any values, the module system first has to know which ones are allowed. This is done by declaring options that specify which attributes can be set and used elsewhere.</p>
+<p>To define any values, the module system first has to know which ones are
+allowed. This is done by declaring options that specify which attributes can
+be set and used elsewhere.</p>
 </li>
 <li>
-<p>If you want to write your own modules, I recommend setting up <a href="https://github.com/nix-community/nixd?tab=readme-ov-file">nixd</a> or <a href="https://github.com/oxalica/nil">nil</a> with your editor of choice. This will allow your editor to warn you about missing arguments and dependencies as well as syntax errors.</p>
+<p>If you want to write your own modules, I recommend setting up
+<a href="https://github.com/nix-community/nixd?tab=readme-ov-file">nixd</a>
+or <a href="https://github.com/oxalica/nil">nil</a> with your editor of choice.
+This will allow your editor to warn you about missing arguments and
+dependencies as well as syntax errors.</p>
 </li>
 </ul>
-<h3 id="declaring-options">Declaring Options</h3>
+<h2 id="declaring-options">Declaring Options</h2>
 <p>The following is <code>nixpkgs/nixos/modules/programs/vim.nix</code>:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span>{
 </span><span>  </span><span style="color:#ffcc66;">config</span><span style="color:#f29e74;">,
@@ -109,7 +273,8 @@
 </span><span>}
 </span></code></pre>
 <ul>
-<li>It provides options to enable Vim, set it as the default editor, and specify the Vim package to use.</li>
+<li>It provides options to enable Vim, set it as the default editor, and specify
+the Vim package to use.</li>
 </ul>
 <ol>
 <li>Module Inputs and Structure:</li>
@@ -126,22 +291,32 @@
 <p>Inputs: The module takes the above inputs and <code>...</code> (catch-all for other args)</p>
 <ul>
 <li>
-<p><code>config</code>: Allows the module to read option values (e.g. <code>config.programs.vim.enable</code>). It provides access to the evaluated configuration.</p>
+<p><code>config</code>: Allows the module to read option values (e.g.
+<code>config.programs.vim.enable</code>). It provides access to the evaluated
+configuration.</p>
 </li>
 <li>
-<p><code>lib</code>: The Nixpkgs library, giving us helper functions like <code>mkEnableOption</code>, <code>mkIf</code>, and <code>mkOverride</code>.</p>
+<p><code>lib</code>: The Nixpkgs library, giving us helper functions like <code>mkEnableOption</code>
+, <code>mkIf</code>, and <code>mkOverride</code>.</p>
 </li>
 <li>
 <p><code>pkgs</code>: The Nixpkgs package set, used to access packages like <code>pkgs.vim</code></p>
 </li>
 <li>
-<p><code>...</code>: Allows the module to accept additional arguments, making it flexible for extension in the future.</p>
+<p><code>...</code>: Allows the module to accept additional arguments, making it flexible
+for extension in the future.</p>
 </li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>Key Takeaways: A NixOS module is typically a function that can include <code>config</code>, <code>lib</code>, and <code>pkgs</code>, but it doesn’t require them. The <code>...</code> argument ensures flexibility, allowing a module to accept extra inputs without breaking future compatibility. Using <code>lib</code> simplifies handling options (mkEnableOption, mkIf, mkOverride) and helps follow best practices. Modules define options, which users can set in their configuration, and <code>config</code>, which applies changes based on those options.</p>
+<p>Key Takeaways: A NixOS module is typically a function that can include
+<code>config</code>, <code>lib</code>, and <code>pkgs</code>, but it doesn’t require them. The <code>...</code>
+argument ensures flexibility, allowing a module to accept extra inputs
+without breaking future compatibility. Using <code>lib</code> simplifies handling
+options (mkEnableOption, mkIf, mkOverride) and helps follow best practices.
+Modules define options, which users can set in their configuration, and
+<code>config</code>, which applies changes based on those options.</p>
 </blockquote>
 <ol start="2">
 <li>Local Configuration Reference:</li>
@@ -151,7 +326,8 @@
 </span><span style="color:#ffa759;">in
 </span></code></pre>
 <ul>
-<li>This is a local alias. Instead of typing <code>config.programs.vim</code> over and over, the module uses <code>cfg</code>.</li>
+<li>This is a local alias. Instead of typing <code>config.programs.vim</code> over and over,
+the module uses <code>cfg</code>.</li>
 </ul>
 <ol start="3">
 <li>Option Declaration</li>
@@ -175,7 +351,8 @@
 </li>
 </ul>
 <blockquote>
-<p><code>mkPackageOption</code> is a helper that defines a package-typed option with a default (<code>pkgs.vim</code>) and provides docs + example.</p>
+<p><code>mkPackageOption</code> is a helper that defines a package-typed option with a
+default (<code>pkgs.vim</code>) and provides docs + example.</p>
 </blockquote>
 <ol start="4">
 <li>Conditional Configuration</li>
@@ -183,7 +360,8 @@
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">config </span><span style="color:#ff3333;">= </span><span style="color:#ffcc66;">lib</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">mkIf </span><span>(</span><span style="color:#ffcc66;">cfg</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">enable </span><span style="color:#f29e74;">|| </span><span style="color:#ffcc66;">cfg</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">defaultEditor</span><span>) {
 </span></code></pre>
 <ul>
-<li>This block is only activated if <em>either</em> <code>programs.vim.enable</code> or <code>defaultEditor</code> is set.</li>
+<li>This block is only activated if <em>either</em> <code>programs.vim.enable</code> or
+<code>defaultEditor</code> is set.</li>
 </ul>
 <ol start="5">
 <li>Warnings</li>
@@ -193,7 +371,8 @@
 </span><span>]</span><span style="color:#ff3333;">;
 </span></code></pre>
 <ul>
-<li>Gives you a soft warning if you try to set <code>defaultEditor = true</code> without also enabling Vim.</li>
+<li>Gives you a soft warning if you try to set <code>defaultEditor = true</code> without
+also enabling Vim.</li>
 </ul>
 <ol start="6">
 <li>Actual System Config Changes</li>
@@ -205,7 +384,8 @@
 </span><span>}</span><span style="color:#ff3333;">;
 </span></code></pre>
 <ul>
-<li>It adds Vim to your <code>systemPackages</code>, sets <code>$EDITOR</code> if <code>defaultEditor</code> is true, and makes <code>/share/vim-plugins</code> available in the environment.</li>
+<li>It adds Vim to your <code>systemPackages</code>, sets <code>$EDITOR</code> if <code>defaultEditor</code> is
+true, and makes <code>/share/vim-plugins</code> available in the environment.</li>
 </ul>
 <p>The following is a bat home-manager module that I wrote:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="font-style:italic;color:#5c6773;"># bat.nix
@@ -255,25 +435,38 @@
 </span></code></pre>
 <ul>
 <li>
-<p>If I set this option to true the bat configuration is dropped in place. If it's not set to true, it won't put the bat configuration in the system. Same as with options defined in modules within the Nixpkgs repository.</p>
+<p>If I set this option to true the bat configuration is dropped in place. If
+it's not set to true, it won't put the bat configuration in the system. Same
+as with options defined in modules within the Nixpkgs repository.</p>
 </li>
 <li>
-<p>If I had set the default to <code>true</code>, it would automatically enable the module without requiring an explicit <code>custom.batModule.enable = true;</code> call in my <code>home.nix</code>.</p>
+<p>If I had set the default to <code>true</code>, it would automatically enable the module
+without requiring an explicit <code>custom.batModule.enable = true;</code> call in my
+<code>home.nix</code>.</p>
 </li>
 </ul>
 <h3 id="module-composition">Module Composition</h3>
 <ul>
 <li>
-<p>NixOS achieves its full system configuration by combining the configurations defined in various modules. This composition is primarily handled through the <code>imports</code> mechanism.</p>
+<p>NixOS achieves its full system configuration by combining the configurations
+defined in various modules. This composition is primarily handled through the
+<code>imports</code> mechanism.</p>
 </li>
 <li>
-<p><code>imports</code>: This is a standard option within a NixOS or Home Manager configuration (often found in your configuration.nix or home.nix). It takes a list of paths to other Nix modules. When you include a module in the imports list, the options and configurations defined in that module become part of your overall system configuration.</p>
+<p><code>imports</code>: This is a standard option within a NixOS or Home Manager
+configuration (often found in your configuration.nix or home.nix). It takes
+a list of paths to other Nix modules. When you include a module in the imports
+list, the options and configurations defined in that module become part of
+your overall system configuration.</p>
 </li>
 <li>
-<p>You declaratively state the desired state of your system by setting options across various modules. The NixOS build system then evaluates and merges these option settings. The culmination of this process, which includes building the entire system closure, is represented by the derivation built by <code>config.system.build.toplevel</code>.</p>
+<p>You declaratively state the desired state of your system by setting options
+across various modules. The NixOS build system then evaluates and merges these
+option settings. The culmination of this process, which includes building the
+entire system closure, is represented by the derivation built by
+<code>config.system.build.toplevel</code>.</p>
 </li>
 </ul>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <h3 id="nixos-modules-and-dependency-locking-with-npins">NixOS Modules and Dependency Locking with npins</h3>
 <p>This is the file structure:</p>
 <pre data-lang="bash" style="background-color:#212733;color:#ccc9c2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffd580;">❯</span><span> tree
@@ -285,8 +478,8 @@
 </span><span>    </span><span style="color:#ffd580;">├──</span><span> default.nix
 </span><span>    </span><span style="color:#ffd580;">└──</span><span> sources.json
 </span></code></pre>
-<p>This uses <code>npins</code> for dependency locking. Install it and run this in the project
-directory:</p>
+<p>This uses <code>npins</code> for dependency locking. Install it and run this in the project</p>
+<p>directory:</p>
 <pre data-lang="bash" style="background-color:#212733;color:#ccc9c2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffd580;">npins</span><span> init
 </span></code></pre>
 <p>Create a <code>default.nix</code> with the following:</p>
@@ -349,7 +542,9 @@ directory:</p>
 </span><span>  }</span><span style="color:#ccc9c2cc;">;
 </span><span>}
 </span></code></pre>
-<p><code>mkEnableOption</code> defaults to false. Now in your <code>configuration.nix</code> you can uncomment <code>mine.desktop.enable = true;</code> to enable the desktop config and vice-versa.</p>
+<p><code>mkEnableOption</code> defaults to false. Now in your <code>configuration.nix</code> you can
+uncomment <code>mine.desktop.enable = true;</code> to enable the desktop config and
+vice-versa.</p>
 <p>You can test that this works by running:</p>
 <pre data-lang="bash" style="background-color:#212733;color:#ccc9c2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffd580;">nix-instantiate</span><span style="color:#ffcc66;"> -A</span><span> nixosSystem.system
 </span></code></pre>
@@ -375,7 +570,7 @@ this in your <code>default.nix</code>:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">nix-repl</span><span style="color:#f29e74;">&gt; </span><span style="color:#ffcc66;">nixosSystem</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">config</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">mine</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">desktop</span><span style="color:#f29e74;">.</span><span style="color:#ffcc66;">enable
 </span><span style="color:#ffcc66;">true
 </span></code></pre>
-<h2 id="resources-on-modules">Resources on Modules</h2>
+<h3 id="resources-on-modules">Resources on Modules</h3>
 <ul>
 <li>
 <p><a href="https://nixos.org/manual/nixos/stable/#sec-writing-modules">WritingNixOsModules</a></p>
@@ -403,25 +598,15 @@ this in your <code>default.nix</code>:</p>
 <p><a href="https://www.youtube.com/watch?v=N7hFP_40DJo&amp;t=17s">NixHour Writing NixOS modules</a> -- This example is from this video
 <a href="https://infinisil.com/modules.mp4">infinisilModules</a></p>
 <h1 id="tweagmodulesystemrecursion"><a href="https://www.youtube.com/watch?v=cZjOzOHb2ow">tweagModuleSystemRecursion</a></h1>
-<h4 id="resources-on-modules-1">Resources on Modules</h4>
-<ul>
-<li>
-<p><a href="https://xeiaso.net/talks/asg-2023-nixos/">xeiaso Nixos Modules for fun &amp; profit</a></p>
-</li>
-<li>
-<p><a href="https://nixos.wiki/wiki/NixOS_modules">NixOS Wiki NixOS modules</a></p>
-</li>
-<li>
-<p><a href="https://nix.dev/tutorials/module-system/index.html">nix.dev Module System</a></p>
-</li>
-<li>
-<p><a href="https://nix.dev/tutorials/module-system/a-basic-module/index.html">nix.dev A basic module</a></p>
-</li>
-<li>
-<p><a href="https://nixos-and-flakes.thiscute.world/other-usage-of-flakes/module-system">NixOS Flakes Book Module System</a></p>
-</li>
-</ul>
- </div>
-    </section>
+ 
+    </div>
+    <script>
+      // Dark mode toggle script
+      document
+        .getElementById("dark-mode-toggle")
+        .addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+        });
+    </script>
   </body>
 </html>

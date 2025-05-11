@@ -4,35 +4,184 @@
     <meta charset="utf-8" />
     <title>My-Nix-Blog</title>
     <style>
+      /* General styles */
       body {
-        background-color: #282828; /* Dark background */
-        color: #ebdbb2; /* Light text for readability */
-      }
-      ul li {
-        margin-bottom: 0.75em; /* Add space below each link item */
+        background-color: #fbf1c7;
+        color: #3c3836;
+        line-height: 1.6;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        font-family: Arial, sans-serif;
       }
 
-     /* style for inline code blocks */
+      .container {
+        /* max-width: 800px; */
+        max-width: 95%;
+        margin: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f2e5bc;
+      }
+
+      ul li {
+        margin-bottom: 0.75em;
+      }
+
+      a {
+        color: #cc6600;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+      }
+
+      a:visited {
+        color: #386841;
+      }
+
+      a:hover {
+        color: #af3a03;
+        text-decoration: underline;
+      }
+
       :not(pre) > code {
-        font-family: monospace, monospace; /* Use a monospace font */
-        font-size: 0.85em; /* Slightly smaller font size can help */
-        background-color: #444444; /* A slightly lighter dark background */
-        color: #f8f8f2; /* A common light code text color (like Monokai) */
-        padding: 2px 5px; /* Add some padding around the text */
-        border-radius: 3px; /* Slightly rounded corners */
-        border: 1px solid #666666; /* Optional: Add a subtle border */
+        font-family: monospace;
+        font-size: 0.85em;
+        background-color: #f2e5bc;
+        color: #3c3836;
+        padding: 2px 5px;
+        border-radius: 3px;
+        border: 1px solid #ebdbb2;
+      }
+
+      pre {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 1em;
+        padding: 10px;
+        background-color: #f2e5bc;
+        border-radius: 5px;
+      }
+
+      @media (max-width: 600px) {
+        pre {
+          font-size: 1.1em;
+          padding: 12px;
+        }
+      }
+
+      h1,
+      h2 {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      img:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #fbf1c7;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #cc6600;
+        border-radius: 4px;
+      }
+
+      .dark-mode {
+        background-color: #282828;
+        color: #ebdbb2;
+      }
+
+      .dark-mode .container {
+        background-color: #3c3836;
+      }
+
+      #dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+      }
+
+      #dark-mode-toggle:hover {
+        background-color: #af3a03;
+      }
+
+      #rss-button {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #cc6600;
+        color: #fbf1c7;
+        border-radius: 5px;
+        margin: 10px 0;
+        font-size: 0.9em;
+      }
+
+      #rss-button:hover {
+        background-color: #af3a03;
+        text-decoration: none;
       }
     </style>
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-dark.css" media="(prefers-color-scheme: dark)" />
-    <link rel="stylesheet" type="text/css" href="https://saylesss88.github.io/static/syntax-theme-light.css" media="(prefers-color-scheme: light)" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-dark.css"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://saylesss88.github.io/static/syntax-theme-light.css"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href="https://saylesss88.github.io/rss.xml"
+    />
   </head>
-
   <body>
-    <section class="section">
-      <div class="container">
+    <div class="container">
+      <h1>Welcome to My-Nix-Blog</h1>
+      <button id="dark-mode-toggle">Toggle Dark Mode</button>
+      <a href="https://saylesss88.github.io/rss.xml" id="rss-button"
+        >📡 Subscribe via RSS</a
+      >
+
+      
 <h1 class="title">Nix Language Basics &amp; Nix Constructs</h1>
 <p class="subtitle"><strong>2025-05-06</strong></p>
+<p><strong>TOC</strong></p>
 <h1 id="the-nix-language">The Nix Language</h1>
+<!--toc:start-->
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#the-nix-language">The Nix Language</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#how-does-nix-work">How does Nix work?</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#syntax-basics">Syntax Basics</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#derivations">Derivations</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#evaluating-nix-files">Evaluating Nix Files</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!--toc:end-->
 <p>Nix as a programming language can be thought of as a kind of "JSON, but with
 functions".</p>
 <p>All statements are declarative, meaning that there's no sequential flow of
@@ -70,7 +219,7 @@ language.</p>
 </li>
 </ul>
 <p>Think of a package definition as the initial instructions, and the derivation as the detailed, low-level plan that Nix uses to actually perform the build."</p>
-<h3 id="syntax-basics">Syntax Basics</h3>
+<h2 id="syntax-basics">Syntax Basics</h2>
 <ul>
 <li>Dashes are allowed as identifiers:</li>
 </ul>
@@ -380,7 +529,15 @@ needed to separate parameters.</li>
 <p><a href="https://nixos.org/guides/nix-pills/04-basics-of-language.html">nix-pills basics of nixlang</a></p>
 </li>
 </ul>
- </div>
-    </section>
+ 
+    </div>
+    <script>
+      // Dark mode toggle script
+      document
+        .getElementById("dark-mode-toggle")
+        .addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+        });
+    </script>
   </body>
 </html>
