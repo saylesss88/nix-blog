@@ -11,8 +11,10 @@ build_search_index = true
 generate_feeds = true
 # Optional: Set the number of recent posts to include in the feed (default is 25)
 feed_limit = 10
+
+[feed]
 # Optional: Specify the filename for the feed (default is "rss.xml")
-feed_filename = "rss.xml"
+filename = "rss.xml"
 
 [markdown]
 # Whether to do syntax highlighting
