@@ -6,13 +6,13 @@ author = "T Sawyer"
 
 # Declarative Dependency Injection in Nix Flakes
 
-**TOC**
-
 <!--toc:start-->
 
 - [Declarative Dependency Injection in Nix Flakes](#declarative-dependency-injection-in-nix-flakes)
-  - [The Problem with specialArgs](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying dep-inject to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
-  <!--toc:end-->
+- [The Problem with specialArgs](#the-problem-with-specialargs) - [A Declarative Solution: Injecting via a Custom Option](#a-declarative-solution-injecting-via-a-custom-option) - [Defining the dep-inject Module in flake.nix](#defining-the-dep-inject-module-in-flakenix) - [Benefits of this Approach](#benefits-of-this-approach) - [Example Usage](#example-usage) - [Applying dep-inject to Home Manager Modules](#applying-dep-inject-to-home-manager-modules) - [Conclusion](#conclusion)
+<!--toc:end-->
+
+**TOC**
 
 <img src="/images/gruv6.png" alt="Cyber" width="700">
 
@@ -279,7 +279,7 @@ nixosConfigurations = {
   associated with `specialArgs`, as highlighted in resources like
   "flakes-arent-real"
 
-#### Conclusion
+### Conclusion
 
 While `specialArgs` offers a seemingly straightforward way to inject
 dependencies, this declarative approach using a custom `dep-inject` option
