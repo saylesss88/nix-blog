@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -171,11 +177,7 @@
 <li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#the-actual-overlay">The Actual Overlay</a></li>
 <li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#the-pokego-package-definition">The pokego Package definition</a></li>
 <li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#adding-the-overlay-to-your-configuration">Adding the overlay to your configuration</a></li>
-<li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#installing-pokego">Installing Pokego</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#another-overlay-example">Another Overlay Example</a></li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#installing-pokego">Installing Pokego</a> - <a href="https://saylesss88.github.io/blog/using-overlays-to-add-packages/#another-overlay-example">Another Overlay Example</a></li>
 </ul>
 <!--toc:end-->
 <p>It is very common to use overlays in Nix to install packages that aren't

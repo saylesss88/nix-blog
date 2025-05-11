@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -171,17 +177,11 @@
 <li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#the-nix-language">The Nix Language</a>
 <ul>
 <li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#how-does-nix-work">How does Nix work?</a></li>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#syntax-basics">Syntax Basics</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#derivations">Derivations</a></li>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#evaluating-nix-files">Evaluating Nix Files</a></li>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#resources">Resources</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#syntax-basics">Syntax Basics</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#derivations">Derivations</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#evaluating-nix-files">Evaluating Nix Files</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#resources">Resources</a></li>
 </ul>
 <!--toc:end-->
+</li>
+</ul>
 <p>Nix as a programming language can be thought of as a kind of "JSON, but with
 functions".</p>
 <p>All statements are declarative, meaning that there's no sequential flow of

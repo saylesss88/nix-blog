@@ -51,6 +51,7 @@ jobs:
 
           # Clean existing files
           git rm -rf .
+          git restore --stages rss.xml
 
           # Copy new site files
           cp -r ../$PUBLISH_DIR/* .

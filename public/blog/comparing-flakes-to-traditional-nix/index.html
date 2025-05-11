@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -168,28 +174,19 @@
 <p><strong>TOC</strong></p>
 <!--toc:start-->
 <ul>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#introduction-flakes-and-traditional-nix">Introduction: Flakes and Traditional Nix</a>
+<li>
+<p><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#introduction-flakes-and-traditional-nix">Introduction: Flakes and Traditional Nix</a></p>
 <ul>
 <li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#what-is-purity-in-nix">What is Purity in Nix?</a></li>
 <li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#building-a-simple-hello-package-flakes-vs-traditional-nix">Building a Simple "hello" Package: Flakes vs. Traditional Nix</a></li>
 <li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#using-nix-flakes">Using Nix Flakes</a></li>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#using-traditional-nix">Using Traditional Nix</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#updating-nixpkgs">Updating Nixpkgs</a></li>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#updating-traditional-nix-using-niv">Updating Traditional Nix (using <code>niv</code>)</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#adding-home-manager-with-flakes">Adding Home-Manager with Flakes</a></li>
-<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#adding-home-manager-with-traditional-nix">Adding Home-Manager with Traditional Nix</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#using-traditional-nix">Using Traditional Nix</a> - <a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#updating-nixpkgs">Updating Nixpkgs</a> - <a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#updating-traditional-nix-using-niv">Updating Traditional Nix (using <code>niv</code>)</a> - <a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#adding-home-manager-with-flakes">Adding Home-Manager with Flakes</a> - <a href="https://saylesss88.github.io/blog/comparing-flakes-to-traditional-nix/#adding-home-manager-with-traditional-nix">Adding Home-Manager with Traditional Nix</a></li>
 </ul>
 <!--toc:end-->
-<ul>
-<li>This post is based on notes from Nix-Hour #4, comparing Traditional Nix and Flakes, focusing on achieving pure build results. See the <a href="https://www.youtube.com/watch?v=atmoYyBAhF4">YouTube video</a> for the original content. This guide adapts the information for clarity and ease of understanding.</li>
+</li>
+<li>
+<p>This post is based on notes from Nix-Hour #4, comparing Traditional Nix and Flakes, focusing on achieving pure build results. See the <a href="https://www.youtube.com/watch?v=atmoYyBAhF4">YouTube video</a> for the original content. This guide adapts the information for clarity and ease of understanding.</p>
+</li>
 </ul>
 <h2 id="what-is-purity-in-nix">What is Purity in Nix?</h2>
 <ul>

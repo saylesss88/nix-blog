@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -168,21 +174,15 @@
 <p><strong>TOC</strong></p>
 <!--toc:start-->
 <ul>
-<li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#building-your-configuration-as-a-package">Building your configuration as a Package</a>
+<li>
+<p><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#building-your-configuration-as-a-package">Building your configuration as a Package</a></p>
 <ul>
 <li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#benefits-of-nixosconfiguration-as-a-package">Benefits of <code>nixosConfiguration</code> as a Package</a></li>
 <li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#usage-and-deployment">Usage and Deployment</a></li>
-<li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#adding-a-configuration-vm-output">Adding a Configuration VM Output</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#debugging">Debugging</a></li>
-<li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#understanding-atomicity">Understanding Atomicity:</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#adding-a-configuration-vm-output">Adding a Configuration VM Output</a> - <a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#debugging">Debugging</a> - <a href="https://saylesss88.github.io/blog/building-your-configuration-as-a-package/#understanding-atomicity">Understanding Atomicity:</a></li>
 </ul>
 <!--toc:end-->
-<ul>
+</li>
 <li>
 <p>TL;DR This post demonstrates other ways to modularize your config as well as
 going into more advanced outputs.</p>

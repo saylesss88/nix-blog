@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -172,15 +178,11 @@
 <ul>
 <li><a href="https://saylesss88.github.io/blog/nix-flakes-explained/#what-is-a-nix-flake">What is a Nix Flake?</a></li>
 <li><a href="https://saylesss88.github.io/blog/nix-flakes-explained/#key-concepts">Key Concepts</a></li>
-<li><a href="https://saylesss88.github.io/blog/nix-flakes-explained/#attribute-sets-the-building-blocks">Attribute Sets: The Building Blocks</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/nix-flakes-explained/#further-resources">Further Resources</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/nix-flakes-explained/#attribute-sets-the-building-blocks">Attribute Sets: The Building Blocks</a> - <a href="https://saylesss88.github.io/blog/nix-flakes-explained/#further-resources">Further Resources</a></li>
 </ul>
 <!--toc:end-->
+</li>
+</ul>
 <p>This explanation highlights common areas of confusion for those new to Nix
 Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.</p>
 <h2 id="what-is-a-nix-flake">What is a Nix Flake?</h2>

@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -172,16 +178,11 @@
 <ul>
 <li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#the-journey-from-definition-to-package">The Journey from Definition to Package</a></li>
 <li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#skeleton-of-a-derivation">Skeleton of a Derivation</a></li>
-<li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#example-a-simple-hello-package-definition">Example: A Simple "Hello" Package Definition</a>
-<ul>
-<li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#swaytools-package-definition">Swaytools Package Definition</a></li>
-<li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#resources">Resources</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="https://saylesss88.github.io/blog/understanding-package-definitions/#example-a-simple-hello-package-definition">Example: A Simple "Hello" Package Definition</a> - <a href="https://saylesss88.github.io/blog/understanding-package-definitions/#swaytools-package-definition">Swaytools Package Definition</a> - <a href="https://saylesss88.github.io/blog/understanding-package-definitions/#resources">Resources</a></li>
 </ul>
 <!--toc:end-->
+</li>
+</ul>
 <p>In Nix, the concept of a <strong>package</strong> can refer to two things:</p>
 <ul>
 <li>

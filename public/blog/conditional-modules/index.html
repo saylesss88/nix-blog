@@ -47,11 +47,11 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #f2e5bc;
+        background-color: #e3d5a4;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
-        border: 1px solid #ebdbb2;
+        border: 1px solid #d65d0e;
       }
 
       pre {
@@ -96,6 +96,12 @@
       .dark-mode {
         background-color: #282828;
         color: #ebdbb2;
+      }
+
+      .dark-mode :not(pre) > code {
+        background-color: #504845; /* Gruvbox-dark background */
+        color: #ebdbb2; /* Gruvbox-dark foreground */
+        border: 1px solid #d65d0e; /* Subtle border */
       }
 
       .dark-mode .container {
@@ -173,9 +179,9 @@
 <li><a href="https://saylesss88.github.io/blog/conditional-modules/#hyprland-module">Hyprland Module</a></li>
 <li><a href="https://saylesss88.github.io/blog/conditional-modules/#wlogout-module">Wlogout Module</a></li>
 </ul>
+<!--toc:end-->
 </li>
 </ul>
-<!--toc:end-->
 <p>With options it's easy to conditionally install something based on if another
 program is enabled in your configuration.</p>
 <h2 id="hyprland-module">Hyprland Module</h2>
