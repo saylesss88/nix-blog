@@ -13,7 +13,7 @@ author = "T Sawyer"
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo) - [JJ and Git Side by Side](#jj-and-git-side-by-side) - [Resources](#resources)
 <!--toc:end-->
 
-![Jujutsu Logo](/home/jr/Pictures/Screenshots/jujutsu.png)
+![Jujutsu Logo](/images/jujutsu.png)
 
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
