@@ -13,6 +13,8 @@ author = "T Sawyer"
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo) - [JJ and Git Side by Side](#jj-and-git-side-by-side) - [Resources](#resources)
 <!--toc:end-->
 
+![Jujutsu Logo](/home/jr/Pictures/Screenshots/jujutsu.png)
+
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
   The native repository format for jj is still a work in progress so people
@@ -84,7 +86,7 @@ nix flake update
 sudo nixos-rebuild test --flake .
 jj squash #  equivalent to `git commit -a --amend`
 jj describe -m "update" # Similar to git commit -m
-jj commit # Finalize the commit
+jj commit # Only needed if finalizing an explicit commit
 sudo nixos-rebuild switch --flake .
 ```
 
