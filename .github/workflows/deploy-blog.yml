@@ -1,11 +1,8 @@
----
-# name: Build and deploy Zola to separate GitHub Pages repo
+name: Build and deploy Zola to separate GitHub Pages repo
 
 on:
   push:
     branches: [main]
-    # paths:
-    #   - "nix-blog/**"
   workflow_dispatch:
 
 jobs:
@@ -19,15 +16,21 @@ jobs:
 
       - name: Install Zola
         run: |
+          set -e
           ZOLA_VERSION="0.20.0"
-          wget https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
-          tar -xzf zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+          echo "Downloading Zola v${ZOLA_VERSION}..."
+          wget "https://github.com/getzola/zola/releases/download/v${ZOLA_VERSION}/zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          tar -xzf "zola-v${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
           sudo mv zola /usr/local/bin/
+          echo "Zola version:"
           zola --version
 
       - name: Build Zola site
         working-directory: nix-blog
-        run: zola build
+        run: |
+          set -e
+          echo "Building Zola site..."
+          zola build
 
       - name: Configure Git
         run: |
@@ -38,32 +41,27 @@ jobs:
         env:
           GH_PAGES_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
         run: |
+          set -e
           REPO="saylesss88/saylesss88.github.io"
           TARGET_BRANCH="main"
           PUBLISH_DIR="nix-blog/public"
 
-          # Clone the GitHub Pages repo
-          git clone --depth 1 --branch $TARGET_BRANCH https://x-access-token:${GH_PAGES_TOKEN}@github.com/${REPO}.git gh-pages
-          # git clone --depth 1 --branch $TARGET_BRANCH
-          #  https://x-access-token:${GH_PAGES_TOKEN}@github.com/$REPO.git gh-pages
-
+          echo "Cloning GitHub Pages repo..."
+          git clone --depth 1 --branch "$TARGET_BRANCH" "https://x-access-token:${GH_PAGES_TOKEN}@github.com/${REPO}.git" gh-pages
           cd gh-pages
 
-          # Clean existing files
-          # git rm -rf .
+          echo "Cleaning existing files (excluding .git and rss.xml)..."
+          find . -mindepth 1 ! -name ".git" ! -path "./.git/*" ! -name "rss.xml" -delete
 
-          find . -mindepth 1 ! -name ".git" ! -path "./.git/*" ! -name "rss.xml" -exec rm -rf {} +
+          echo "Copying new site files..."
+          cp -r "../$PUBLISH_DIR"/* .
 
-
-
-          # Copy new site files
-          cp -r ../$PUBLISH_DIR/* .
-
-          # Commit and push if there are changes
+          echo "Checking for changes..."
           git add -A
-          if git diff --cached --quiet; then
+          if [[ -z "$(git status --porcelain)" ]]; then
             echo "No changes to commit"
           else
+            echo "Committing and pushing changes..."
             git commit -m "Deploy Zola site"
-            git push origin $TARGET_BRANCH
+            git push origin "$TARGET_BRANCH"
           fi
