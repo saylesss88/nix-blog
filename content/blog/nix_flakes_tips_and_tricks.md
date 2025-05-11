@@ -17,6 +17,8 @@ author = "T Sawyer"
   - [Set up Flake Check and Formatter Outputs](#set-up-flake-check-and-formatter-outputs) - [Add a devShell Output](#add-a-devshell-output)
   <!--toc:end-->
 
+<img src="/images/gruv8.png" alt="Cyber" width="700">
+
 1. Shallow clone nixpkgs, the full Git history isn't always necessary and this
    can speed up build times.
 

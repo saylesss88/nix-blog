@@ -29,6 +29,8 @@ author = "T Sawyer"
 - [VII. Best Practices and Tips from the Community](#vii-best-practices-and-tips-from-the-community)
 <!--toc:end-->
 
+<img src="/images/gruv7.png" alt="Cyber" width="700">
+
 # Working with Nixpkgs Locally: Benefits and Best Practices
 
 - Nixpkgs, the package repository for NixOS, is a powerful resource for building and customizing software.

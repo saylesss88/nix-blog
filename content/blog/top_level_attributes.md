@@ -16,6 +16,8 @@ author = "T Sawyer"
   - [How the Module System Works: A Simplified Overview](#how-the-module-system-works-a-simplified-overview)
   <!--toc:end-->
 
+<img src="/images/gruv9.png" alt="Cyber" width="700">
+
 This explanation is based on insights from Infinisil, a prominent figure in the
 Nix community, to help clarify the concept of top-level attributes within
 NixOS modules.
