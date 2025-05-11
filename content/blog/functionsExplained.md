@@ -16,6 +16,7 @@ author = "T Sawyer"
   - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
   <!--toc:end-->
 
+![NixOS Logo](/images/nixLogo.png)
 Functions are a fundamental concept in Nix and are prevalent throughout Nix code. Grasping how they work is crucial for understanding and writing Nix expressions.
 
 ## The Single-Argument Nature of Nix Functions
