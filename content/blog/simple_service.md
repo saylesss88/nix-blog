@@ -15,6 +15,8 @@ author = "T Sawyer"
   - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output) - [Build the System Configuration](#build-the-system-configuration)
   <!--toc:end-->
 
+<img src="/images/gruv12.png" alt="Cyber" width="700">
+
 TL;DR NixOS's declarative configuration and flakes make it easy to create
 custom services. This post shows how to build a minimal service using flakes
 and overlays for a "meow" command

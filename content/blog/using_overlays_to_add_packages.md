@@ -16,6 +16,8 @@ author = "T Sawyer"
 - [Installing Pokego](#installing-pokego) - [Another Overlay Example](#another-overlay-example)
 <!--toc:end-->
 
+<img src="/images/pokego.png" alt="Cyber" width="700">
+
 It is very common to use overlays in Nix to install packages that aren't
 available in the standard Nixpkgs repository.
 

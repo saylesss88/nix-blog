@@ -16,6 +16,8 @@ author = "T Sawyer"
   - [Debugging with a Flake REPL output](#debugging-with-a-flake-repl-output) - [Usage](#usage) - [Debugging](#debugging)
   <!--toc:end-->
 
+<img src="/images/gruv11.png" alt="Cyber" width="700">
+
 List available commands with `:?`:
 
 ```nix

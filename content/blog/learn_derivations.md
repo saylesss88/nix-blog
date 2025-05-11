@@ -16,6 +16,8 @@ author = "T Sawyer"
   - [Our First Simple Derivation: Understanding the Builder](#our-first-simple-derivation-understanding-the-builder) - [Why a Builder Script?](#why-a-builder-script) - [The Challenge with Shebangs in Nix](#the-challenge-with-shebangs-in-nix) - [The Importance of Statelessness in Nix](#the-importance-of-statelessness-in-nix) - [Our Second Derivation](#our-second-derivation) - [Links To Articles about Derivations](#links-to-articles-about-derivations)
   <!--toc:end-->
 
+<img src="/images/gruv10.png" alt="Cyber" width="700">
+
 - A derivation in Nix is a fundamental concept that describes how to build a piece of software or a resource (e.g., a package, library, or configuration file). Think of it as a recipe for creating something within the Nix ecosystem.
 
 - For beginners, the analogy of a cooking recipe is helpful:
