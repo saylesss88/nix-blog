@@ -8,13 +8,12 @@ author = "T Sawyer"
 
 **TOC**
 
-- [Using Overlays to add Packages that aren't in Nixpkgs](#using-overlays-to-add-packages-that-arent-in-nixpkgs)
-  - [Adding the overlays output to your Flake](#adding-the-overlays-output-to-your-flake)
-  - [The Actual Overlay](#the-actual-overlay)
-  - [The pokego Package definition](#the-pokego-package-definition)
-  - [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
-  - [Installing Pokego](#installing-pokego)
-    - [Another Overlay Example](#another-overlay-example)
+- [Adding the overlays output to your Flake](#adding-the-overlays-output-to-your-flake)
+- [The Actual Overlay](#the-actual-overlay)
+- [The pokego Package definition](#the-pokego-package-definition)
+- [Adding the overlay to your configuration](#adding-the-overlay-to-your-configuration)
+- [Installing Pokego](#installing-pokego)
+  - [Another Overlay Example](#another-overlay-example)
 
 <img src="/images/pokego.png" alt="Cyber" width="700">
 
