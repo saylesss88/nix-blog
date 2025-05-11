@@ -4,17 +4,16 @@ date = 2025-05-05
 author = "T Sawyer"
 +++
 
-**TOC**
-
 # Understanding Nix Functions
 
-<!--toc:start-->
+**TOC**
 
 - [Understanding Nix Functions](#understanding-nix-functions)
-  - [The Single-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
-  - [Identifying Function Structure: The Colon (`:`)](#identifying-function-structure-the-colon)
-  - [Function Declarations: Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments) - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules) - [Resources](#resources)
-  <!--toc:end-->
+  - [The Single\-Argument Nature of Nix Functions](#the-single-argument-nature-of-nix-functions)
+  - [Identifying Function Structure The Colon](#identifying-function-structure-the-colon)
+  - [Function Declarations Single and "Multiple" Arguments](#function-declarations-single-and-multiple-arguments)
+    - [The Function Nature of NixOS and Home Manager Modules](#the-function-nature-of-nixos-and-home-manager-modules)
+    - [Resources](#resources)
 
 <img src="/images/nixLogo.png" alt="Nix Flake Logo" width="300">
 
@@ -24,7 +23,7 @@ Functions are a fundamental concept in Nix and are prevalent throughout Nix code
 
 A key concept to understand is that in Nix, every function conceptually takes **exactly one argument**. What might appear as multi-argument functions are actually achieved through a technique called **currying**, where a series of nested single-argument functions are used.
 
-## Identifying Function Structure: The Colon (`:`)
+## Identifying Function Structure The Colon
 
 The colon (`:`) acts as a clear separator within a function definition:
 
@@ -53,7 +52,7 @@ greet "Anonymous"  # Evaluates to "Hello, Anonymous!"
 The value `"Anonymous"` is substituted for the `personName` placeholder within
 the function body.
 
-## Function Declarations: Single and "Multiple" Arguments
+## Function Declarations Single and "Multiple" Arguments
 
 **Single-Argument Functions**
 
