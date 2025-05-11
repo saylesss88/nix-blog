@@ -9,9 +9,8 @@ author = "T Sawyer"
 **TOC**
 
 - [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
-  - [Here's an example](#heres-an-example)
-    - [JJ and Git Side by Side](#jj-and-git-side-by-side)
-    - [Resources](#resources)
+  - [JJ and Git Side by Side](#jj-and-git-side-by-side)
+  - [Resources](#resources)
 
 ![Jujutsu Logo](/images/jujutsu.png)
 
