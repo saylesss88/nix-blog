@@ -51,7 +51,8 @@ jobs:
 
           # Clean existing files
           # git rm -rf .
-          find . -mindepth 1 ! -name ".git" ! -name "rss.xml" -exec rm -rf {} +
+
+          find . -mindepth 1 ! -name ".git" ! -path "./.git/*" ! -name "rss.xml" -exec rm -rf {} +
 
 
 
