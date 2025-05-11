@@ -1,10 +1,15 @@
 +++
 title = "NixOS Modules Explained"
 date = 2025-05-05
+author = "T Sawyer"
 +++
+
 # NixOS Modules
+
 **TOC**
+
 <!--toc:start-->
+
 - [NixOS Modules](#nixos-modules)
   - [Declaring Options](#declaring-options)
     - [Module Composition](#module-composition)

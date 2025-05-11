@@ -1,16 +1,19 @@
 +++
 title = "Building a Custom NixOS Service with Flakes and Overlays"
 date = 2025-05-09
+author = "T Sawyer"
 +++
 
 # Building a Custom NixOS Service with Flakes and Overlays
+
 **TOC**
+
 <!--toc:start-->
+
 - [Building a Custom NixOS Service with Flakes and Overlays](#building-a-custom-nixos-service-with-flakes-and-overlays)
   - [Create Project Directory](#create-project-directory)
-  - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output)
-    - [Build the System Configuration](#build-the-system-configuration)
-<!--toc:end-->
+  - [Add `nixosConfigurations` Output](#add-nixosconfigurations-output) - [Build the System Configuration](#build-the-system-configuration)
+  <!--toc:end-->
 
 TL;DR NixOS's declarative configuration and flakes make it easy to create
 custom services. This post shows how to build a minimal service using flakes

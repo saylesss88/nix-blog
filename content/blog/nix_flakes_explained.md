@@ -1,19 +1,20 @@
 +++
 title = "Nix Flakes Explained"
 date = 2025-05-05
+author = "T Sawyer"
 +++
 
-
 # Nix Flakes Explained
+
 **TOC**
+
 <!--toc:start-->
+
 - [Nix Flakes Explained](#nix-flakes-explained)
   - [What is a Nix Flake?](#what-is-a-nix-flake)
   - [Key Concepts](#key-concepts)
-  - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks)
-      - [Further Resources](#further-resources)
-<!--toc:end-->
-
+  - [Attribute Sets: The Building Blocks](#attribute-sets-the-building-blocks) - [Further Resources](#further-resources)
+  <!--toc:end-->
 
 This explanation highlights common areas of confusion for those new to Nix
 Flakes, aiming to clarify concepts rather than serve as a comprehensive guide.

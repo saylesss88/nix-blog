@@ -1,18 +1,20 @@
 +++
 title = "Understanding Top-Level Attributes in NixOS Modules"
 date = 2025-05-07
+author = "T Sawyer"
 +++
 
-
-
 # Understanding Top-Level Attributes in NixOS Modules
+
 **TOC**
+
 <!--toc:start-->
+
 - [Understanding Top-Level Attributes in NixOS Modules](#understanding-top-level-attributes-in-nixos-modules)
   - [How Options Relate: A Chain of Influence](#how-options-relate-a-chain-of-influence)
   - [The NixOS Module System: Evaluating Options](#the-nixos-module-system-evaluating-options)
   - [How the Module System Works: A Simplified Overview](#how-the-module-system-works-a-simplified-overview)
-<!--toc:end-->
+  <!--toc:end-->
 
 This explanation is based on insights from Infinisil, a prominent figure in the
 Nix community, to help clarify the concept of top-level attributes within

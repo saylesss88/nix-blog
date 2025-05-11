@@ -1,21 +1,20 @@
 +++
 title = "Understanding Package Definitions in Nix"
 date = 2025-05-08
+author = "T Sawyer"
 +++
 
-
-
 # Understanding Package Definitions in Nix
+
 **TOC**
+
 <!--toc:start-->
+
 - [Understanding Package Definitions in Nix](#understanding-package-definitions-in-nix)
   - [The Journey from Definition to Package](#the-journey-from-definition-to-package)
   - [Skeleton of a Derivation](#skeleton-of-a-derivation)
-  - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition)
-    - [Swaytools Package Definition](#swaytools-package-definition)
-    - [Resources](#resources)
-<!--toc:end-->
-
+  - [Example: A Simple "Hello" Package Definition](#example-a-simple-hello-package-definition) - [Swaytools Package Definition](#swaytools-package-definition) - [Resources](#resources)
+  <!--toc:end-->
 
 In Nix, the concept of a **package** can refer to two things:
 

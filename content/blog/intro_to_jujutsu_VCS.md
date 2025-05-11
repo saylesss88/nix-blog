@@ -1,17 +1,17 @@
 +++
 title = "Intro to Jujutsu VCS"
 date = 2025-05-07
+author = "T Sawyer"
 +++
 
-
 # Intro to Jujutsu (Using jj in an existing Git Repo)
-**TOC**
-<!--toc:start-->
-- [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo)
-    - [JJ and Git Side by Side](#jj-and-git-side-by-side)
-    - [Resources](#resources)
-<!--toc:end-->
 
+**TOC**
+
+<!--toc:start-->
+
+- [Intro to Jujutsu (Using jj in an existing Git Repo)](#intro-to-jujutsu-using-jj-in-an-existing-git-repo) - [JJ and Git Side by Side](#jj-and-git-side-by-side) - [Resources](#resources)
+<!--toc:end-->
 
 - You can use jujutsu (jj) with existing Git repositories with one command.
   `jj git init --colocate` or `jj git init --git-repo /path/to/git_repository`.
