@@ -51,7 +51,8 @@ jobs:
           cd "$REPO"
 
           echo "Cleaning existing files (excluding .git and rss.xml)..."
-          find . -mindepth 1 ! -name ".git" ! -name "rss.xml" -exec rm -rf {} +
+          find . -mindepth 1 ! -name ".git" ! -path "./.git/*" ! -name "rss.xml" -exec rm -rf {} +
+
 
           echo "Copying new site files..."
           cp -r "../$PUBLISH_DIR"/* .
