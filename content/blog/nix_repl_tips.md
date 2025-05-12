@@ -1,20 +1,19 @@
 +++
-title = "Nix Repl"
+title = "Nix Repl Overview"
 date = 2025-05-06
 author = "T Sawyer"
 +++
 
-**TOC**
-
 # Nix Repl List available commands
 
-<!--toc:start-->
+**TOC**
 
 - [Nix Repl List available commands](#nix-repl-list-available-commands)
   - [Load Nix expressions Directly](#load-nix-expressions-directly)
     - [Load Flakes](#load-flakes)
-  - [Debugging with a Flake REPL output](#debugging-with-a-flake-repl-output) - [Usage](#usage) - [Debugging](#debugging)
-  <!--toc:end-->
+  - [Debugging with a Flake REPL output](#debugging-with-a-flake-repl-output)
+    - [Usage](#usage)
+    - [Debugging](#debugging)
 
 <img src="/images/gruv11.png" alt="Cyber" width="700">
 
