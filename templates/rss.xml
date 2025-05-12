@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>{{ config.title }}</title>
+    <link>{{ config.base_url }}</link>
+    <description>{{ config.description }}</description>
+    <generator>Zola</generator>
+    <language>{{ config.default_language | default(value="en") }}</language>
+    <atom:link href="{{ config.base_url }}/{{ config.feed_filenames[0] }}" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</lastBuildDate>
+    <pubDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
+    <author>{{ config.extra.author }}</author>
+    {% set feed_limit = config.feed_limit | default(value=25) %}
+    {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %}
+    {% for page in blog_posts | slice(end=feed_limit) %}
+    <item>
+      <title>{{ page.title }}</title>
+      <link>{{ page.permalink }}</link>
+      <description>{{ page.description | default(value="") }}</description>
+      <pubDate>{{ page.date | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
+      <guid>{{ page.permalink }}</guid>
+      <author>{{ config.extra.author_email | default(value="saylesss88@proton.me") }} ({{ config.extra.author }})</author>
+    </item>
+    {% endfor %}
+  </channel>
+</rss> 
