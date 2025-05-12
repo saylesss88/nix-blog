@@ -12,7 +12,7 @@
     <author>{{ config.extra.author }}</author>
 
     {% set feed_limit = config.feed_limit | default(value=25) %}
-    {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %}
+    {% set blog_posts = pages | sort(attribute="date", reverse=true) %}
     {% for page in blog_posts | slice(end=feed_limit) %}
     <item>
       <title>{{ page.title }}</title>
