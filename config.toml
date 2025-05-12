@@ -1,8 +1,5 @@
 # The URL the site will be built for
-title = "T Sawyer's Blog"
 base_url = "https://saylesss88.github.io"
-description = "NixOS Blog"
-default_language = "en"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -12,25 +9,28 @@ build_search_index = true
 
 # Enable RSS feed generation
 generate_feeds = true
+
 # Optional: Set the number of recent posts to include in the feed (default is 25)
 feed_limit = 10
+
 # Specify the filename for the feed
 feed_filenames = ["rss.xml"]
 
 [markdown]
 # Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
+
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 # highlight_theme = "ayu-dark"
 highlight_theme = "ayu-mirage"
 
 highlight_themes_css = [
-  { theme = "ayu-mirage", filename = "syntax-theme-dark.css" }, # Using ayu-mirage for dark
+  { theme = "ayu-mirage", filename = "syntax-theme-dark.css" }, # Using ayu-mirage for dark mode
   { theme = "ayu-light", filename = "syntax-theme-light.css" }, # Assuming a light variant exists
 ]
 
 [extra]
 author = "T Sawyer"
-author_email = "saylesss87@proton.me"
 subtitle = "Nix-Blog"
+
 # Put all your custom variables here
