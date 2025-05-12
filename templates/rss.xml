@@ -3,24 +3,28 @@
   <channel>
     <title>{{ config.title | default(value="T Sawyer's Blog") }}</title>
     <link>{{ config.base_url }}</link>
-    <description>{{ config.description }}</description>
+    <description>{{ config.description | default(value="NixOS Blog") }}</description>
     <generator>Zola</generator>
     <language>{{ config.default_language | default(value="en") }}</language>
     <atom:link href="{{ config.base_url }}/{{ config.feed_filenames[0] }}" rel="self" type="application/rss+xml"/>
     <lastBuildDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</lastBuildDate>
     <pubDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
-    <managingEditor>{{ config.extra.author_email | default(value="saylesss87@proton.me") }} ({{ config.extra.author }})</managingEditor>
-    {% set feed_limit = config.feed_limit | default(value=25) %}
+    <managingEditor>{{ config.extra.author_email | default(value="saylesss88@proton.me") }} ({{ config.extra.author | default(value="T Sawyer") }})</managingEditor>
+    {% set feed_limit = config.feed_limit | default(value=10) %}
     {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %}
-    {% for page in blog_posts | slice(end=feed_limit) %}
-    <item>
-      <title>{{ page.title }}</title>
-      <link>{{ page.permalink }}</link>
-      <description>{{ page.description | default(value="") }}</description>
-      <pubDate>{{ page.date | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
-      <guid>{{ page.permalink }}</guid>
-      <dc:creator>{{ config.extra.author }}</dc:creator>
-    </item>
-    {% endfor %}
+    {% if blog_posts is empty %}
+      <!-- Debugging: No blog posts found. Check if pages have 'components: blog' and 'date' in front matter. -->
+    {% else %}
+      {% for page in blog_posts | slice(end=feed_limit) %}
+      <item>
+        <title>{{ page.title | default(value="Untitled") }}</title>
+        <link>{{ page.permalink }}</link>
+        <description>{{ page.description | default(value="") }}</description>
+        <pubDate>{{ page.date | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
+        <guid>{{ page.permalink }}</guid>
+        <dc:creator>{{ config.extra.author | default(value="T Sawyer") }}</dc:creator>
+      </item>
+      {% endfor %}
+    {% endif %}
   </channel>
 </rss>
