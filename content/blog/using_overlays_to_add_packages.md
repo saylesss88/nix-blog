@@ -157,7 +157,7 @@ in
 ## The pokego Package definition
 
 The following is the `./pac_defs/pokego.nix`, it may be helpful to first read my
-[PackageDefinition](https://saylesss88.github.io/blog/package-definitions/)
+[PackageDefinition](https://saylesss88.github.io/blog/understanding-package-definitions/)
 post to better understand the following:
 
 ```nix
