@@ -8,12 +8,16 @@ author = "T Sawyer"
 
 # The Nix Language
 
-<!--toc:start-->
+**TOC**
 
 - [The Nix Language](#the-nix-language)
-  - [How does Nix work?](#how-does-nix-work)
-  - [Syntax Basics](#syntax-basics) - [Derivations](#derivations) - [Evaluating Nix Files](#evaluating-nix-files) - [Resources](#resources)
-  <!--toc:end-->
+  - [How does Nix work](#how-does-nix-work)
+  - [Syntax Basics](#syntax-basics)
+    - [Derivations](#derivations)
+    - [Evaluating Nix Files](#evaluating-nix-files)
+    - [Resources](#resources)
+
+<img src="/images/gruv18.png" alt="window_view" width="700">
 
 Nix as a programming language can be thought of as a kind of "JSON, but with
 functions".
@@ -23,7 +27,7 @@ instructions that makes up a Nix package. Instead, functions are called that
 assign values to fields in attribute sets, which in turn may get assigned to
 other values.
 
-## How does Nix work?
+## How does Nix work
 
 Nix is a pure, functional, lazy, declarative, and reproducible programming
 language.
