@@ -2,6 +2,8 @@
 title = "Nix Flakes Explained"
 date = 2025-05-05
 author = "T Sawyer"
+components = ["blog"]
+description = "Nix Flakes"
 +++
 
 # Nix Flakes Explained

@@ -2,6 +2,8 @@
 title = "Nix Language Basics & Nix Constructs"
 date = 2025-05-06
 author = "T Sawyer"
+components = ["blog"]
+description = "Nix Lang Basics"
 +++
 
 **TOC**

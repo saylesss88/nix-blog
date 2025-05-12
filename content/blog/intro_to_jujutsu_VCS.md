@@ -2,6 +2,8 @@
 title = "Intro to Jujutsu VCS"
 date = 2025-05-07
 author = "T Sawyer"
+components = ["blog"]
+description = "JJ"
 +++
 
 # Intro to Jujutsu (Using jj in an existing Git Repo)

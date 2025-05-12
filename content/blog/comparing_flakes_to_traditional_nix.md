@@ -2,6 +2,8 @@
 title = "Nix Flakes vs. Traditional Nix: A Comparison"
 date = 2025-05-05
 author = "T Sawyer"
+components = ["blog"]
+description = "Flakes vs Traditional Nix"
 +++
 
 # Introduction: Flakes and Traditional Nix

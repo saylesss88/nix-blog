@@ -2,6 +2,8 @@
 title = "Nix Flakes Tips and Tricks"
 date = 2025-05-06
 author = "T Sawyer"
+components = ["blog"]
+description = "Flakes Tips"
 +++
 
 # Shallow Clone Nixpkgs
