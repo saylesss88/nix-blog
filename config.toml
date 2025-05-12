@@ -18,6 +18,14 @@ feed_limit = 10
 # Specify the filename for the feed
 feed_filenames = ["rss.xml"]
 
+[search]
+include_title = true
+include_description = false
+include_data = false
+include_path = false
+include_content = true
+index_format = "elasticlunr_javascript"
+
 [markdown]
 # Whether to do syntax highlighting
 highlight_code = true
