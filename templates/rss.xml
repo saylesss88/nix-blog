@@ -9,7 +9,7 @@
     <atom:link href="{{ config.base_url }}/{{ config.feed_filenames[0] }}" rel="self" type="application/rss+xml"/>
     <lastBuildDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</lastBuildDate>
     <pubDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
-    <managingEditor>{{ config.extra.author_email | default(value="saylesss88@proton.me") }} ({{ config.extra.author }})</managingEditor>
+    <managingEditor>{{ config.extra.author_email | default(value="saylesss87@proton.me") }} ({{ config.extra.author }})</managingEditor>
     {% set feed_limit = config.feed_limit | default(value=25) %}
     {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %}
     {% for page in blog_posts | slice(end=feed_limit) %}
