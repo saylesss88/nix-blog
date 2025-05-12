@@ -16,7 +16,6 @@
       }
 
       .container {
-        /* max-width: 800px; */
         max-width: 95%;
         margin: auto;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -47,7 +46,7 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #e3d5a4;
+        background-color: #a89984;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
@@ -56,7 +55,6 @@
 
       pre {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         font-size: 1em;
         padding: 10px;
         background-color: #f2e5bc;
@@ -80,32 +78,48 @@
         transition: transform 0.3s ease-in-out;
       }
 
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #fbf1c7;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #cc6600;
-        border-radius: 4px;
-      }
-
-      .dark-mode {
+      /* Updated dark mode styles using data-theme */
+      [data-theme="dark"] {
         background-color: #282828;
-        color: #ebdbb2;
+        color: #ebdbb2; /* Ensures all text is visible in dark mode */
       }
 
-      .dark-mode :not(pre) > code {
-        background-color: #504845; /* Gruvbox-dark background */
-        color: #ebdbb2; /* Gruvbox-dark foreground */
-        border: 1px solid #d65d0e; /* Subtle border */
-      }
-
-      .dark-mode .container {
+      [data-theme="dark"] .container {
         background-color: #3c3836;
+        display: block;
+      }
+
+      [data-theme="dark"] article,
+      [data-theme="dark"] section,
+      [data-theme="dark"] p,
+      [data-theme="dark"] ul,
+      [data-theme="dark"] li {
+        color: #ebdbb2; /* Ensures blog content stays visible */
+        display: block;
+      }
+
+      [data-theme="dark"] pre {
+        background-color: #1d2021;
+        color: #d4be98;
+        border: 1px solid #d65d0e;
+        display: block;
+      }
+
+      [data-theme="dark"] h1,
+      [data-theme="dark"] h2 {
+        color: #ebdbb2;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      [data-theme="dark"] table {
+        color: #ebdbb2; /* Ensure table text is visible */
+      }
+
+      [data-theme="dark"] th {
+        color: #ebdbb2; /* Style table header text if needed */
+      }
+
+      [data-theme="dark"] td {
+        color: #ebdbb2; /* Style table data text */
       }
 
       #dark-mode-toggle {
@@ -140,25 +154,8 @@
         text-decoration: none;
       }
     </style>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://saylesss88.github.io/static/syntax-theme-dark.css"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://saylesss88.github.io/static/syntax-theme-light.css"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS"
-      href="https://saylesss88.github.io/rss.xml"
-    />
   </head>
+
   <body>
     <div class="container">
       <h1>Welcome to My-Nix-Blog</h1>
@@ -172,23 +169,29 @@
 <p class="subtitle"><strong>2025-05-06</strong></p>
 <p><strong>TOC</strong></p>
 <h1 id="the-nix-language">The Nix Language</h1>
-<!--toc:start-->
+<p><strong>TOC</strong></p>
 <ul>
 <li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#the-nix-language">The Nix Language</a>
 <ul>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#how-does-nix-work">How does Nix work?</a></li>
-<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#syntax-basics">Syntax Basics</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#derivations">Derivations</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#evaluating-nix-files">Evaluating Nix Files</a> - <a href="https://saylesss88.github.io/blog/nix-lang-basics/#resources">Resources</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#how-does-nix-work">How does Nix work</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#syntax-basics">Syntax Basics</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#derivations">Derivations</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#evaluating-nix-files">Evaluating Nix Files</a></li>
+<li><a href="https://saylesss88.github.io/blog/nix-lang-basics/#resources">Resources</a></li>
 </ul>
-<!--toc:end-->
 </li>
 </ul>
+</li>
+</ul>
+<img src="/images/gruv18.png" alt="window_view" width="700">
 <p>Nix as a programming language can be thought of as a kind of "JSON, but with
 functions".</p>
 <p>All statements are declarative, meaning that there's no sequential flow of
 instructions that makes up a Nix package. Instead, functions are called that
 assign values to fields in attribute sets, which in turn may get assigned to
 other values.</p>
-<h2 id="how-does-nix-work">How does Nix work?</h2>
+<h2 id="how-does-nix-work">How does Nix work</h2>
 <p>Nix is a pure, functional, lazy, declarative, and reproducible programming
 language.</p>
 <table><thead><tr><th>Concept</th><th>Description</th></tr></thead><tbody>
@@ -531,12 +534,28 @@ needed to separate parameters.</li>
 </ul>
  
     </div>
+
+    <!-- Dark mode script -->
     <script>
-      // Dark mode toggle script
+      // Function to set theme
+      function setTheme(theme) {
+        localStorage.setItem("theme", theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+
+      // Load saved theme preference on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        setTheme(savedTheme);
+      });
+
+      // Toggle theme on button click
       document
         .getElementById("dark-mode-toggle")
         .addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
+          const currentTheme =
+            localStorage.getItem("theme") === "dark" ? "light" : "dark";
+          setTheme(currentTheme);
         });
     </script>
   </body>

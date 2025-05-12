@@ -16,7 +16,6 @@
       }
 
       .container {
-        /* max-width: 800px; */
         max-width: 95%;
         margin: auto;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -47,7 +46,7 @@
       :not(pre) > code {
         font-family: monospace;
         font-size: 0.85em;
-        background-color: #e3d5a4;
+        background-color: #a89984;
         color: #3c3836;
         padding: 2px 5px;
         border-radius: 3px;
@@ -56,7 +55,6 @@
 
       pre {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         font-size: 1em;
         padding: 10px;
         background-color: #f2e5bc;
@@ -80,32 +78,48 @@
         transition: transform 0.3s ease-in-out;
       }
 
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #fbf1c7;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #cc6600;
-        border-radius: 4px;
-      }
-
-      .dark-mode {
+      /* Updated dark mode styles using data-theme */
+      [data-theme="dark"] {
         background-color: #282828;
-        color: #ebdbb2;
+        color: #ebdbb2; /* Ensures all text is visible in dark mode */
       }
 
-      .dark-mode :not(pre) > code {
-        background-color: #504845; /* Gruvbox-dark background */
-        color: #ebdbb2; /* Gruvbox-dark foreground */
-        border: 1px solid #d65d0e; /* Subtle border */
-      }
-
-      .dark-mode .container {
+      [data-theme="dark"] .container {
         background-color: #3c3836;
+        display: block;
+      }
+
+      [data-theme="dark"] article,
+      [data-theme="dark"] section,
+      [data-theme="dark"] p,
+      [data-theme="dark"] ul,
+      [data-theme="dark"] li {
+        color: #ebdbb2; /* Ensures blog content stays visible */
+        display: block;
+      }
+
+      [data-theme="dark"] pre {
+        background-color: #1d2021;
+        color: #d4be98;
+        border: 1px solid #d65d0e;
+        display: block;
+      }
+
+      [data-theme="dark"] h1,
+      [data-theme="dark"] h2 {
+        color: #ebdbb2;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      [data-theme="dark"] table {
+        color: #ebdbb2; /* Ensure table text is visible */
+      }
+
+      [data-theme="dark"] th {
+        color: #ebdbb2; /* Style table header text if needed */
+      }
+
+      [data-theme="dark"] td {
+        color: #ebdbb2; /* Style table data text */
       }
 
       #dark-mode-toggle {
@@ -140,25 +154,8 @@
         text-decoration: none;
       }
     </style>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://saylesss88.github.io/static/syntax-theme-dark.css"
-      media="(prefers-color-scheme: dark)"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://saylesss88.github.io/static/syntax-theme-light.css"
-      media="(prefers-color-scheme: light)"
-    />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS"
-      href="https://saylesss88.github.io/rss.xml"
-    />
   </head>
+
   <body>
     <div class="container">
       <h1>Welcome to My-Nix-Blog</h1>
@@ -170,23 +167,27 @@
       
 <h1 class="title">Understanding Nix Functions</h1>
 <p class="subtitle"><strong>2025-05-05</strong></p>
-<p><strong>TOC</strong></p>
 <h1 id="understanding-nix-functions">Understanding Nix Functions</h1>
-<!--toc:start-->
+<p><strong>TOC</strong></p>
 <ul>
-<li><a href="https://saylesss88.github.io/blog/functionsexplained/#understanding-nix-functions">Understanding Nix Functions</a>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#understanding-nix-functions">Understanding Nix Functions</a>
 <ul>
-<li><a href="https://saylesss88.github.io/blog/functionsexplained/#the-single-argument-nature-of-nix-functions">The Single-Argument Nature of Nix Functions</a></li>
-<li><a href="https://saylesss88.github.io/blog/functionsexplained/#identifying-function-structure-the-colon">Identifying Function Structure: The Colon (<code>:</code>)</a></li>
-<li><a href="https://saylesss88.github.io/blog/functionsexplained/#function-declarations-single-and-multiple-arguments">Function Declarations: Single and "Multiple" Arguments</a> - <a href="https://saylesss88.github.io/blog/functionsexplained/#the-function-nature-of-nixos-and-home-manager-modules">The Function Nature of NixOS and Home Manager Modules</a> - <a href="https://saylesss88.github.io/blog/functionsexplained/#resources">Resources</a></li>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#the-single-argument-nature-of-nix-functions">The Single-Argument Nature of Nix Functions</a></li>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#identifying-function-structure-the-colon">Identifying Function Structure The Colon</a></li>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#function-declarations-single-and-multiple-arguments">Function Declarations Single and "Multiple" Arguments</a>
+<ul>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#the-function-nature-of-nixos-and-home-manager-modules">The Function Nature of NixOS and Home Manager Modules</a></li>
+<li><a href="https://saylesss88.github.io/blog/understanding-nix-functions/#resources">Resources</a></li>
 </ul>
-<!--toc:end-->
 </li>
 </ul>
+</li>
+</ul>
+<img src="/images/nixLogo.png" alt="Nix Flake Logo" width="300">
 <p>Functions are a fundamental concept in Nix and are prevalent throughout Nix code. Grasping how they work is crucial for understanding and writing Nix expressions.</p>
 <h2 id="the-single-argument-nature-of-nix-functions">The Single-Argument Nature of Nix Functions</h2>
 <p>A key concept to understand is that in Nix, every function conceptually takes <strong>exactly one argument</strong>. What might appear as multi-argument functions are actually achieved through a technique called <strong>currying</strong>, where a series of nested single-argument functions are used.</p>
-<h2 id="identifying-function-structure-the-colon">Identifying Function Structure: The Colon (<code>:</code>)</h2>
+<h2 id="identifying-function-structure-the-colon">Identifying Function Structure The Colon</h2>
 <p>The colon (<code>:</code>) acts as a clear separator within a function definition:</p>
 <ul>
 <li><strong>Left of the Colon:</strong> This is the function's <strong>argument</strong>. It's a placeholder name for a value that will be provided when the function is called.</li>
@@ -210,7 +211,7 @@ uses the placeholder).</p>
 </span></code></pre>
 <p>The value <code>"Anonymous"</code> is substituted for the <code>personName</code> placeholder within
 the function body.</p>
-<h2 id="function-declarations-single-and-multiple-arguments">Function Declarations: Single and "Multiple" Arguments</h2>
+<h2 id="function-declarations-single-and-multiple-arguments">Function Declarations Single and "Multiple" Arguments</h2>
 <p><strong>Single-Argument Functions</strong></p>
 <p>The simplest form of a Nix function takes a single argument:</p>
 <pre data-lang="nix" style="background-color:#212733;color:#ccc9c2;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#ffcc66;">inc </span><span style="color:#ff3333;">= </span><span style="color:#ffcc66;">x</span><span>: </span><span style="color:#ffcc66;">x </span><span style="color:#f29e74;">+ </span><span style="color:#ffcc66;">1</span><span style="color:#ff3333;">;
@@ -372,12 +373,28 @@ then uses these values to define parts of your system.</p>
 </ul>
  
     </div>
+
+    <!-- Dark mode script -->
     <script>
-      // Dark mode toggle script
+      // Function to set theme
+      function setTheme(theme) {
+        localStorage.setItem("theme", theme);
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+
+      // Load saved theme preference on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        setTheme(savedTheme);
+      });
+
+      // Toggle theme on button click
       document
         .getElementById("dark-mode-toggle")
         .addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
+          const currentTheme =
+            localStorage.getItem("theme") === "dark" ? "light" : "dark";
+          setTheme(currentTheme);
         });
     </script>
   </body>
