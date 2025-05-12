@@ -11,7 +11,8 @@
     <pubDate>{{ now() | date(format="%a, %d %b %Y %H:%M:%S GMT") }}</pubDate>
     <managingEditor>{{ config.extra.author_email | default(value="saylesss88@proton.me") }} ({{ config.extra.author | default(value="T Sawyer") }})</managingEditor>
     {% set feed_limit = config.feed_limit | default(value=10) %}
-    {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %}
+    <!-- {% set blog_posts = pages | filter(attribute="components", value="blog") | sort(attribute="date", reverse=true) %} -->
+    {% set blog_posts = pages | sort(attribute="date", reverse=true) %}
     {% if blog_posts | length == 0 %}
       <!-- Debugging: No blog posts found. Check if pages have 'components: blog' and 'date' in front matter. -->
     {% else %}
