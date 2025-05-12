@@ -28,5 +28,6 @@ highlight_themes_css = [
 
 [extra]
 author = "T Sawyer"
+author_email = "saylesss87@proton.me"
 subtitle = "Nix-Blog"
 # Put all your custom variables here
