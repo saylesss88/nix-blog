@@ -2,8 +2,6 @@
 title = "Understanding Package Definitions in Nix"
 date = 2025-05-08
 author = "T Sawyer"
-components = ["blog"]
-description = "Package Definitions"
 +++
 
 # Understanding Package Definitions in Nix

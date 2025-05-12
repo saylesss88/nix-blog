@@ -2,8 +2,6 @@
 title = "Overlay Resources"
 date = 2025-05-07
 author = "T Sawyer"
-components = ["blog"]
-description = "Overlay Resources"
 +++
 
 ## Overlay Learning Resources

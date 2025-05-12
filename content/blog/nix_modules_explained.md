@@ -2,8 +2,6 @@
 title = "NixOS Modules Explained"
 date = 2025-05-05
 author = "T Sawyer"
-components = ["blog"]
-description = "Nix Modules"
 +++
 
 # NixOS Modules

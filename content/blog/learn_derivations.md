@@ -2,8 +2,6 @@
 title = "Understanding Nix Derivations: A Beginner's Guide & Resources"
 date = 2025-05-09
 author = "T Sawyer"
-components = ["blog"]
-description = "Derivations"
 +++
 
 # Introduction to Nix Derivations

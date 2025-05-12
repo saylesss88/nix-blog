@@ -2,8 +2,6 @@
 title = "Conditional Configuration"
 date = 2025-05-06
 author = "T Sawyer"
-components = ["blog"]
-description = "Conditional Configuration"
 +++
 
 # Conditional Configuration

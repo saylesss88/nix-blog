@@ -2,8 +2,6 @@
 title = "Working with Nixpkgs Locally: Benefits and Best Practices"
 date = 2025-05-07
 author = "T Sawyer"
-components = ["blog"]
-description = "Nixpkgs"
 +++
 
 **TOC**

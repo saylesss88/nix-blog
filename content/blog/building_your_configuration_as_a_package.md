@@ -2,8 +2,6 @@
 title = "Building your Configuration as a Package"
 date = 2025-05-05
 author = "T Sawyer"
-components = ["blog"]
-description = "Config as Package"
 +++
 
 # Building your configuration as a Package

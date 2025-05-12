@@ -2,8 +2,6 @@
 title = "Nix Repl Overview"
 date = 2025-05-06
 author = "T Sawyer"
-components = ["blog"]
-description = "Nix Repl"
 +++
 
 # Nix Repl List available commands
