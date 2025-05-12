@@ -1,6 +1,6 @@
 +++
 title = "Nix Language Basics & Nix Constructs"
-date = 2025-05-06
+date = 2025-05-10
 author = "T Sawyer"
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Understanding Nix Functions"
-date = 2025-05-05
+date = 2025-05-10
 author = "T Sawyer"
 +++
 
