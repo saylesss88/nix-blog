@@ -60,7 +60,8 @@ jobs:
 
           # Copy new site files
           echo "Copying new site files..."
-          cp -r ../$PUBLISH_DIR/* .
+          # cp -r ../$PUBLISH_DIR/* .
+          cp -r ../$PUBLISH_DIR/* blog/
 
           echo "Checking for changes..."
           # Commit and push if there are changes
