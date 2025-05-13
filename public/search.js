@@ -23,12 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
               const post = indexData.documentStore.docs[result.ref];
               const listItem = document.createElement('li');
               const link = document.createElement('a');
-              // link.href = post.permalink;
-              if (post.extra && post.extra.permalink.startsWith('/')) {
-                link.href = window.location.origin + post.permalink;
-              } else {
-                console.error("Missing permalink for search result:", post);
-              }
+              link.href = post.permalink;
               const title = post.title.replace(new RegExp(query, 'gi'), '<mark>$&</mark>');
               link.innerHTML = title;
               listItem.appendChild(link);
