@@ -221,8 +221,8 @@
     </style>
     <script>
       (() => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
       })();
       const baseUrl = "{{ config.base_url | safe }}blog/";
     </script>
@@ -266,9 +266,15 @@
     </script>
 
     <script>
-      const searchIndexURL = baseUrl + 'search_index.en.js';
+      const searchIndexURL = "{{ get_url(path='search_index.en.js') }}";
     </script>
-    <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
-    <script type="text/javascript" src="{{ get_url(path="search.js") }}"></script>
+    <script
+      type="text/javascript"
+      src="{{ get_url(path='elasticlunr.min.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ get_url(path='search.js') }}"
+    ></script>
   </body>
 </html>
