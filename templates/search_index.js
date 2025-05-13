@@ -8,4 +8,4 @@
   {% set_global doc = doc | merge(extra=page.extra) %}
   {% set_global index = index | push(value=doc) %}
 {% endfor %}
-{{ elasticlunr_index(docs=index, fields=["title", "content", "extra.permalink"]) }}
+{{ elasticlunr_index(docs=index, fields=["title", "content", "permalink"]) }}
