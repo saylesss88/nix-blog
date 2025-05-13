@@ -2,7 +2,7 @@
 title = "Overlay Resources"
 date = 2025-05-07
 author = "T Sawyer"
-extra.permalink = "/blog/overlay-resources/"
+permalink = "/blog/overlay-resources/"
 +++
 
 ## Overlay Learning Resources

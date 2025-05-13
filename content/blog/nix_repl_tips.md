@@ -2,7 +2,7 @@
 title = "Nix Repl Overview"
 date = 2025-05-06
 author = "T Sawyer"
-extra.permalink = "/blog/nix-repl-overview/"
+permalink = "/blog/nix-repl-overview/"
 +++
 
 # Nix Repl List available commands

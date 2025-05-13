@@ -2,7 +2,7 @@
 title = "Understanding Package Definitions in Nix"
 date = 2025-05-08
 author = "T Sawyer"
-extra.permalink = "/blog/understanding-package-definitions-in-nix/"
+permalink = "/blog/understanding-package-definitions-in-nix/"
 +++
 
 # Understanding Package Definitions in Nix

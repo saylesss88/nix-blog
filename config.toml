@@ -13,7 +13,7 @@ build_search_index = true
 generate_feeds = true
 
 # Optional: Set the number of recent posts to include in the feed (default is 25)
-feed_limit = 12
+feed_limit = 10
 
 # Specify the filename for the feed
 feed_filenames = ["rss.xml"]
@@ -25,7 +25,7 @@ include_data = false
 include_path = true
 include_content = true
 index_format = "elasticlunr_javascript"
-extra_fields = ["extra.permalink"]
+extra_fields = ["permalink"]
 
 [markdown]
 # Whether to do syntax highlighting
