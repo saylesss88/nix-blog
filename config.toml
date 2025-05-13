@@ -24,7 +24,7 @@ feed_filenames = ["rss.xml"]
 # include_data = false
 # include_path = true
 # include_content = true
-index_format = "elasticlunr_json"
+index_format = "elasticlunr_javascript"
 # extra_fields = ["extra.permalink"]
 
 [markdown]
