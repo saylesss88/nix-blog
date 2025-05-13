@@ -19,13 +19,13 @@ feed_limit = 10
 feed_filenames = ["rss.xml"]
 
 [search]
-include_title = true
-include_description = true
-include_data = false
-include_path = true
-include_content = true
+# include_title = true
+# include_description = true
+# include_data = false
+# include_path = true
+# include_content = true
 index_format = "elasticlunr_json"
-extra_fields = ["permalink"]
+# extra_fields = ["permalink"]
 
 [markdown]
 # Whether to do syntax highlighting
