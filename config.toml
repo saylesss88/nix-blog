@@ -40,8 +40,6 @@ highlight_themes_css = [
   { theme = "ayu-light", filename = "syntax-theme-light.css" }, # Assuming a light variant exists
 ]
 
-[languages]
-en = { default = true }
 
 [extra]
 author = "T Sawyer"
