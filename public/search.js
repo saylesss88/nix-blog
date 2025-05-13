@@ -2,13 +2,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search');
   const resultsContainer = document.querySelector('.search-results__items');
   const searchResultsDiv = document.querySelector('.search-results');
-  const baseUrl = window.baseUrl || ''; // Set in template: const baseUrl = "{{ config.base_url | safe }}";
 
   // Load the search index
-  fetch('/search_index.en.json') // Use .json unless your setup explicitly uses .js
+  fetch('/search_index.en.js') // Changed path here
     .then(response => response.json())
     .then(indexData => {
-      console.log("Search Index Data:", indexData); // Debug: Inspect index structure
+      console.log("Search Index Data:", indexData); // Keep this for debugging
       const index = elasticlunr.Index.load(indexData);
 
       searchInput.addEventListener('input', function() {
@@ -22,13 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
           if (results.length > 0) {
             results.forEach(function(result) {
               const post = indexData.documentStore.docs[result.ref];
-              console.log("Permalink:", post.permalink); // Debug: Log permalinks
               const listItem = document.createElement('li');
               const link = document.createElement('a');
-              // Fix permalink: Remove base_url, ensure trailing slash
-              let href = post.permalink.replace(baseUrl, '');
-              href = href.endsWith('/') ? href : href + '/';
-              link.href = href;
+              link.href = post.permalink;
               const title = post.title.replace(new RegExp(query, 'gi'), '<mark>$&</mark>');
               link.innerHTML = title;
               listItem.appendChild(link);
