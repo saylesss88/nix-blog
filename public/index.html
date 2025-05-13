@@ -219,23 +219,13 @@
         margin-bottom: 5px;
       }
     </style>
-      <script>
-      function setTheme(theme) {
-      localStorage.setItem("theme", theme);
-      document.documentElement.setAttribute("data-theme", theme);
-    }
-      document.addEventListener("DOMContentLoaded", () => {
+    <script>
+      (() => {
         const savedTheme = localStorage.getItem("theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
-      });
-      document
-        .getElementById("dark-mode-toggle")
-        .addEventListener("click", () => {
-          const currentTheme =
-            localStorage.getItem("theme") === "dark" ? "light" : "dark";
-          setTheme(currentTheme);
-        });
-      </script>
+      })();
+      const baseUrl = "https://saylesss88.github.ioblog/";
+    </script>
   </head>
   <body>
     <div class="container">
@@ -254,11 +244,13 @@
 
       
 <h1 class="title">This is my blog made with Zola.</h1>
-<p><a href="https://saylesss88.github.io/blog/">Posts</a>.</p>
+<p><a href="https://saylesss88.github.io/blog">Posts</a>.</p>
+
 <script>
   const baseUrl = "https://saylesss88.github.io";
 </script>
-<script src="https://saylesss88.github.io/search.js"></script>
+<script src="https://saylesss88.github.io/static/search.js"></script>
+<!-- <script src="https://saylesss88.github.io/search.js"></script> -->
 
     </div>
 
@@ -268,10 +260,10 @@
         document.documentElement.setAttribute("data-theme", theme);
       }
 
-      <!-- document.addEventListener("DOMContentLoaded", () => { -->
-        <!-- const savedTheme = localStorage.getItem("theme") || "light"; -->
-        <!-- setTheme(savedTheme); -->
-      <!-- }); -->
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      });
 
       document
         .getElementById("dark-mode-toggle")
@@ -281,11 +273,16 @@
           setTheme(currentTheme);
         });
     </script>
-    
     <script>
-      const searchIndexURL = "https://saylesss88.github.io/search_index.en.js";
+      const searchIndexURL = "https://saylesss88.github.io/search_index.en.json";
     </script>
-    <script type="text/javascript" src="https://saylesss88.github.io/elasticlunr.min.js"></script>
-    <script type="text/javascript" src="https://saylesss88.github.io/search.js"></script>
+    <script
+      type="text/javascript"
+      src="https://saylesss88.github.io/elasticlunr.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://saylesss88.github.io/search.js"
+    ></script>
   </body>
 </html>
