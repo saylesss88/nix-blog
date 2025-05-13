@@ -274,10 +274,11 @@
           setTheme(currentTheme);
         });
     </script>
-
+    
+    <script>
+      const searchIndexURL = "{{ get_url(path='search_index.en.js') }}";
+    </script>
     <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
-    <!-- <script type="text/javascript" src="{{ get_url(path="/blog/elasticlunr.min.js") }}"></script> -->
-    <!-- <script type="text/javascript" src="{{ get_url(path="/blog/search.js") }}"></script> -->
     <script type="text/javascript" src="{{ get_url(path="search.js") }}"></script>
   </body>
 </html>

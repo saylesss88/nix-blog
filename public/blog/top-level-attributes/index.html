@@ -219,6 +219,23 @@
         margin-bottom: 5px;
       }
     </style>
+      <script>
+      function setTheme(theme) {
+      localStorage.setItem("theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      });
+      document
+        .getElementById("dark-mode-toggle")
+        .addEventListener("click", () => {
+          const currentTheme =
+            localStorage.getItem("theme") === "dark" ? "light" : "dark";
+          setTheme(currentTheme);
+        });
+      </script>
   </head>
   <body>
     <div class="container">
@@ -450,10 +467,10 @@ of whether those options are declared in the same module.</p>
         document.documentElement.setAttribute("data-theme", theme);
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedTheme = localStorage.getItem("theme") || "light";
-        setTheme(savedTheme);
-      });
+      <!-- document.addEventListener("DOMContentLoaded", () => { -->
+        <!-- const savedTheme = localStorage.getItem("theme") || "light"; -->
+        <!-- setTheme(savedTheme); -->
+      <!-- }); -->
 
       document
         .getElementById("dark-mode-toggle")
@@ -463,10 +480,11 @@ of whether those options are declared in the same module.</p>
           setTheme(currentTheme);
         });
     </script>
-
-    <!-- <script type="text/javascript" src="https://saylesss88.github.io/elasticlunr.min.js"></script> -->
-    <script type="text/javascript" src="https://saylesss88.github.io/blog/elasticlunr.min.js"></script>
-    <script type="text/javascript" src="https://saylesss88.github.io/blog/search.js"></script>
-    <!-- <script type="text/javascript" src="https://saylesss88.github.io/search.js"></script> -->
+    
+    <script>
+      const searchIndexURL = "https://saylesss88.github.io/search_index.en.js";
+    </script>
+    <script type="text/javascript" src="https://saylesss88.github.io/elasticlunr.min.js"></script>
+    <script type="text/javascript" src="https://saylesss88.github.io/search.js"></script>
   </body>
 </html>
