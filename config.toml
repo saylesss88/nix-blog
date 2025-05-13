@@ -13,7 +13,7 @@ build_search_index = true
 generate_feeds = true
 
 # Optional: Set the number of recent posts to include in the feed (default is 25)
-feed_limit = 10
+feed_limit = 12
 
 # Specify the filename for the feed
 feed_filenames = ["rss.xml"]
