@@ -2,6 +2,7 @@
 title = "Understanding Top-Level Attributes in NixOS Modules"
 date = 2025-05-07
 author = "T Sawyer"
+extra.permalink = "/blog/understanding-toplevel-attributes-in-nixos-modules/"
 +++
 
 # Understanding Top-Level Attributes in NixOS Modules

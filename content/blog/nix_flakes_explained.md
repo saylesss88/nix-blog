@@ -2,6 +2,7 @@
 title = "Nix Flakes Explained"
 date = 2025-05-05
 author = "T Sawyer"
+extra.permalink = "/blog/nix-flakes-explained/"
 +++
 
 # Nix Flakes Explained

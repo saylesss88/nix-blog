@@ -2,6 +2,7 @@
 title = "NixOS Modules Explained"
 date = 2025-05-09
 author = "T Sawyer"
+extra.permalink = "/blog/nixos-modules-explained/"
 +++
 
 # NixOS Modules

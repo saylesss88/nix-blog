@@ -2,6 +2,7 @@
 title = "Understanding Nix Functions"
 date = 2025-05-10
 author = "T Sawyer"
+extra.permalink = "/blog/understanding-nix-functions/"
 +++
 
 # Understanding Nix Functions
