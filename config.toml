@@ -4,7 +4,6 @@ title = "NixOS Blog"
 description = "T Sawyer's NixOS Blog"
 default_language = "en"
 theme = "duckquill"
-default_theme = "dark"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
