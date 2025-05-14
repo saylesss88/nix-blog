@@ -46,5 +46,6 @@ highlight_themes_css = [
 search_fields = ["title", "description", "permalink", "content"]
 author = "T Sawyer"
 subtitle = "Nix-Blog"
+enable_dark_mode = true
 
 # Put all your custom variables here
