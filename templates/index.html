@@ -9,10 +9,10 @@
   <p>{{ page.description | default(value=page.summary) }}</p>
 </article>
 {% endfor %}
-    
+
 <script>
   const baseUrl = "{{ config.base_url | safe }}";
-  const searchIndexURL = "/search_index.en.js"; // Adjusted to directly reference the correct path
+  const searchIndexURL = "/search_index.en.json"; // Adjusted to directly reference the correct path
 </script>
 
 <!-- Load Search Scripts -->
