@@ -2,7 +2,7 @@
 title = "Working with Nixpkgs Locally: Benefits and Best Practices"
 date = 2025-05-07
 author = "T Sawyer"
-permalink = "/blog/working-with-nixpkgs-locally/"
+slug = "/blog/working-with-nixpkgs-locally/"
 +++
 
 **TOC**

@@ -2,7 +2,7 @@
 title = "Using Overlays to add Packages that aren't in Nixpkgs"
 date = 2025-05-08
 author = "T Sawyer"
-permalink = "/blog/using-overlays/"
+slug = "/blog/using-overlays/"
 +++
 
 # Using Overlays to add Packages that aren't in Nixpkgs

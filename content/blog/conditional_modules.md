@@ -2,7 +2,7 @@
 title = "Conditional Configuration"
 date = 2025-05-06
 author = "T Sawyer"
-permalink = "/blog/conditional-configuration/"
+slug = "/blog/conditional-configuration/"
 +++
 
 # Conditional Configuration
