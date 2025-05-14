@@ -2,7 +2,7 @@
 title = "Building your Configuration as a Package"
 date = 2025-05-05
 author = "T Sawyer"
-slug = "/blog/building-your-configuration-as-a-package/"
+slug = "building-your-configuration-as-a-package"
 +++
 
 # Building your configuration as a Package

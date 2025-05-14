@@ -2,7 +2,7 @@
 title = "Building a Custom NixOS Service with Flakes and Overlays"
 date = 2025-05-09
 author = "T Sawyer"
-slug = "/blog/nixos-service/"
+slug = "nixos-service"
 +++
 
 # Building a Custom NixOS Service with Flakes and Overlays

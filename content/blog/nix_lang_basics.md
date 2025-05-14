@@ -2,7 +2,7 @@
 title = "Nix Language Basics & Nix Constructs"
 date = 2025-05-10
 author = "T Sawyer"
-slug = "/blog/nix-language-basics-constructs/"
+slug = "nix-language-basics-constructs"
 +++
 
 **TOC**

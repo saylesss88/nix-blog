@@ -2,7 +2,7 @@
 title = "Declarative Dependency Injection in Nix Flakes"
 date = 2025-05-06
 author = "T Sawyer"
-slug = "/blog/declarative-depinject/"
+slug = "declarative-depinject"
 +++
 
 # Declarative Dependency Injection in Nix Flakes

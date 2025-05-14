@@ -2,7 +2,7 @@
 title = "Nix Flakes vs. Traditional Nix: A Comparison"
 date = 2025-05-05
 author = "T Sawyer"
-slug = "/blog/flakes-vs-traditional-nix/"
+slug = "flakes-vs-traditional-nix"
 +++
 
 # Introduction: Flakes and Traditional Nix

@@ -2,7 +2,7 @@
 title = "Nix Flakes Tips and Tricks"
 date = 2025-05-06
 author = "T Sawyer"
-slug = "/blog/nix-flakes-tips-tricks/"
+slug = "nix-flakes-tips-tricks"
 +++
 
 # Shallow Clone Nixpkgs
