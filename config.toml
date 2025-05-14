@@ -43,6 +43,7 @@ highlight_themes_css = [
 
 
 [extra]
+search_fields = ["title", "description", "permalink", "content"]
 author = "T Sawyer"
 subtitle = "Nix-Blog"
 

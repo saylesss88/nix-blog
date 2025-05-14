@@ -1,48 +1,58 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search');
   const resultsContainer = document.querySelector('.search-results__items');
   const searchResultsDiv = document.querySelector('.search-results');
 
-  const searchIndexURL = "/search_index.en.json";
+  if (typeof window.searchIndex === 'undefined') {
+    console.error('Search index not loaded globally (window.searchIndex is undefined).');
+    return;
+  }
 
-  // Fetch the search index JSON
-  fetch(searchIndexURL)
-    .then(response => response.json())
-    .then(data => {
-      const index = elasticlunr.Index.load(data);
+  const index = elasticlunr.Index.load(window.searchIndex);
 
-      searchInput.addEventListener('input', function () {
-        const query = this.value.trim();
-        resultsContainer.innerHTML = '';
-        searchResultsDiv.style.display = query.length > 0 ? 'block' : 'none';
+  searchInput.addEventListener('input', function() {
+    const query = this.value.trim();
+    resultsContainer.innerHTML = '';
+    searchResultsDiv.style.display = query.length > 0 ? 'block' : 'none';
 
-        if (query.length > 0) {
-          const results = index.search(query, { expand: true });
+    if (query.length > 0) {
+      const results = index.search(query, { expand: true });
 
-          if (results.length > 0) {
-            results.forEach(function (result) {
-              const post = data.documentStore.docs[result.ref]; // Corrected reference to data
-              const listItem = document.createElement('li');
-              const link = document.createElement('a');
-              link.href = post.permalink;
-              const title = post.title.replace(new RegExp(query, 'gi'), '<mark>$&</mark>');
-              link.innerHTML = title;
-              listItem.appendChild(link);
-              resultsContainer.appendChild(listItem);
-            });
-          } else {
+      if (results.length > 0) {
+        results.forEach(function(result) {
+          const post = index.documentStore.docs[result.ref];
+
+          if (post) {
+            console.log("Retrieved post data:", post); // ADD THIS FOR DEBUGGING
+
             const listItem = document.createElement('li');
-            listItem.textContent = 'No results found.';
-            resultsContainer.appendChild(listItem);
-          }
-        }
-      });
-    })
-    .catch(error => console.error("Failed to load search index:", error));
+            const link = document.createElement('a');
 
-  // Hide results when clicking outside the search container
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('#search') && !event.target.closest('.search-results')) {
+            if (post && post.permalink) {
+              link.href = post.permalink;
+            } else {
+              console.error("Permalink missing for ref:", result.ref, "Post data:", post);
+              link.href = '#'; // Fallback
+            }
+
+            const title = post && post.title ? post.title.replace(new RegExp(query, 'gi'), '<mark>$&</mark>') : 'Untitled';
+            link.innerHTML = title;
+            listItem.appendChild(link);
+            resultsContainer.appendChild(listItem);
+          } else {
+            console.error("Document data not found in index for ref:", result.ref);
+          }
+        });
+      } else {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'No results found.';
+        resultsContainer.appendChild(listItem);
+      }
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.search-container')) {
       searchResultsDiv.style.display = 'none';
     }
   });
