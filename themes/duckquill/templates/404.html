@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/macros_rel_attributes.html" as macros_rel_attributes %}
 
 {% block content %}
 {%- set rel_attributes = macros_rel_attributes::rel_attributes() | trim -%}
