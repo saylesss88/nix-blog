@@ -2,7 +2,7 @@
 title = "Nix Repl Overview"
 date = 2025-05-06
 author = "T Sawyer"
-slug = "/blog/nix-repl-overview/"
+slug = "nix-repl-overview"
 +++
 
 # Nix Repl List available commands

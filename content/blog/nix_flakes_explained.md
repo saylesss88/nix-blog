@@ -2,7 +2,7 @@
 title = "Nix Flakes Explained"
 date = 2025-05-05
 author = "T Sawyer"
-slug = "/blog/nix-flakes-explained/"
+slug = "nix-flakes-explained"
 +++
 
 # Nix Flakes Explained

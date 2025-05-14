@@ -2,7 +2,7 @@
 title = "Intro to Jujutsu VCS"
 date = 2025-05-07
 author = "T Sawyer"
-slug = "/blog/intro-to-jujutsu-vcs/"
+slug = "intro-to-jujutsu-vcs"
 +++
 
 # Intro to Jujutsu (Using jj in an existing Git Repo)

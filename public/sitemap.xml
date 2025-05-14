@@ -7,71 +7,71 @@
         <loc>https://saylesss88.github.io/blog/</loc>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-building-your-configuration-as-a-package/</loc>
+        <loc>https://saylesss88.github.io/blog/building-your-configuration-as-a-package/</loc>
         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-conditional-configuration/</loc>
+        <loc>https://saylesss88.github.io/blog/conditional-configuration/</loc>
         <lastmod>2025-05-06</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-declarative-depinject/</loc>
+        <loc>https://saylesss88.github.io/blog/declarative-depinject/</loc>
         <lastmod>2025-05-06</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-flakes-vs-traditional-nix/</loc>
+        <loc>https://saylesss88.github.io/blog/flakes-vs-traditional-nix/</loc>
         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-intro-to-jujutsu-vcs/</loc>
+        <loc>https://saylesss88.github.io/blog/intro-to-jujutsu-vcs/</loc>
         <lastmod>2025-05-07</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nix-flakes-explained/</loc>
+        <loc>https://saylesss88.github.io/blog/nix-flakes-explained/</loc>
         <lastmod>2025-05-05</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nix-flakes-tips-tricks/</loc>
+        <loc>https://saylesss88.github.io/blog/nix-flakes-tips-tricks/</loc>
         <lastmod>2025-05-06</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nix-language-basics-constructs/</loc>
+        <loc>https://saylesss88.github.io/blog/nix-language-basics-constructs/</loc>
         <lastmod>2025-05-10</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nix-repl-overview/</loc>
+        <loc>https://saylesss88.github.io/blog/nix-repl-overview/</loc>
         <lastmod>2025-05-06</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nixos-modules-explained/</loc>
+        <loc>https://saylesss88.github.io/blog/nixos-modules-explained/</loc>
         <lastmod>2025-05-09</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-nixos-service/</loc>
+        <loc>https://saylesss88.github.io/blog/nixos-service/</loc>
         <lastmod>2025-05-09</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-understanding-derivations/</loc>
+        <loc>https://saylesss88.github.io/blog/understanding-derivations/</loc>
         <lastmod>2025-05-09</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-understanding-nix-functions/</loc>
+        <loc>https://saylesss88.github.io/blog/understanding-nix-functions/</loc>
         <lastmod>2025-05-10</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-understanding-package-definitions-in-nix/</loc>
+        <loc>https://saylesss88.github.io/blog/understanding-package-definitions-in-nix/</loc>
         <lastmod>2025-05-08</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-understanding-toplevel-attributes-in-nixos-modules/</loc>
+        <loc>https://saylesss88.github.io/blog/understanding-toplevel-attributes-in-nixos-modules/</loc>
         <lastmod>2025-05-07</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-using-overlays/</loc>
+        <loc>https://saylesss88.github.io/blog/using-overlays/</loc>
         <lastmod>2025-05-08</lastmod>
     </url>
     <url>
-        <loc>https://saylesss88.github.io/blog/blog-working-with-nixpkgs-locally/</loc>
+        <loc>https://saylesss88.github.io/blog/working-with-nixpkgs-locally/</loc>
         <lastmod>2025-05-07</lastmod>
     </url>
 </urlset>

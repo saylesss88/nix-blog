@@ -2,7 +2,7 @@
 title = "NixOS Modules Explained"
 date = 2025-05-09
 author = "T Sawyer"
-slug = "/blog/nixos-modules-explained/"
+slug = "nixos-modules-explained"
 +++
 
 # NixOS Modules
