@@ -2,11 +2,11 @@ base_url = "https://saylesss88.github.io"
 
 title = "NixOS Blog"
 
-# description = "T Sawyer's NixOS Blog"
+description = "T Sawyer's NixOS Blog"
 
 default_language = "en"
 
-theme = "emily_zola_theme"
+theme = "particle-zola"
 
 
 # Whether to automatically compile all Sass files in the sass directory
