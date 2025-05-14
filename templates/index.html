@@ -2,10 +2,24 @@
 <h1 class="title">This is my blog made with Zola.</h1>
 <p><a href="{{ get_url(path='/blog/') }}">Posts</a>.</p>
 
+<!-- Debug: Log page data to ensure permalink is correctly recognized -->
+{% for page in section.pages %}
+<script>
+  console.log("Debug Page Data:", {
+    title: "{{ page.title }}",
+    permalink: "{{ page.permalink }}",
+    content: "{{ page.content | striptags | truncate(length=200) }}",
+  });
+</script>
+{% endfor %}
+
 <script>
   const baseUrl = "{{ config.base_url | safe }}";
+  const searchIndexURL = "/search_index.en.js"; // Adjusted to directly reference the correct path
 </script>
+
+<!-- Load Search Scripts -->
+<script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
 <script src="{{ get_url(path='search.js') }}"></script>
-<!-- <script src="{{ get_url(path='static/search.js') }}"></script> -->
-<!-- <script src="{{ get_url(path='search.js') }}"></script> -->
+
 {% endblock content %}
