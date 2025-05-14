@@ -3,22 +3,10 @@ title = "NixOS Modules Explained"
 date = 2025-05-09
 author = "T Sawyer"
 slug = "nixos-modules-explained"
+toc = true
 +++
 
 # NixOS Modules
-
-**TOC**
-
-<!--toc:start-->
-
-- [NixOS Modules](#nixos-modules)
-  - [Declaring Options](#declaring-options)
-    - [Module Composition](#module-composition)
-    - [NixOS Modules and Dependency Locking with npins](#nixos-modules-and-dependency-locking-with-npins)
-    - [Resources on Modules](#resources-on-modules)
-- [Videos](#videos)
-- [[tweagModuleSystemRecursion](https://www.youtube.com/watch?v=cZjOzOHb2ow)](#tweagmodulesystemrecursionhttpswwwyoutubecomwatchvczjozohb2ow)
-<!--toc:end-->
 
 <img src="/images/gruv3.png" alt="Cyber" width="700">
 
