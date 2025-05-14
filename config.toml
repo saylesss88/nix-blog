@@ -1,61 +1,78 @@
-# The URL the site will be built for
 base_url = "https://saylesss88.github.io"
+
 title = "NixOS Blog"
+
 description = "T Sawyer's NixOS Blog"
+
 default_language = "en"
-theme = "anemone"
+
+theme = "emily_zola_theme"
+
 
 # Whether to automatically compile all Sass files in the sass directory
-compile_sass = true # The anemone theme sets this to false, so you might want to match that if it doesn't use Sass
+
+compile_sass = true
+
 
 # Whether to build a search index to be used later on by a JavaScript library
-build_search_index = true # Anemone also has this set to true
+
+build_search_index = true
+
 
 # Enable RSS feed generation
-generate_feeds = true # Anemone also has this set to true
+
+generate_feeds = true
+
 
 # Optional: Set the number of recent posts to include in the feed (default is 25)
-feed_limit = 10 # Keep this if you like
+
+feed_limit = 10
+
 
 # Specify the filename for the feed
-feed_filenames = ["rss.xml"] # Keep this if you like
+
+feed_filenames = ["rss.xml"]
+
 
 [search]
+
 include_title = true
+
 include_description = true
+
 include_data = false
+
 include_path = true
+
 include_content = true
+
 index_format = "elasticlunr_json"
+
 # extra_fields = ["title", "description", "permalink", "content"] # Ensure permalink is included
+
 [markdown]
+
 # Whether to do syntax highlighting
-highlight_code = true # Anemone sets this to false
+
+highlight_code = true
+
 
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+
 # highlight_theme = "ayu-dark"
-highlight_theme = "ayu-mirage" # Anemone uses "gruvbox-dark" if highlighting is enabled
+
+highlight_theme = "ayu-mirage"
 
 highlight_themes_css = [
   { theme = "ayu-mirage", filename = "syntax-theme-dark.css" }, # Using ayu-mirage for dark mode
   { theme = "ayu-light", filename = "syntax-theme-light.css" }, # Assuming a light variant exists
 ]
 
-
 [extra]
 search_fields = ["title", "description", "permalink", "content"]
-author = "T Sawyer"                                              # Anemone also has an author field
-display_author = true
-subtitle = "Nix-Blog"                                            # You can keep this if you use it in your templates
-# enable_dark_mode = true # Anemone handles dark mode differently, so you might not need this
-# favicon = "favicon.ico" # Add a favicon path here if you have one
-list_pages = false  # Matches Anemone's default
-twitter_card = true # Matches Anemone's default
+author = "T Sawyer"
+subtitle = "Nix-Blog"
+enable_dark_mode = true
 
-## Navigation - This needs to match Anemone's structure
-header_nav = [
-  { url = "/", name_en = "/home/" },     # Adjust name_en to what you want to display
-  { url = "/blog", name_en = "/blog/" }, # This should link to your blog listing page
-]
 
 # Put all your custom variables here
