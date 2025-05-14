@@ -1,65 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const searchInput = document.getElementById('search');
-  const resultsContainer = document.querySelector('.search-results__items');
-  const searchResultsDiv = document.querySelector('.search-results');
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("search");
+  const searchResults = document.querySelector(".search-results__items");
 
-  if (typeof window.searchIndex === 'undefined') {
-    console.error('Search index not loaded globally (window.searchIndex is undefined).');
+  // Listen for input in the search field
+  searchInput.addEventListener("input", function (event) {
+    const query = event.target.value.trim().toLowerCase(); // Normalize search query
+    if (query.length > 0) {
+      const results = search(query);
+      displayResults(results);
+    } else {
+      searchResults.innerHTML = ''; // Clear results when the input is empty
+    }
+  });
+
+  function search(query) {
+  const index = window.searchIndex.index.body;
+  const results = [];
+
+  // Log the query to check
+  console.log("Search query:", query);
+
+  if (!query) {
+    return results; // Return an empty array if no query is provided
+  }
+
+  for (const [key, value] of Object.entries(index)) {
+    const doc = value.docs;
+    for (const [url, { tf }] of Object.entries(doc)) {
+      if (url.toLowerCase().includes(query) || doc[url].title.toLowerCase().includes(query) || doc[url].body.toLowerCase().includes(query)) {
+        results.push({ title: doc[url].title, url: key, score: tf });
+      }
+    }
+  }
+
+  // Log the results for debugging
+  console.log("Search results:", results);
+  return results; // Ensure results is always an array
+}
+
+function displayResults(results) {
+  const searchResults = document.querySelector(".search-results__items");
+  searchResults.innerHTML = ''; // Clear previous results
+  if (!Array.isArray(results)) {
+    console.error("Results is not an array:", results);
     return;
   }
 
-  const index = elasticlunr.Index.load(window.searchIndex);
+  if (results.length === 0) {
+    searchResults.innerHTML = '<li>No results found.</li>';
+  } else {
+    results.forEach(result => {
+      const resultItem = document.createElement('li');
+      resultItem.innerHTML = `<a href="${result.url}" target="_blank">${result.title}</a>`;
+      searchResults.appendChild(resultItem);
+    });
+  }
+}
 
-  searchInput.addEventListener('input', function() {
-    const query = this.value.trim();
-    resultsContainer.innerHTML = '';
-    searchResultsDiv.style.display = query.length > 0 ? 'block' : 'none';
-
-    if (query.length > 0) {
-      const results = index.search(query, { expand: true });
-
-      if (results.length > 0) {
-        results.forEach(function(result) {
-          const post = index.documentStore.docs[result.ref];
-
-          if (post) {
-            console.log("Retrieved post data:", post); // ADD THIS FOR DEBUGGING
-
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-
-            if (post && post.id) {
-              link.href = post.id; // use `id` which is the full URL
-            } else if (post && post.path) {
-              link.href = post.path; // fallback to path
-            } else {
-              console.error("Permalink missing for ref:", result.ref, "Post data:", post);
-              link.href = '#';
-            }
-
-
-            const title = post?.title
-              ? post.title.replace(new RegExp(query, 'gi'), '<mark>$&</mark>')
-              : 'Untitled';
-
-            link.innerHTML = title;
-            listItem.appendChild(link);
-            resultsContainer.appendChild(listItem);
-          } else {
-            console.error("Document data not found in index for ref:", result.ref);
-          }
-        });
-      } else {
-        const listItem = document.createElement('li');
-        listItem.textContent = 'No results found.';
-        resultsContainer.appendChild(listItem);
-      }
-    }
-  });
-
-  document.addEventListener('click', function(event) {
-    if (!event.target.closest('.search-container')) {
-      searchResultsDiv.style.display = 'none';
-    }
-  });
-});
