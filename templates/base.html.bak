@@ -219,6 +219,13 @@
         margin-bottom: 5px;
       }
     </style>
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      })();
+      const baseUrl = "{{ config.base_url | safe }}";
+    </script>
   </head>
   <body>
     <div class="container">
@@ -237,7 +244,6 @@
 
       {% block content %} {% endblock content %}
     </div>
-
     <script>
       function setTheme(theme) {
         localStorage.setItem("theme", theme);
@@ -246,7 +252,7 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "light";
-        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
       });
 
       document
@@ -257,8 +263,59 @@
           setTheme(currentTheme);
         });
     </script>
+    <script src="{{ get_url(path='search_index.en.json') }}"></script>
+    <script
+      type="text/javascript"
+      defer
+      src="{{ get_url(path='elasticlunr.min.js') }}"
+    ></script>
+    <script>
+      let index;
 
-    <script type="text/javascript" src="{{ get_url(path="elasticlunr.min.js") }}"></script>
-    <script type="text/javascript" src="{{ get_url(path="search.js") }}"></script>
+      <!-- fetch("https://saylesss88.github.io/search_index.en.json") -->
+      fetch("${baseUrl}search_index.en.json")
+        .then((response) => response.json())
+        .then((data) => {
+          index = elasticlunr.Index.load(data);
+
+          const searchInput = document.getElementById("search");
+          const resultsContainer = document.querySelector(".search-results");
+          const resultsList = document.querySelector(".search-results__items");
+
+          searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.trim();
+
+            if (!query || !index) {
+              resultsContainer.style.display = "none";
+              resultsList.innerHTML = "";
+              return;
+            }
+
+            const results = index.search(query, {
+              expand: true,
+            });
+
+            if (results.length > 0) {
+              resultsList.innerHTML = results
+                .map((result) => {
+                  const ref = index.documentStore.getDoc(result.ref);
+                  return `<li><a href="${ref.permalink}">${ref.title}</a></li>`;
+                })
+                .join("");
+              resultsContainer.style.display = "block";
+            } else {
+              resultsList.innerHTML = "<li>No results found.</li>";
+              resultsContainer.style.display = "block";
+            }
+          });
+        })
+        .catch((err) => {
+          console.error("Search index failed to load:", err);
+        });
+    </script>
+    <script
+      type="text/javascript"
+      src="{{ get_url(path='search.js') }}"
+    ></script>
   </body>
 </html>
