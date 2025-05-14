@@ -26,8 +26,7 @@ include_data = false
 include_path = true
 include_content = true
 index_format = "elasticlunr_javascript"
-extra_fields = ["permalink"]
-
+extra_fields = ["title", "description", "permalink", "content"] # Ensure permalink is included
 [markdown]
 # Whether to do syntax highlighting
 highlight_code = true
